@@ -34,7 +34,7 @@ const Feature = () => {
         >
           <Icon strokeWidth={'3px'} className='text-blue-500' />
           <p className='mt-1 font-bold'>{title}</p>
-          <p className='mt-3'>{description}</p>
+          <p className='mt-3 text-sm'>{description}</p>
         </div>
       ))}
     </div>
