@@ -1,6 +1,6 @@
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Hero from './components/Hero';
+import Header from './components/layouts/Header';
+import Footer from './components/layouts/Footer';
+import Hero from './components/layouts/Hero';
 import Features from './components/layouts/Features';
 
 function App() {

@@ -1,4 +1,4 @@
-import { footerMessage } from '@/messages/footerMessage';
+import { footerMessage } from '@/ressources/footerMessage';
 
 const Footer = () => (
   <footer className='w-full py-10 px-8 bg-blue-600 text-white shadow-lg'>
