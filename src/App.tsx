@@ -1,7 +1,7 @@
-import Header from './components/layouts/Header';
-import Footer from './components/layouts/Footer';
-import Hero from './components/layouts/Hero';
-import Features from './components/layouts/Features';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Hero from './components/Home/Hero';
+import Features from './components/Home/Features';
 
 function App() {
   return (
