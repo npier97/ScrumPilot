@@ -2,42 +2,38 @@ import { Clock, Users, ChartSpline } from 'lucide-react';
 
 const featuresDatas = [
   {
-    title: 'Time-Efficient Meetings',
+    title: 'featureMessage1',
     icon: Clock,
-    description:
-      'Keep your standups focused and productive with built-in timers and prompts.'
+    description: 'featureMessage2'
   },
   {
-    title: 'Team Collaboration',
+    title: 'featureMessage3',
     icon: Users,
-    description:
-      'Connect seamlessly with your team members, no matter where they are.'
+    description: 'featureMessage4'
   },
   {
-    title: 'Progress Tracking',
+    title: 'featureMessage5',
     icon: ChartSpline,
-    description: 'Monitor team progress and identify blockers in real-time.'
+    description: 'featureMessage6'
   }
 ];
 
 const footerMessageDatas = [
   {
-    title: 'Abous Us',
-    content: [
-      'Making agile meetings more efficient and productive for teams worldwide'
-    ]
+    title: 'aboutUsTitle',
+    content: ['aboutUsMessage']
   },
   {
-    title: 'Get in Touch',
-    content: ['TBD']
+    title: 'getInTouchTitle',
+    content: ['getInTouchMessage']
   },
   {
-    title: 'Follow Us',
-    content: ['TBD']
+    title: 'followUsTitle',
+    content: ['followUsMessage']
   },
   {
-    title: 'Resources',
-    content: ['Documentation', 'Blog', 'Support']
+    title: 'resourcesTitle',
+    content: ['resourcesMessage1', 'resourcesMessage2', 'resourcesMessage3']
   }
 ];
 

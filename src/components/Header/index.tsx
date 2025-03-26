@@ -6,6 +6,8 @@ import {
 } from '@/components/ui/navigation-menu';
 import { Link } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
+import LanguageDropdown from '../LanguageDropdown';
+import { useTranslation } from 'react-i18next';
 
 const MenuItem = ({ link, label }: { link: string; label: string }) => (
   <NavigationMenuItem>
@@ -17,6 +19,7 @@ const MenuItem = ({ link, label }: { link: string; label: string }) => (
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,14 +32,15 @@ const Header = () => {
 
   return (
     <NavigationMenu
-      className={`${isScrolled && 'bg-blue-600 text-white'} transition-all duration-300 ease-in-out`}
+      className={`${isScrolled && 'shadow-lg'} transition-all duration-300 ease-in-out`}
     >
       <NavigationMenuList>
         <MenuItem link='/' label='Scrum Pilot' />
       </NavigationMenuList>
       <NavigationMenuList>
-        <MenuItem link='/login' label='Login' />
-        <MenuItem link='/sign-up' label='Sign up' />
+        <MenuItem link='/login' label={t('logIn')} />
+        <MenuItem link='/sign-up' label={t('signUp')} />
+        <LanguageDropdown />
       </NavigationMenuList>
     </NavigationMenu>
   );
