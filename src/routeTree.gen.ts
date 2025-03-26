@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root';
 import { Route as SignUpImport } from './routes/sign-up';
 import { Route as LoginImport } from './routes/login';
+import { Route as FirebasePlaygroundImport } from './routes/firebase-playground';
 import { Route as IndexImport } from './routes/index';
 
 // Create/Update Routes
@@ -26,6 +27,12 @@ const SignUpRoute = SignUpImport.update({
 const LoginRoute = LoginImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRoute
+} as any);
+
+const FirebasePlaygroundRoute = FirebasePlaygroundImport.update({
+  id: '/firebase-playground',
+  path: '/firebase-playground',
   getParentRoute: () => rootRoute
 } as any);
 
@@ -44,6 +51,13 @@ declare module '@tanstack/react-router' {
       path: '/';
       fullPath: '/';
       preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/firebase-playground': {
+      id: '/firebase-playground';
+      path: '/firebase-playground';
+      fullPath: '/firebase-playground';
+      preLoaderRoute: typeof FirebasePlaygroundImport;
       parentRoute: typeof rootRoute;
     };
     '/login': {
@@ -67,12 +81,14 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute;
+  '/firebase-playground': typeof FirebasePlaygroundRoute;
   '/login': typeof LoginRoute;
   '/sign-up': typeof SignUpRoute;
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute;
+  '/firebase-playground': typeof FirebasePlaygroundRoute;
   '/login': typeof LoginRoute;
   '/sign-up': typeof SignUpRoute;
 }
@@ -80,27 +96,30 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   '/': typeof IndexRoute;
+  '/firebase-playground': typeof FirebasePlaygroundRoute;
   '/login': typeof LoginRoute;
   '/sign-up': typeof SignUpRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/login' | '/sign-up';
+  fullPaths: '/' | '/firebase-playground' | '/login' | '/sign-up';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/login' | '/sign-up';
-  id: '__root__' | '/' | '/login' | '/sign-up';
+  to: '/' | '/firebase-playground' | '/login' | '/sign-up';
+  id: '__root__' | '/' | '/firebase-playground' | '/login' | '/sign-up';
   fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
+  FirebasePlaygroundRoute: typeof FirebasePlaygroundRoute;
   LoginRoute: typeof LoginRoute;
   SignUpRoute: typeof SignUpRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FirebasePlaygroundRoute: FirebasePlaygroundRoute,
   LoginRoute: LoginRoute,
   SignUpRoute: SignUpRoute
 };
@@ -116,12 +135,16 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/firebase-playground",
         "/login",
         "/sign-up"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/firebase-playground": {
+      "filePath": "firebase-playground.tsx"
     },
     "/login": {
       "filePath": "login.tsx"
