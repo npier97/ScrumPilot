@@ -6,9 +6,9 @@ const Feature = () => {
 
   return (
     <section className='container mx-auto w-full flex max-lg:flex-col max-lg:space-y-5 lg:space-x-7 pb-14'>
-      {featuresDatas?.map(({ title, icon: Icon, description }, idx) => (
+      {featuresDatas?.map(({ title, icon: Icon, description }) => (
         <div
-          key={idx}
+          key={`${title}`}
           className=' shadow rounded flex-1 flex flex-col items-start px-5 py-5 '
         >
           <Icon strokeWidth={'3px'} className='text-blue-500' />

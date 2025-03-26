@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
   const { t } = useTranslation();
+
   return (
     <section className='pt-40 px-4 pb-20 flex flex-col gap-6 items-center justify-center lg:flex-row'>
       <div className='max-w-md flex flex-col gap-4 items-center text-center lg:items-start lg:text-start'>
