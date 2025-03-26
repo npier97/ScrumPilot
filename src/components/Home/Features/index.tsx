@@ -11,8 +11,10 @@ const Feature = () => {
           key={`${title}`}
           className=' shadow rounded flex-1 flex flex-col items-start px-5 py-5 '
         >
-          <Icon strokeWidth={'3px'} className='text-blue-500' />
-          <p className='mt-1 font-bold'>{t(title)}</p>
+          <p className='mt-1 flex gap-2 font-bold'>
+            <Icon strokeWidth={'3px'} className='text-blue-500' />
+            {t(title)}
+          </p>
           <p className='mt-3 text-sm'>{t(description)}</p>
         </div>
       ))}
