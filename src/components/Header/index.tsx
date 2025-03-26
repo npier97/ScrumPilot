@@ -32,7 +32,7 @@ const Header = () => {
 
   return (
     <NavigationMenu
-      className={`${isScrolled && 'shadow-lg'} transition-all duration-300 ease-in-out`}
+      className={`${isScrolled && 'shadow-md'} transition-all duration-300 ease-in-out z-50`}
     >
       <NavigationMenuList>
         <MenuItem link='/' label='Scrum Pilot' />
