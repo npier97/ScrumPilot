@@ -67,22 +67,30 @@ const LogIn = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name='password'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='text'
-                        placeholder='Enter your password'
-                        {...field}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className='relative'>
+                <FormField
+                  control={form.control}
+                  name='password'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type={showPassword ? 'text' : 'password'}
+                          placeholder='Enter your password'
+                          {...field}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <div
+                  onClick={() => setShowPassword(!showPassword)}
+                  className='absolute right-4 bottom-2'
+                >
+                  {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                </div>
+              </div>
 
               <Button className='w-full py-5' type='submit'>
                 Log in
