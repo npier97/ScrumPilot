@@ -1,13 +1,24 @@
 import Header from '@/components/Header';
-import { createRootRoute, Outlet } from '@tanstack/react-router';
+import { createRootRoute, Outlet, useMatches } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
-export const Route = createRootRoute({
-  component: () => (
+const HEADERLESS_ROUTES = ['/login', '/signup'];
+
+const RootRoute = () => {
+  const matches = useMatches();
+  const shouldShowHeader = !matches.some((match) =>
+    HEADERLESS_ROUTES.includes(match.routeId)
+  );
+
+  return (
     <>
-      <Header />
+      {shouldShowHeader && <Header />}
       <Outlet />
       <TanStackRouterDevtools />
     </>
-  )
+  );
+};
+
+export const Route = createRootRoute({
+  component: RootRoute
 });
