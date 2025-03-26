@@ -1,4 +1,5 @@
 import { footerMessageDatas } from '@/ressources/datas/homepageMessages';
+import { ArrowUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
@@ -21,6 +22,12 @@ const Footer = () => {
       <div className='md:text-center'>
         &copy; {new Date().getFullYear()} Scrum Pilot. {t('rightsReserved')}
       </div>
+      <a
+        href='#top'
+        className='absolute botton-0 right-1 -translate-x-1/2 -translate-y-1/2 text-white text-2xl bg-blue-600 p-3 rounded-full shadow-xl'
+      >
+        <ArrowUp />
+      </a>
     </footer>
   );
 };
