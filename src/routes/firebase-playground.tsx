@@ -4,6 +4,8 @@ import { auth } from '@/firebase-config';
 import { createFileRoute } from '@tanstack/react-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export const Route = createFileRoute('/firebase-playground')({
   component: RouteComponent
@@ -30,7 +32,6 @@ function RouteComponent() {
     <section className='container mx-auto w-full pt-40 pb-20 flex flex-col gap-6 items-center justify-center lg:flex-row'>
       <div className='max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700'>
         <div className='flex flex-col items-center gap-2'>
-          <h1 className='mb-8'>Authentication</h1>
           <div className='mb-6'>
             <label
               htmlFor='email'
@@ -38,10 +39,9 @@ function RouteComponent() {
             >
               Email address
             </label>
-            <input
-              type='email'
+            <Input
               id='email'
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+              type='email'
               placeholder='john.doe@company.com'
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -54,23 +54,20 @@ function RouteComponent() {
             >
               Password
             </label>
-            <input
-              type='password'
+            <Input
               id='password'
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+              type='password'
               placeholder='•••••••••'
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          <button
+          <Button
             onClick={() => createUser(email, password)}
-            className='relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 cursor-pointer'
+            className='cursor-pointer'
           >
-            <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent'>
-              Red to Yellow
-            </span>
-          </button>
+            Create User
+          </Button>
         </div>
       </div>
     </section>
