@@ -1,10 +1,12 @@
 {
   "logIn": "Connexion",
   "signUp": "S'inscrire",
-  "ariaLanguage": "Choisissez une langue. La sélection actuelle est Français.",
+  "subNavMessage1": "Entrez numero de session",
+  "subNavMessage2": "Rejoindre une salle",
   "heroTitle": "Rationalisez Vos Réunions Scrum",
   "heroSubTitle": "Connectez-vous avec votre équipe. Créez ou rejoignez une salle pour rendre vos réunions quotidiennes plus efficaces.",
   "heroCTAMessage": "Démarrez une salle",
+  "heroImageAltMessage": "Personnes en réunion",
   "featureMessage1": "Réunions efficaces en temps",
   "featureMessage2": "Vos réunions plus productives avec des minuteries et des invitations intégrées.",
   "featureMessage3": "Collaboration d’équipe",
@@ -21,5 +23,7 @@
   "resourcesMessage1": "Documentation",
   "resourcesMessage2": "Blog",
   "resourcesMessage3": "Support",
-  "rightsReserved": "Tous droits réservés."
+  "rightsReserved": "Tous droits réservés.",
+  "ariaLanguageSelection": "Choisissez une langue. La sélection actuelle est Français.",
+  "ariaLabelBackToTop": "Faites défiler vers le haut de la page"
 }
