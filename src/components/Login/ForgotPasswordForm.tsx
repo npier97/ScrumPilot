@@ -1,23 +1,28 @@
-interface ForgotPasswordFormProps {
-  setShowForgotPasswordForm: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Form, FormField, FormItem, FormControl, FormLabel } from '../ui/form';
 import { useForm, useFormState } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { Link } from '@tanstack/react-router';
 import React from 'react';
-import { loginFormSchema } from '../../../zod.schemas';
+import { createLoginFormSchema } from '../../../zod.schemas';
+import { useTranslation } from 'react-i18next';
+
+interface ForgotPasswordFormProps {
+  setShowForgotPasswordForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+type ForgotPasswordFormType = {
+  email: string;
+};
 
 const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
   setShowForgotPasswordForm
 }) => {
-  const formSchema = loginFormSchema.pick({ email: true });
+  const { t } = useTranslation();
+  const formSchema = createLoginFormSchema(t).pick({ email: true });
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<ForgotPasswordFormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: ''
@@ -26,14 +31,14 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
 
   const { errors } = useFormState({ control: form.control });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: ForgotPasswordFormType) => {
     console.log(values);
   };
 
   return (
     <Form {...form}>
       <form
-        className='flex flex-col space-y-5 mt-6'
+        className='flex flex-col space-y-5 mt-6 w-full'
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -41,15 +46,20 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('forms.email')}</FormLabel>
               <FormControl>
-                <Input type='text' placeholder='Enter your email' {...field} />
+                <Input
+                  type='text'
+                  placeholder={t('forms.email.placeholder')}
+                  {...field}
+                  value={form.getValues('email')}
+                />
               </FormControl>
             </FormItem>
           )}
         />
         <Button className='w-full py-5' type='submit'>
-          Continue
+          {t('forms.continue')}
         </Button>
         <div className='flex flex-col text-xs space-y-1'>
           {Object.entries(errors).map(([fieldName, error]) => (
@@ -60,22 +70,22 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
         </div>
       </form>
 
-      <div className=' flex justify-center my-3'>
+      <div className='flex justify-center my-3'>
         <Button
           onClick={() => setShowForgotPasswordForm(false)}
           variant={'link'}
-          className=' text-sm text-primary hover:underline'
+          className='text-sm text-primary hover:underline'
         >
-          Back to login
+          {t('forms.backToLogin')}
         </Button>
       </div>
       <hr />
       <div className='flex items-center justify-center flex-wrap pt-6'>
-        <p>Don't have an account yet ?</p>
+        <p>{t('forms.noAccountYet')}</p>
         &nbsp;
         <Link to='/sigin'>
           <Button variant={'link'} className='text-primary hover:underline'>
-            Create an account
+            {t('forms.createAccount')}
           </Button>
         </Link>
       </div>

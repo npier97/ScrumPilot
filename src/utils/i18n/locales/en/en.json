@@ -21,5 +21,28 @@
   "resourcesMessage1": "Documentation",
   "resourcesMessage2": "Blog",
   "resourcesMessage3": "Support",
-  "rightsReserved": "All rights reserved."
+  "rightsReserved": "All rights reserved.",
+  "forms": {
+    "signInTitle": "Login to your account",
+    "forgotPwdTitle": "Recover your account",
+    "email": "Email",
+    "password": "Password",
+    "login": "Log in",
+    "forgotPwd": "Forgot your password ?",
+    "noAccountYet": "Don't have an account yet ?",
+    "createAccount": "Create an account",
+    "email.invalid": "Please enter a valid email address",
+    "email.minLength": "Email must be at least 5 characters long",
+    "email.maxLength": "Email must not exceed 255 characters",
+    "email.placeholder": "Enter your email (ex: yourname@gmail.com)",
+    "email.required": "Email adress :Required",
+    "password.invalid": "Password must be at least 8 characters long",
+    "password.minLength": "Password must not exceed 100 characters",
+    "password.maxLength": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    "password.placeholder": "Enter your password",
+    "password.complexity": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    "password.required": "Password : Required",
+    "continue": "Continue",
+    "backToLogin": "Back to login"
+  }
 }

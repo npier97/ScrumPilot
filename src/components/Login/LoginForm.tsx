@@ -4,31 +4,35 @@ import { Form, FormField, FormItem, FormControl, FormLabel } from '../ui/form';
 import { Link } from '@tanstack/react-router';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import { Eye, EyeOff } from 'lucide-react';
-
 import { useState } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginFormSchema } from '../../../zod.schemas';
+import { createLoginFormSchema } from '../../../zod.schemas';
+import { useTranslation } from 'react-i18next';
+import LanguageDropdown from '../LanguageDropdown/index';
 
 const LogIn = () => {
+  const { t } = useTranslation();
   const [showForgotPasswordForm, setShowForgotPasswordForm] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const formSchema = loginFormSchema;
+  const formSchema = createLoginFormSchema(t);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<ReturnType<typeof createLoginFormSchema>>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
       password: ''
     }
   });
-  const { errors } = useFormState({ control: form.control });
 
+  const { errors } = useFormState({ control: form.control });
   const { clearErrors } = form;
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (
+    values: z.infer<ReturnType<typeof createLoginFormSchema>>
+  ) => {
     console.log(values);
   };
 
@@ -39,16 +43,23 @@ const LogIn = () => {
 
   return (
     <div className='w-screen h-screen flex justify-center items-center text-sm container mx-auto'>
-      <div className='shadow-lg rounded-xl w-full sm:w-[450px] p-6'>
-        <h1 className='text-2xl font-bold text-center'>
-          {!showForgotPasswordForm
-            ? 'Login to your account'
-            : 'Recover your account'}
-        </h1>
+      <div className='shadow-lg rounded-xl w-full sm:w-[450px] p-6 flex flex-col items-center'>
+        <div className='flex'>
+          <h1 className='text-2xl font-bold text-center'>
+            {!showForgotPasswordForm
+              ? 'Login to your account'
+              : 'Recover your account'}
+          </h1>
+
+          <div className='relative'>
+            <LanguageDropdown />
+          </div>
+        </div>
+
         {!showForgotPasswordForm ? (
           <Form {...form}>
             <form
-              className='flex flex-col space-y-5 mt-6'
+              className='flex flex-col space-y-5 mt-8 w-full'
               onSubmit={form.handleSubmit(onSubmit)}
             >
               <FormField
@@ -56,12 +67,13 @@ const LogIn = () => {
                 name='email'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t('forms.email')}</FormLabel>
                     <FormControl>
                       <Input
                         type='text'
-                        placeholder='Enter your email (ex: yourname@gmail.com)'
+                        placeholder={t('forms.email.placeholder')}
                         {...field}
+                        value={field.value ?? ''}
                       />
                     </FormControl>
                   </FormItem>
@@ -73,12 +85,14 @@ const LogIn = () => {
                   name='password'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>{t('forms.password')}</FormLabel>
                       <FormControl>
                         <Input
+                          autoComplete='password'
                           type={showPassword ? 'text' : 'password'}
-                          placeholder='Enter your password'
+                          placeholder={t('forms.password.placeholder')}
                           {...field}
+                          value={field.value ?? ''}
                         />
                       </FormControl>
                     </FormItem>
@@ -86,14 +100,14 @@ const LogIn = () => {
                 />
                 <div
                   onClick={() => setShowPassword(!showPassword)}
-                  className='absolute right-4 bottom-2'
+                  className='absolute right-4 bottom-2 cursor-pointer'
                 >
                   {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                 </div>
               </div>
 
               <Button className='w-full py-5' type='submit'>
-                Log in
+                {t('forms.login')}
               </Button>
 
               <div className='flex flex-col text-xs space-y-1'>
@@ -111,19 +125,19 @@ const LogIn = () => {
                 variant={'link'}
                 className=' text-sm text-primary hover:underline'
               >
-                Forgot your password
+                {t('forms.forgotPwd')}
               </Button>
             </div>
             <hr />
             <div className='flex items-center justify-center flex-wrap pt-6'>
-              <p>Don't have an account yet ?</p>
+              <p>{t('forms.noAccountYet')}</p>
               &nbsp;
               <Link to='/sigin'>
                 <Button
                   variant={'link'}
                   className='text-primary hover:underline'
                 >
-                  Create an account
+                  {t('forms.createAccount')}
                 </Button>
               </Link>
             </div>

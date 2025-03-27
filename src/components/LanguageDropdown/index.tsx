@@ -14,7 +14,7 @@ const LanguageDropdown = () => {
   };
 
   return (
-    <div className='p-2'>
+    <div className='p-2 relative'>
       <button
         className='text-blue-60 cursor-pointer hover:text-accent-foreground'
         onClick={() => setIsOpen(!isOpen)}
