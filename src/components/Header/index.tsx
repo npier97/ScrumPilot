@@ -12,7 +12,9 @@ import { useTranslation } from 'react-i18next';
 const MenuItem = ({ link, label }: { link: string; label: string }) => (
   <NavigationMenuItem>
     <NavigationMenuLink asChild>
-      <Link to={link}>{label}</Link>
+      <Link to={link} data-testid='menu-items'>
+        {label}
+      </Link>
     </NavigationMenuLink>
   </NavigationMenuItem>
 );
