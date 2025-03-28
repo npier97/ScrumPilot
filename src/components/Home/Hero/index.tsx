@@ -1,9 +1,13 @@
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
+import { useCreateRoom } from '@/hooks/useCreateRoom';
 
 const Hero = () => {
   const { t } = useTranslation();
+  const { createNewRoom } = useCreateRoom();
+
+  const handleClick = () => createNewRoom();
 
   return (
     <section className='py-20 px-4 flex flex-col gap-6 items-center justify-center lg:flex-row'>
@@ -13,6 +17,7 @@ const Hero = () => {
         <Button
           className='bg-blue-600 cursor-pointer hover:bg-blue-500 md:max-w-[300px]'
           aria-label={t('heroCTAMessage')}
+          onClick={handleClick}
         >
           {t('heroCTAMessage')}
           <Plus aria-hidden='true' />
