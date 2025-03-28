@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "husky",
-    "test": "vitest"
+    "test": "CI=true vitest"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
