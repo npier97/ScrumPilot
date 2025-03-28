@@ -1,85 +1,82 @@
-interface ForgotPasswordFormProps {
-  setShowForgotPasswordForm: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { Form, FormField, FormItem, FormControl, FormLabel } from '../ui/form';
+import { Form } from '../ui/form';
 import { useForm, useFormState } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Link } from '@tanstack/react-router';
-import React from 'react';
-import { loginFormSchema } from '../../../zod.schemas';
+import { createLoginFormSchema } from '../../../zod.schemas';
+import { useTranslation } from 'react-i18next';
+import { ForgotPasswordFormType } from '@/types/login';
+import { useEffect } from 'react';
+import EmailPasswordField from './EmailPasswordField';
+// TODO: improve imports declaration
 
-const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
-  setShowForgotPasswordForm
+const ForgotPasswordForm = ({
+  isVisible,
+  toggleIsVisible
+}: {
+  isVisible: boolean;
+  toggleIsVisible: () => void;
 }) => {
-  const formSchema = loginFormSchema.pick({ email: true });
-
-  const form = useForm<z.infer<typeof formSchema>>({
+  const { t } = useTranslation();
+  const formSchema = createLoginFormSchema(t).pick({ email: true });
+  const form = useForm<ForgotPasswordFormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: ''
     }
   });
-
   const { errors } = useFormState({ control: form.control });
-
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const { reset } = form;
+  const onSubmit = (values: ForgotPasswordFormType) => {
+    // get form values here
   };
 
-  return (
-    <Form {...form}>
-      <form
-        className='flex flex-col space-y-5 mt-6'
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <FormField
-          control={form.control}
-          name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input type='text' placeholder='Enter your email' {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <Button className='w-full py-5' type='submit'>
-          Continue
-        </Button>
-        <div className='flex flex-col text-xs space-y-1'>
-          {Object.entries(errors).map(([fieldName, error]) => (
-            <p key={fieldName} className='text-red-500'>
-              {error.message}
-            </p>
-          ))}
-        </div>
-      </form>
+  useEffect(() => {
+    reset();
+  }, [isVisible, reset]);
 
-      <div className=' flex justify-center my-3'>
-        <Button
-          onClick={() => setShowForgotPasswordForm(false)}
-          variant={'link'}
-          className=' text-sm text-primary hover:underline'
+  return (
+    isVisible && (
+      <Form {...form}>
+        <form
+          className='flex flex-col space-y-5 mt-6 w-full'
+          onSubmit={form.handleSubmit(onSubmit)}
         >
-          Back to login
-        </Button>
-      </div>
-      <hr />
-      <div className='flex items-center justify-center flex-wrap pt-6'>
-        <p>Don't have an account yet ?</p>
-        &nbsp;
-        <Link to='/sigin'>
-          <Button variant={'link'} className='text-primary hover:underline'>
-            Create an account
+          <EmailPasswordField control={form.control} field='email' />
+          <Button className='w-full py-5' type='submit'>
+            {t('forms.continue')}
           </Button>
-        </Link>
-      </div>
-    </Form>
+          <div className='flex flex-col text-xs space-y-1'>
+            {Object.entries(errors).map(([fieldName, error]) => (
+              <p key={fieldName} className='text-red-500'>
+                {(error as { message: string }).message}
+              </p>
+            ))}
+          </div>
+        </form>
+
+        <div className='flex justify-center my-3'>
+          <Button
+            onClick={() => toggleIsVisible()}
+            variant={'link'}
+            className='text-sm text-primary hover:underline'
+          >
+            {t('forms.backToLogin')}
+          </Button>
+        </div>
+        <hr />
+        <div className='flex items-center justify-center flex-wrap pt-6'>
+          <p>{t('forms.noAccountYet')}</p>
+          &nbsp;
+          <Link to='/sign-up'>
+            <Button variant={'link'} className='text-primary hover:underline'>
+              {t('forms.createAccount')}
+            </Button>
+          </Link>
+        </div>
+      </Form>
+    )
   );
 };
 

@@ -25,5 +25,32 @@
   "resourcesMessage3": "Support",
   "rightsReserved": "All rights reserved.",
   "ariaLanguageSelection": "Choose a language. The current selection is English.",
-  "ariaLabelBackToTop": "Scroll back to the top of the page"
+  "ariaLabelBackToTop": "Scroll back to the top of the page",
+  "forms": {
+    "loginTitle": "Login to your account",
+    "forgotPwdTitle": "Recover your account",
+    "login": "Log in",
+    "forgotPwd": "Forgot your password?",
+    "noAccountYet": "Don't have an account yet?",
+    "createAccount": "Create an account",
+    "email": {
+      "label": "Email",
+      "invalid": "Please enter a valid email address",
+      "minLength": "Email must be at least 5 characters long",
+      "maxLength": "Email must not exceed 255 characters",
+      "placeholder": "Enter your email (ex: yourname@gmail.com)",
+      "required": "Email address: Required"
+    },
+    "password": {
+      "label": "Password",
+      "minLength": "Password must be at least 12 characters long",
+      "maxLength": "Password must not exceed 100 characters",
+      "invalid": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+      "placeholder": "Enter your password",
+      "complexity": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+      "required": "Password: Required"
+    },
+    "continue": "Continue",
+    "backToLogin": "Back to login"
+  }
 }

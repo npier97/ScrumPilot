@@ -25,5 +25,32 @@
   "resourcesMessage3": "Support",
   "rightsReserved": "Tous droits réservés.",
   "ariaLanguageSelection": "Choisissez une langue. La sélection actuelle est Français.",
-  "ariaLabelBackToTop": "Faites défiler vers le haut de la page"
+  "ariaLabelBackToTop": "Faites défiler vers le haut de la page",
+  "forms": {
+    "loginTitle": "Connectez-vous à votre compte",
+    "forgotPwdTitle": "Récupérez votre compte",
+    "login": "Se connecter",
+    "forgotPwd": "Mot de passe oublié ?",
+    "noAccountYet": "Vous n'avez pas encore de compte ?",
+    "createAccount": "Créer un compte",
+    "email": {
+      "label": "Email",
+      "invalid": "Veuillez entrer une adresse email valide",
+      "minLength": "L'email doit contenir au moins 5 caractères",
+      "maxLength": "L'email ne doit pas dépasser 255 caractères",
+      "placeholder": "Entrez votre email (ex: votrenom@gmail.com)",
+      "required": "Adresse email : Requis"
+    },
+    "password": {
+      "label": "Mot de passe",
+      "minLength": "Le mot de passe doit contenir au moins 12 caractères",
+      "maxLength": "Le mot de passe ne doit pas dépasser 100 caractères",
+      "invalid": "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial",
+      "placeholder": "Entrez votre mot de passe",
+      "complexity": "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial",
+      "required": "Mot de passe : Requis"
+    },
+    "continue": "Poursuivre",
+    "backToLogin": "Se connecter"
+  }
 }
