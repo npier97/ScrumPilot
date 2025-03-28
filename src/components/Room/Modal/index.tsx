@@ -54,9 +54,9 @@ const Modal = ({
         <div className='grid grid-cols-4 items-center gap-4'>
           <InputField
             id='room'
-            label={'room.modal.roomName'}
+            label={'room.modal.room'}
             value={roomName}
-            placeholder='Room Name'
+            placeholder={t('room.modal.roomName')}
             setValue={setRoomName}
             isVisible={isAdminLink}
           />
@@ -64,9 +64,9 @@ const Modal = ({
             id='username'
             label={'room.modal.username'}
             value={MemberName}
-            placeholder='Your Name'
+            placeholder={t('room.modal.yourName')}
             setValue={setMemberName}
-            isVisible={true}
+            isVisible
           />
         </div>
         <DialogFooter>
