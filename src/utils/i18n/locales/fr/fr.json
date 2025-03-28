@@ -65,6 +65,14 @@
       "username": "Utilisateur",
       "yourName": "Votre Nom",
       "save": "Enregistrer les modifications"
+    },
+    "vote": {
+      "reset": "Réinitialiser les votes",
+      "reveal": "Révéler les votes",
+      "submit": "Soumettre les votes"
+    },
+    "users": {
+      "estimate": "Estimation moyenne"
     }
   }
 }

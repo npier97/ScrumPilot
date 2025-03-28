@@ -65,6 +65,14 @@
       "username": "User",
       "yourName": "Your Name",
       "save": "Save changes"
+    },
+    "vote": {
+      "reset": "Reset votes",
+      "reveal": "Reveal votes",
+      "submit": "Submit votes"
+    },
+    "users": {
+      "estimate": "Average estimate"
     }
   }
 }
