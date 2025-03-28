@@ -24,7 +24,7 @@ const Modal = ({
 }: ModalProps) => {
   const { t } = useTranslation();
   const [roomName, setRoomName] = useState('');
-  const [MemberName, setMemberName] = useState('');
+  const [memberName, setMemberName] = useState('');
   const isAdminLink = path === 'rooms';
 
   const handleJoinRoom = async (room: RoomType, newMemberName: string) => {
@@ -63,7 +63,7 @@ const Modal = ({
           <InputField
             id='username'
             label={'room.modal.username'}
-            value={MemberName}
+            value={memberName}
             placeholder={t('room.modal.yourName')}
             setValue={setMemberName}
             isVisible
@@ -73,7 +73,7 @@ const Modal = ({
           <Button
             className='cursor-pointer'
             type='submit'
-            onClick={() => handleJoinRoom(room, MemberName)}
+            onClick={() => handleJoinRoom(room, memberName)}
           >
             {t('room.modal.save')}
           </Button>
