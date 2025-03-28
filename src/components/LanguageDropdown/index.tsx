@@ -18,7 +18,7 @@ const LanguageDropdown = () => {
       <button
         className='text-blue-60 cursor-pointer hover:text-accent-foreground'
         onClick={() => setIsOpen(!isOpen)}
-        aria-label={t('ariaLanguage')}
+        aria-label={t('ariaLanguageSelection')}
       >
         {currentLanguage}
       </button>
