@@ -73,7 +73,7 @@ const AuthForm = ({
           <div className='flex items-center justify-center flex-wrap pt-6'>
             <p>{t('forms.noAccountYet')}</p>
             &nbsp;
-            <Link to='/sigin'>
+            <Link to='/sign-up'>
               <Button variant={'link'} className='text-primary hover:underline'>
                 {t('forms.createAccount')}
               </Button>
