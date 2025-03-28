@@ -62,6 +62,7 @@ const RoomPage = () => {
       </div>
       {isModalVisible && (
         <Modal
+          path={path}
           room={room}
           roomId={roomId}
           isOpen={isModalVisible}

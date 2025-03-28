@@ -6,6 +6,7 @@ export interface Room {
 }
 
 export interface ModalProps {
+  path: string;
   room: RoomType;
   roomId: string;
   isOpen: boolean;
@@ -13,3 +14,12 @@ export interface ModalProps {
 }
 
 export type RoomType = Room | null;
+
+export interface InputProps {
+  isVisible: boolean;
+  label: string;
+  id: string;
+  value: string;
+  placeholder: string;
+  setValue: (value: string) => void;
+}
