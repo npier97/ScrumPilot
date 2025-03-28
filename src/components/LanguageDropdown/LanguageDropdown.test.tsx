@@ -34,11 +34,13 @@ describe('Language selection', () => {
     const languageListItems = within(languageMenu).getAllByTestId(
       'language-list-items'
     );
+    const frenchLanguageButton = languageListItems[1];
 
-    await userEvent.click(languageListItems[1]);
+    await userEvent.click(frenchLanguageButton);
 
     const authMenu = screen.getAllByTestId('menu-items');
+    const loginItem = authMenu[1];
 
-    expect(authMenu[1].textContent).toContain('Connexion');
+    expect(loginItem.textContent).toContain('Connexion');
   });
 });
