@@ -3,10 +3,14 @@ import { Merge, Plus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { useTranslation } from 'react-i18next';
+import { useCreateRoom } from '@/hooks/useCreateRoom';
 
 const SubNav = () => {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const { createNewRoom } = useCreateRoom();
+
+  const handleClick = () => createNewRoom();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +34,10 @@ const SubNav = () => {
           <Merge aria-hidden='true' />
         </Button>
       </div>
-      <Button className='bg-blue-600 cursor-pointer hover:bg-blue-500 md:max-w-[300px]'>
+      <Button
+        className='bg-blue-600 cursor-pointer hover:bg-blue-500 md:max-w-[300px]'
+        onClick={handleClick}
+      >
         {t('heroCTAMessage')}
         <Plus aria-hidden='true' />
       </Button>

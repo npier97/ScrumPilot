@@ -61,6 +61,7 @@
     "modal": {
       "title": "Enter your name to join the room",
       "description": "Make changes to your profile here. Click save when you're done.",
+      "roomName": "Room Name",
       "username": "Name",
       "save": "Save changes"
     }
