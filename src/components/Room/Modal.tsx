@@ -13,8 +13,11 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog';
+import { useTranslation } from 'react-i18next';
+import LanguageDropdown from '../LanguageDropdown';
 
 const Modal = ({ room, roomId, isOpen, toggleVisibility }: ModalProps) => {
+  const { t } = useTranslation();
   const [newMemberName, setNewMemberName] = useState('');
 
   const handleJoinRoom = async (room: RoomType, newMemberName: string) => {
@@ -32,14 +35,12 @@ const Modal = ({ room, roomId, isOpen, toggleVisibility }: ModalProps) => {
     <Dialog open={isOpen}>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
-          <DialogTitle>Enter your name to join the room</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
+          <DialogTitle>{t('room.modal.title')}</DialogTitle>
+          <DialogDescription>{t('room.modal.description')}</DialogDescription>
         </DialogHeader>
         <div className='grid grid-cols-4 items-center gap-4'>
           <Label htmlFor='name' className='text-right'>
-            Name
+            {t('room.modal.username')}
           </Label>
           <Input
             id='name'
@@ -55,8 +56,9 @@ const Modal = ({ room, roomId, isOpen, toggleVisibility }: ModalProps) => {
             type='submit'
             onClick={() => handleJoinRoom(room, newMemberName)}
           >
-            Save changes
+            {t('room.modal.save')}
           </Button>
+          <LanguageDropdown />
         </DialogFooter>
       </DialogContent>
     </Dialog>

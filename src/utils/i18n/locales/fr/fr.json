@@ -52,5 +52,17 @@
     },
     "continue": "Poursuivre",
     "backToLogin": "Se connecter"
+  },
+  "room": {
+    "welcome": "Bienvenue dans la Room",
+    "joined": "a rejoint.",
+    "invite": "Inviter un nouveau membre",
+    "loading": "Chargement de la Room...",
+    "modal": {
+      "title": "Entrez un nom pour rejoindre la salle",
+      "description": "Modifiez votre profil ici. Cliquez sur enregistrer lorsque vous avez terminé.",
+      "username": "Nom",
+      "save": "Enregistrer les modifications"
+    }
   }
 }

@@ -52,5 +52,17 @@
     },
     "continue": "Continue",
     "backToLogin": "Back to login"
+  },
+  "room": {
+    "welcome": "Welcome to Room",
+    "joined": "joined.",
+    "invite": "Invite new member",
+    "loading": "Loading room...",
+    "modal": {
+      "title": "Enter your name to join the room",
+      "description": "Make changes to your profile here. Click save when you're done.",
+      "username": "Name",
+      "save": "Save changes"
+    }
   }
 }
