@@ -3,8 +3,6 @@ import { ModalProps, RoomType } from '@/types/Room';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Dialog,
   DialogContent,
@@ -14,17 +12,32 @@ import {
   DialogTitle
 } from '@/components/ui/dialog';
 import { useTranslation } from 'react-i18next';
-import LanguageDropdown from '../LanguageDropdown';
+import LanguageDropdown from '@/components/LanguageDropdown';
+import InputField from './InputField';
 
-const Modal = ({ room, roomId, isOpen, toggleVisibility }: ModalProps) => {
+const Modal = ({
+  path,
+  room,
+  roomId,
+  isOpen,
+  toggleVisibility
+}: ModalProps) => {
   const { t } = useTranslation();
-  const [newMemberName, setNewMemberName] = useState('');
+  const [roomName, setRoomName] = useState('');
+  const [MemberName, setMemberName] = useState('');
+  const isAdminLink = path === 'rooms';
 
   const handleJoinRoom = async (room: RoomType, newMemberName: string) => {
     if (!room) return;
 
     const roomRef = doc(db, 'rooms', roomId);
 
+    if (isAdminLink) {
+      await updateDoc(roomRef, {
+        name: roomName,
+        createdBy: newMemberName
+      });
+    }
     await updateDoc(roomRef, {
       members: [...room.members, newMemberName]
     });
@@ -39,22 +52,28 @@ const Modal = ({ room, roomId, isOpen, toggleVisibility }: ModalProps) => {
           <DialogDescription>{t('room.modal.description')}</DialogDescription>
         </DialogHeader>
         <div className='grid grid-cols-4 items-center gap-4'>
-          <Label htmlFor='name' className='text-right'>
-            {t('room.modal.username')}
-          </Label>
-          <Input
-            id='name'
-            className='col-span-3'
-            value={newMemberName}
-            onChange={(e) => setNewMemberName(e.target.value)}
+          <InputField
+            id='room'
+            label={'room.modal.roomName'}
+            value={roomName}
+            placeholder='Room Name'
+            setValue={setRoomName}
+            isVisible={isAdminLink}
+          />
+          <InputField
+            id='username'
+            label={'room.modal.username'}
+            value={MemberName}
             placeholder='Your Name'
+            setValue={setMemberName}
+            isVisible={true}
           />
         </div>
         <DialogFooter>
           <Button
             className='cursor-pointer'
             type='submit'
-            onClick={() => handleJoinRoom(room, newMemberName)}
+            onClick={() => handleJoinRoom(room, MemberName)}
           >
             {t('room.modal.save')}
           </Button>
