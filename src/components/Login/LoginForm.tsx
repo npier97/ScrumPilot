@@ -20,7 +20,6 @@ const LogIn = () => {
               : t('forms.forgotPwdTitle')}
           </h1>
         </div>
-
         <AuthForm
           isVisible={!showForgotPasswordForm}
           toggleIsVisible={toggleForgotPasswordPage}
