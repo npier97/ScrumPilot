@@ -15,7 +15,7 @@ const Hero = () => {
         <h1 className='text-2xl font-bold lg:text-4xl'>{t('heroTitle')}</h1>
         <h2>{t('heroSubTitle')}</h2>
         <Button
-          className='bg-blue-600 cursor-pointer hover:bg-blue-500 md:max-w-[300px]'
+          className='bg-blue-600 hover:bg-blue-500 md:max-w-[300px]'
           aria-label={t('heroCTAMessage')}
           onClick={handleClick}
         >

@@ -27,8 +27,7 @@
   "ariaLanguageSelection": "Choisissez une langue. La sélection actuelle est Français.",
   "ariaLabelBackToTop": "Faites défiler vers le haut de la page",
   "room": {
-    "welcome": "Bienvenue dans la Room",
-    "joined": "a rejoint.",
+    "welcome": "Bienvenue sur",
     "invite": "Inviter un nouveau membre",
     "loading": "Chargement de la Room...",
     "modal": {

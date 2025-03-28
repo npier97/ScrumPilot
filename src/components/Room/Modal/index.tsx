@@ -71,7 +71,6 @@ const Modal = ({
         </div>
         <DialogFooter>
           <Button
-            className='cursor-pointer'
             type='submit'
             onClick={() => handleJoinRoom(room, memberName)}
           >
