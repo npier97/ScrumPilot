@@ -27,8 +27,7 @@
   "ariaLanguageSelection": "Choisissez une langue. La sélection actuelle est Français.",
   "ariaLabelBackToTop": "Faites défiler vers le haut de la page",
   "room": {
-    "welcome": "Bienvenue dans la Room",
-    "joined": "a rejoint.",
+    "welcome": "Bienvenue sur",
     "invite": "Inviter un nouveau membre",
     "loading": "Chargement de la Room...",
     "modal": {
@@ -39,6 +38,14 @@
       "username": "Utilisateur",
       "yourName": "Votre Nom",
       "save": "Enregistrer les modifications"
+    },
+    "vote": {
+      "reset": "Réinitialiser les votes",
+      "reveal": "Révéler les votes",
+      "submit": "Soumettre les votes"
+    },
+    "users": {
+      "estimate": "Estimation moyenne"
     }
   }
 }

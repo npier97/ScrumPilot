@@ -16,7 +16,7 @@ const LanguageDropdown = () => {
   return (
     <div className='p-2'>
       <button
-        className='text-blue-60 cursor-pointer hover:text-accent-foreground'
+        className='text-blue-60 hover:text-accent-foreground'
         onClick={() => setIsOpen(!isOpen)}
         aria-label={t('ariaLanguageSelection')}
       >
@@ -28,7 +28,7 @@ const LanguageDropdown = () => {
           {LANGUAGES.map((language) => (
             <button
               key={`${language.code}`}
-              className='block px-4 py-2 w-full text-left cursor-pointer hover:bg-gray-100 hover:text-accent-foreground'
+              className='block px-4 py-2 w-full text-left hover:bg-gray-100 hover:text-accent-foreground'
               onClick={() => changeLanguage(language.code)}
             >
               {language.label}
