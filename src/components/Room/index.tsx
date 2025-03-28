@@ -17,7 +17,7 @@ const RoomPage = () => {
   const path = location.pathname.includes('rooms') ? 'rooms' : 'join';
   const { roomId } = useParams({ from: `/${path}/$roomId` });
   const [room, setRoom] = useState<RoomType>(null);
-  const [isModalVisible, setModalVisibility] = useState(false);
+  const [isModalVisible, setModalVisibility] = useState(true);
 
   const handleInviteOnClick = () => {
     const link = `${window.location.origin}/join/${roomId}`;
