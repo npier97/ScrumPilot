@@ -54,8 +54,7 @@
     "backToLogin": "Se connecter"
   },
   "room": {
-    "welcome": "Bienvenue dans la Room",
-    "joined": "a rejoint.",
+    "welcome": "Bienvenue sur",
     "invite": "Inviter un nouveau membre",
     "loading": "Chargement de la Room...",
     "modal": {

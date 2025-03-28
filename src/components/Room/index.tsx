@@ -8,6 +8,8 @@ import Modal from './Modal';
 import { Toaster } from '../ui/sonner';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
+import UsersCard from './UsersCard';
+import Voting from './Voting';
 
 const RoomPage = () => {
   const { t } = useTranslation();
@@ -15,7 +17,7 @@ const RoomPage = () => {
   const path = location.pathname.includes('rooms') ? 'rooms' : 'join';
   const { roomId } = useParams({ from: `/${path}/$roomId` });
   const [room, setRoom] = useState<RoomType>(null);
-  const [isModalVisible, setModalVisibility] = useState(true);
+  const [isModalVisible, setModalVisibility] = useState(false);
 
   const handleInviteOnClick = () => {
     const link = `${window.location.origin}/join/${roomId}`;
@@ -38,23 +40,20 @@ const RoomPage = () => {
 
   return (
     <>
-      <div className='pt-40 flex justify-center'>
+      <div className='pt-20 flex justify-center'>
         {room ? (
-          <div className='flex flex-col items-center gap-2'>
-            <h1>
-              {t('room.welcome')} {roomId}!
-            </h1>
-            <p>
-              {room.members.map((member) => (
-                <span key={`${member}`}>{member}</span>
-              ))}{' '}
-              {t('room.joined')}
-            </p>
-            <Button className='cursor-pointer' onClick={handleInviteOnClick}>
-              {t('room.invite')}
-            </Button>
-            {/* TODO: toaster translation */}
-            <Toaster />
+          <div className='flex flex-col gap-4'>
+            <div className='flex flex-col items-center gap-2'>
+              <h1>
+                {t('room.welcome')} {room.name}!
+              </h1>
+              <Button onClick={handleInviteOnClick}>{t('room.invite')}</Button>
+              {/* TODO: toaster translation */}
+              <Toaster />
+            </div>
+            <hr className='my-8 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
+            <Voting />
+            <UsersCard members={room.members} />
           </div>
         ) : (
           <p>{t('room.loading')}</p>

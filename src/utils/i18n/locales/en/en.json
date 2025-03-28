@@ -54,8 +54,7 @@
     "backToLogin": "Back to login"
   },
   "room": {
-    "welcome": "Welcome to Room",
-    "joined": "joined.",
+    "welcome": "Welcome to",
     "invite": "Invite new member",
     "loading": "Loading room...",
     "modal": {
