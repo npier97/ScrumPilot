@@ -25,5 +25,17 @@
   "resourcesMessage3": "Support",
   "rightsReserved": "Tous droits réservés.",
   "ariaLanguageSelection": "Choisissez une langue. La sélection actuelle est Français.",
-  "ariaLabelBackToTop": "Faites défiler vers le haut de la page"
+  "ariaLabelBackToTop": "Faites défiler vers le haut de la page",
+  "room": {
+    "welcome": "Bienvenue dans la Room",
+    "joined": "a rejoint.",
+    "invite": "Inviter un nouveau membre",
+    "loading": "Chargement de la Room...",
+    "modal": {
+      "title": "Entrez un nom pour rejoindre la salle",
+      "description": "Modifiez votre profil ici. Cliquez sur enregistrer lorsque vous avez terminé.",
+      "username": "Nom",
+      "save": "Enregistrer les modifications"
+    }
+  }
 }

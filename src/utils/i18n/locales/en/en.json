@@ -25,5 +25,17 @@
   "resourcesMessage3": "Support",
   "rightsReserved": "All rights reserved.",
   "ariaLanguageSelection": "Choose a language. The current selection is English.",
-  "ariaLabelBackToTop": "Scroll back to the top of the page"
+  "ariaLabelBackToTop": "Scroll back to the top of the page",
+  "room": {
+    "welcome": "Welcome to Room",
+    "joined": "joined.",
+    "invite": "Invite new member",
+    "loading": "Loading room...",
+    "modal": {
+      "title": "Enter your name to join the room",
+      "description": "Make changes to your profile here. Click save when you're done.",
+      "username": "Name",
+      "save": "Save changes"
+    }
+  }
 }

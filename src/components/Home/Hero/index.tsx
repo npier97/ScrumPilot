@@ -13,9 +13,9 @@ const Hero = () => {
     try {
       const roomRef = await addDoc(collection(db, 'rooms'), {
         name: 'New Room',
-        createdBy: 'new user',
+        createdBy: '',
         createdAt: serverTimestamp(),
-        members: ['new user']
+        members: ['']
       });
       navigate({ to: `/rooms/${roomRef.id}` });
     } catch (error) {
