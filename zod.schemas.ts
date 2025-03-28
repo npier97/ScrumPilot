@@ -9,10 +9,10 @@ export const createLoginFormSchema = (t: (key: string) => string) =>
       .max(255, t('forms.email.maxLength')),
     password: z
       .string({ required_error: t('forms.password.required') })
-      .min(8, t('forms.password.minLength'))
+      .min(12, t('forms.password.minLength'))
       .max(100, t('forms.password.maxLength'))
       .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/, // Doit contenir au moins une lettre minuscule, une lettre majuscule, un chiffre et au moins un caractère spécial
         t('forms.password.complexity')
       )
   });
