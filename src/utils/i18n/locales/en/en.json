@@ -54,8 +54,7 @@
     "backToLogin": "Back to login"
   },
   "room": {
-    "welcome": "Welcome to Room",
-    "joined": "joined.",
+    "welcome": "Welcome to",
     "invite": "Invite new member",
     "loading": "Loading room...",
     "modal": {
@@ -66,6 +65,14 @@
       "username": "User",
       "yourName": "Your Name",
       "save": "Save changes"
+    },
+    "vote": {
+      "reset": "Reset votes",
+      "reveal": "Reveal votes",
+      "submit": "Submit votes"
+    },
+    "users": {
+      "estimate": "Average estimate"
     }
   }
 }
