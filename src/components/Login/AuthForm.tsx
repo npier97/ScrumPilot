@@ -37,51 +37,51 @@ const AuthForm = ({
     reset();
   }, [isVisible, reset]);
 
+  if (!isVisible) return null;
+
   return (
-    isVisible && (
-      <>
-        <Form {...form}>
-          <form
-            className='flex flex-col space-y-5 mt-8 w-full'
-            onSubmit={form.handleSubmit(onSubmit)}
+    <>
+      <Form {...form}>
+        <form
+          className='flex flex-col space-y-5 mt-8 w-full'
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <EmailPasswordField control={form.control} field='email' />
+          <EmailPasswordField control={form.control} field='password' />
+
+          <Button className='w-full py-5' type='submit'>
+            {t('forms.login')}
+          </Button>
+
+          <div className='flex flex-col text-xs space-y-1'>
+            {Object.entries(errors).map(([fieldName, error]) => (
+              <p key={fieldName} className='text-red-500'>
+                {error.message}
+              </p>
+            ))}
+          </div>
+        </form>
+        <div className='flex justify-center my-3'>
+          <Button
+            onClick={() => toggleIsVisible()}
+            variant={'link'}
+            className=' text-sm text-primary hover:underline'
           >
-            <EmailPasswordField control={form.control} field='email' />
-            <EmailPasswordField control={form.control} field='password' />
-
-            <Button className='w-full py-5' type='submit'>
-              {t('forms.login')}
+            {t('forms.forgotPwd')}
+          </Button>
+        </div>
+        <hr />
+        <div className='flex items-center justify-center flex-wrap pt-6'>
+          <p>{t('forms.noAccountYet')}</p>
+          &nbsp;
+          <Link to='/sign-up'>
+            <Button variant={'link'} className='text-primary hover:underline'>
+              {t('forms.createAccount')}
             </Button>
-
-            <div className='flex flex-col text-xs space-y-1'>
-              {Object.entries(errors).map(([fieldName, error]) => (
-                <p key={fieldName} className='text-red-500'>
-                  {error.message}
-                </p>
-              ))}
-            </div>
-          </form>
-          <div className='flex justify-center my-3'>
-            <Button
-              onClick={() => toggleIsVisible()}
-              variant={'link'}
-              className=' text-sm text-primary hover:underline'
-            >
-              {t('forms.forgotPwd')}
-            </Button>
-          </div>
-          <hr />
-          <div className='flex items-center justify-center flex-wrap pt-6'>
-            <p>{t('forms.noAccountYet')}</p>
-            &nbsp;
-            <Link to='/sign-up'>
-              <Button variant={'link'} className='text-primary hover:underline'>
-                {t('forms.createAccount')}
-              </Button>
-            </Link>
-          </div>
-        </Form>
-      </>
-    )
+          </Link>
+        </div>
+      </Form>
+    </>
   );
 };
 
