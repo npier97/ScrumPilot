@@ -62,10 +62,7 @@ function RouteComponent() {
               required
             />
           </div>
-          <Button
-            onClick={() => createUser(email, password)}
-            className='cursor-pointer'
-          >
+          <Button onClick={() => createUser(email, password)}>
             Create User
           </Button>
         </div>

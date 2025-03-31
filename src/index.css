@@ -120,4 +120,7 @@
   .container {
     @apply px-4;
   }
+  button {
+    @apply cursor-pointer;
+  }
 }

@@ -52,5 +52,27 @@
     },
     "continue": "Poursuivre",
     "backToLogin": "Se connecter"
+  },
+  "room": {
+    "welcome": "Bienvenue sur",
+    "invite": "Inviter un nouveau membre",
+    "loading": "Chargement de la Room...",
+    "modal": {
+      "title": "Entrez un nom pour rejoindre la Room",
+      "description": "Modifiez votre profil ici. Cliquez sur enregistrer lorsque vous avez terminé.",
+      "room": "Room",
+      "roomName": "Nom de la Room",
+      "username": "Utilisateur",
+      "yourName": "Votre Nom",
+      "save": "Enregistrer les modifications"
+    },
+    "vote": {
+      "reset": "Réinitialiser les votes",
+      "reveal": "Révéler les votes",
+      "submit": "Soumettre les votes"
+    },
+    "users": {
+      "estimate": "Estimation moyenne"
+    }
   }
 }

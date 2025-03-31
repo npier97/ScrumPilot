@@ -15,6 +15,8 @@ import { Route as SignUpImport } from './routes/sign-up';
 import { Route as LoginImport } from './routes/login';
 import { Route as FirebasePlaygroundImport } from './routes/firebase-playground';
 import { Route as IndexImport } from './routes/index';
+import { Route as RoomsRoomIdImport } from './routes/rooms/$roomId';
+import { Route as JoinRoomIdImport } from './routes/join/$roomId';
 
 // Create/Update Routes
 
@@ -39,6 +41,18 @@ const FirebasePlaygroundRoute = FirebasePlaygroundImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute
+} as any);
+
+const RoomsRoomIdRoute = RoomsRoomIdImport.update({
+  id: '/rooms/$roomId',
+  path: '/rooms/$roomId',
+  getParentRoute: () => rootRoute
+} as any);
+
+const JoinRoomIdRoute = JoinRoomIdImport.update({
+  id: '/join/$roomId',
+  path: '/join/$roomId',
   getParentRoute: () => rootRoute
 } as any);
 
@@ -74,6 +88,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignUpImport;
       parentRoute: typeof rootRoute;
     };
+    '/join/$roomId': {
+      id: '/join/$roomId';
+      path: '/join/$roomId';
+      fullPath: '/join/$roomId';
+      preLoaderRoute: typeof JoinRoomIdImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/rooms/$roomId': {
+      id: '/rooms/$roomId';
+      path: '/rooms/$roomId';
+      fullPath: '/rooms/$roomId';
+      preLoaderRoute: typeof RoomsRoomIdImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
@@ -84,6 +112,8 @@ export interface FileRoutesByFullPath {
   '/firebase-playground': typeof FirebasePlaygroundRoute;
   '/login': typeof LoginRoute;
   '/sign-up': typeof SignUpRoute;
+  '/join/$roomId': typeof JoinRoomIdRoute;
+  '/rooms/$roomId': typeof RoomsRoomIdRoute;
 }
 
 export interface FileRoutesByTo {
@@ -91,6 +121,8 @@ export interface FileRoutesByTo {
   '/firebase-playground': typeof FirebasePlaygroundRoute;
   '/login': typeof LoginRoute;
   '/sign-up': typeof SignUpRoute;
+  '/join/$roomId': typeof JoinRoomIdRoute;
+  '/rooms/$roomId': typeof RoomsRoomIdRoute;
 }
 
 export interface FileRoutesById {
@@ -99,14 +131,35 @@ export interface FileRoutesById {
   '/firebase-playground': typeof FirebasePlaygroundRoute;
   '/login': typeof LoginRoute;
   '/sign-up': typeof SignUpRoute;
+  '/join/$roomId': typeof JoinRoomIdRoute;
+  '/rooms/$roomId': typeof RoomsRoomIdRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/firebase-playground' | '/login' | '/sign-up';
+  fullPaths:
+    | '/'
+    | '/firebase-playground'
+    | '/login'
+    | '/sign-up'
+    | '/join/$roomId'
+    | '/rooms/$roomId';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/firebase-playground' | '/login' | '/sign-up';
-  id: '__root__' | '/' | '/firebase-playground' | '/login' | '/sign-up';
+  to:
+    | '/'
+    | '/firebase-playground'
+    | '/login'
+    | '/sign-up'
+    | '/join/$roomId'
+    | '/rooms/$roomId';
+  id:
+    | '__root__'
+    | '/'
+    | '/firebase-playground'
+    | '/login'
+    | '/sign-up'
+    | '/join/$roomId'
+    | '/rooms/$roomId';
   fileRoutesById: FileRoutesById;
 }
 
@@ -115,13 +168,17 @@ export interface RootRouteChildren {
   FirebasePlaygroundRoute: typeof FirebasePlaygroundRoute;
   LoginRoute: typeof LoginRoute;
   SignUpRoute: typeof SignUpRoute;
+  JoinRoomIdRoute: typeof JoinRoomIdRoute;
+  RoomsRoomIdRoute: typeof RoomsRoomIdRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FirebasePlaygroundRoute: FirebasePlaygroundRoute,
   LoginRoute: LoginRoute,
-  SignUpRoute: SignUpRoute
+  SignUpRoute: SignUpRoute,
+  JoinRoomIdRoute: JoinRoomIdRoute,
+  RoomsRoomIdRoute: RoomsRoomIdRoute
 };
 
 export const routeTree = rootRoute
@@ -137,7 +194,9 @@ export const routeTree = rootRoute
         "/",
         "/firebase-playground",
         "/login",
-        "/sign-up"
+        "/sign-up",
+        "/join/$roomId",
+        "/rooms/$roomId"
       ]
     },
     "/": {
@@ -151,6 +210,12 @@ export const routeTree = rootRoute
     },
     "/sign-up": {
       "filePath": "sign-up.tsx"
+    },
+    "/join/$roomId": {
+      "filePath": "join/$roomId.tsx"
+    },
+    "/rooms/$roomId": {
+      "filePath": "rooms/$roomId.tsx"
     }
   }
 }
