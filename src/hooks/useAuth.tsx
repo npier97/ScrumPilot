@@ -20,9 +20,7 @@ export const useAuth = () => {
       }
       //     // navigate({ to: '/' });
     } catch (error: unknown) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Une erreur est survenue';
-      return { success: false, message: errorMessage };
+      return { success: false, message: 'Invalid credentials' };
     }
   };
 
