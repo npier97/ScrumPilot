@@ -38,6 +38,7 @@ const AuthForm = ({
     status: false,
     message: null
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const resetSubmitErrors = () =>
     setSubmitError({ status: false, message: null });
@@ -46,6 +47,8 @@ const AuthForm = ({
     values: z.infer<ReturnType<typeof createLoginFormSchema>>
   ) => {
     resetSubmitErrors();
+
+    setIsLoading(true);
     const setConnection = await connectUser(values);
     if (setConnection?.success) {
       console.log(setConnection.message);
@@ -53,6 +56,7 @@ const AuthForm = ({
       setSubmitError({ status: true, message: setConnection?.message });
       setTimeout(resetSubmitErrors, 5000);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -70,7 +74,7 @@ const AuthForm = ({
         <EmailPasswordField control={form.control} field='email' />
         <EmailPasswordField control={form.control} field='password' />
 
-        <Button className='w-full py-5' type='submit'>
+        <Button className='w-full py-5' type='submit' disabled={isLoading}>
           {t('forms.login')}
         </Button>
 
