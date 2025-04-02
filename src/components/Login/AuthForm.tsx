@@ -2,7 +2,7 @@ import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import EmailPasswordField from './EmailPasswordField';
 import { Link } from '@tanstack/react-router';
-import { useForm, useFormState } from 'react-hook-form';
+import { set, useForm, useFormState } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createLoginFormSchema } from '../../../zod.schemas';
@@ -42,19 +42,17 @@ const AuthForm = ({
   const resetSubmitErrors = () =>
     setSubmitError({ status: false, message: null });
 
-  const onSubmit = (
+  const onSubmit = async (
     values: z.infer<ReturnType<typeof createLoginFormSchema>>
   ) => {
     resetSubmitErrors();
-    connectUser(values)
-      .then((res) => {
-        if (res?.success) {
-          console.log('user connected');
-        } else {
-          setSubmitError({ status: true, message: res?.message });
-        }
-      })
-      .finally(() => setTimeout(() => resetSubmitErrors(), 5000));
+    const setConnection = await connectUser(values);
+    if (setConnection?.success) {
+      console.log(setConnection.message);
+    } else {
+      setSubmitError({ status: true, message: setConnection?.message });
+      setTimeout(resetSubmitErrors, 5000);
+    }
   };
 
   useEffect(() => {
