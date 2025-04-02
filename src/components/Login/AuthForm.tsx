@@ -53,7 +53,7 @@ const AuthForm = ({
           setSubmitError({ status: true, message: res?.message });
         }
       })
-      .finally(() => setTimeout(() => resetSubmitErrors, 5000));
+      .finally(() => setTimeout(() => resetSubmitErrors(), 5000));
   };
 
   useEffect(() => {
