@@ -123,4 +123,7 @@
   button {
     @apply cursor-pointer;
   }
+  hr {
+    @apply w-full;
+  }
 }

@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import ErrorMessage from './ErrorMessage';
+import CreateAccountSection from './CreateAccountSection';
 
 const AuthForm = ({
   isVisible,
@@ -93,16 +94,7 @@ const AuthForm = ({
           {t('forms.forgotPwd')}
         </Button>
       </div>
-      <hr />
-      <div className='flex items-center justify-center flex-wrap pt-6'>
-        <p>{t('forms.noAccountYet')}</p>
-        &nbsp;
-        <Link to='/sign-up'>
-          <Button variant={'link'} className='text-primary hover:underline'>
-            {t('forms.createAccount')}
-          </Button>
-        </Link>
-      </div>
+      <CreateAccountSection />
     </Form>
   );
 };

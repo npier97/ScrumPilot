@@ -2,13 +2,12 @@ import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import { useForm, useFormState } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Link } from '@tanstack/react-router';
 import { createLoginFormSchema } from '../../../zod.schemas';
 import { useTranslation } from 'react-i18next';
 import { ForgotPasswordFormType } from '@/types/login';
 import { useEffect } from 'react';
 import EmailPasswordField from './EmailPasswordField';
+import CreateAccountSection from './CreateAccountSection';
 // TODO: improve imports declaration
 
 const ForgotPasswordForm = ({
@@ -66,16 +65,8 @@ const ForgotPasswordForm = ({
           {t('forms.backToLogin')}
         </Button>
       </div>
-      <hr />
-      <div className='flex items-center justify-center flex-wrap pt-6'>
-        <p>{t('forms.noAccountYet')}</p>
-        &nbsp;
-        <Link to='/sign-up'>
-          <Button variant={'link'} className='text-primary hover:underline'>
-            {t('forms.createAccount')}
-          </Button>
-        </Link>
-      </div>
+
+      <CreateAccountSection />
     </Form>
   );
 };
