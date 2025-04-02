@@ -8,7 +8,7 @@ const CreateAccountSection = () => {
   return (
     <>
       <hr />
-      <div className='flex items-center justify-center flex-wrap pt-6 text-xs'>
+      <div className='flex items-center justify-center flex-wrap pt-6'>
         <p>{t('forms.noAccountYet')}</p>
         &nbsp;
         <Link to='/sign-up'>
