@@ -43,7 +43,6 @@ const AuthForm = ({
     values: z.infer<ReturnType<typeof createLoginFormSchema>>
   ) => {
     resetSubmitErrors();
-
     const setConnection = await connectUser(values);
     if (setConnection?.success) {
       console.log(setConnection.message);
