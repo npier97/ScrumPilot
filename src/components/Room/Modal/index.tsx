@@ -1,6 +1,6 @@
 import { db } from '@/firebase-config';
 import { ModalProps, RoomType } from '@/types/Room';
-import { doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -24,10 +24,10 @@ const Modal = ({
 }: ModalProps) => {
   const { t } = useTranslation();
   const [roomName, setRoomName] = useState('');
-  const [memberName, setMemberName] = useState('');
+  const [participantName, setParticipantName] = useState('');
   const isAdminLink = path === 'rooms';
 
-  const handleJoinRoom = async (room: RoomType, newMemberName: string) => {
+  const handleJoinRoom = async (room: RoomType, newParticipantName: string) => {
     if (!room) return;
 
     const roomRef = doc(db, 'rooms', roomId);
@@ -35,14 +35,18 @@ const Modal = ({
     if (isAdminLink) {
       await updateDoc(roomRef, {
         name: roomName,
-        createdBy: newMemberName
+        createdBy: newParticipantName
       });
     }
-    await updateDoc(roomRef, {
-      members: [...room.members, newMemberName]
+    await addDoc(collection(db, 'rooms', roomRef.id, 'participants'), {
+      avatar: '',
+      name: newParticipantName,
+      vote: null
     });
     toggleVisibility(false);
   };
+
+  // return null; //TODO: REMOVE
 
   return (
     <Dialog open={isOpen}>
@@ -63,16 +67,16 @@ const Modal = ({
           <InputField
             id='username'
             label={'room.modal.username'}
-            value={memberName}
+            value={participantName}
             placeholder={t('room.modal.yourName')}
-            setValue={setMemberName}
+            setValue={setParticipantName}
             isVisible
           />
         </div>
         <DialogFooter>
           <Button
             type='submit'
-            onClick={() => handleJoinRoom(room, memberName)}
+            onClick={() => handleJoinRoom(room, participantName)}
           >
             {t('room.modal.save')}
           </Button>

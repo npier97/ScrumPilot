@@ -1,8 +1,9 @@
-export interface Room {
-  name: string;
+export interface RoomProps {
   createdAt: Date;
   createdBy: string;
-  members: string[];
+  name: string;
+  participants: ParticipantsType;
+  revealVotes: boolean;
 }
 
 export interface ModalProps {
@@ -13,7 +14,13 @@ export interface ModalProps {
   toggleVisibility: (bool: boolean) => void;
 }
 
-export type RoomType = Room | null;
+export type RoomType = RoomProps | null;
+export type ParticipantsType = {
+  id: string;
+  name: string;
+  avatar: string;
+  vote: number;
+};
 
 export interface InputProps {
   isVisible: boolean;
@@ -22,4 +29,9 @@ export interface InputProps {
   value: string;
   placeholder: string;
   setValue: (value: string) => void;
+}
+
+export interface VotingProps {
+  roomId: string;
+  participants: ParticipantsType[];
 }
