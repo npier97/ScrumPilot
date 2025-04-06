@@ -1,25 +1,22 @@
+import { ParticipantsType } from '@/types/Room';
 import { useTranslation } from 'react-i18next';
 
-const UsersCard = ({ members }: { members: string[] }) => {
+const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
   const { t } = useTranslation();
 
   return (
     <div className={'rounded-xl border py-12 px-20 shadow-lg text-center'}>
       <div className='flex flex-row justify-center gap-8 '>
-        {members.map((member) => (
-          <div className='flex flex-col items-center' key={`${member}`}>
+        {participants.map((participant) => (
+          <div className='flex flex-col items-center' key={`${participant}`}>
             <img
               className='w-20 h-20 mb-3 rounded-full shadow-sm'
-              src='/src/assets/react.svg'
+              src='/hacker.png'
               alt='Random image'
             />
             <h5 className='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
-              {member}
+              {participant.name}
             </h5>
-            <span className='text-sm text-gray-500 dark:text-gray-400'>
-              {/* TODO: add custom position */}
-              Visual Designer
-            </span>
           </div>
         ))}
       </div>
@@ -29,4 +26,4 @@ const UsersCard = ({ members }: { members: string[] }) => {
   );
 };
 
-export default UsersCard;
+export default UserCard;

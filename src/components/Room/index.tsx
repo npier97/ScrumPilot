@@ -1,14 +1,14 @@
 import { db } from '@/firebase-config';
 import { useLocation, useParams } from '@tanstack/react-router';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
-import { Room, RoomType } from '@/types/Room';
+import { ParticipantsType, RoomProps, RoomType } from '@/types/Room';
 import Modal from './Modal';
 import { Toaster } from '../ui/sonner';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
-import UsersCard from './UsersCard';
+import UserCard from './UserCard';
 import Voting from './Voting';
 
 const RoomPage = () => {
@@ -17,6 +17,7 @@ const RoomPage = () => {
   const path = location.pathname.includes('rooms') ? 'rooms' : 'join';
   const { roomId } = useParams({ from: `/${path}/$roomId` });
   const [room, setRoom] = useState<RoomType>(null);
+  const [participants, setParticipants] = useState<ParticipantsType[]>([]);
   const [isModalVisible, setModalVisibility] = useState(true);
 
   const handleInviteOnClick = () => {
@@ -31,11 +32,28 @@ const RoomPage = () => {
     const roomRef = doc(db, 'rooms', roomId);
     const unsubscribe = onSnapshot(roomRef, (roomSnap) => {
       if (roomSnap.exists()) {
-        setRoom(roomSnap.data() as Room);
+        setRoom(roomSnap.data() as RoomProps);
       }
     });
 
-    return () => unsubscribe();
+    const participantsRef = collection(db, 'rooms', roomId, 'participants');
+    const unsubscribeParticipants = onSnapshot(participantsRef, (snapshot) => {
+      const updatedParticipants = snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          name: data.name,
+          avatar: data.avatar,
+          vote: data.vote
+        };
+      });
+      setParticipants(updatedParticipants);
+    });
+
+    return () => {
+      unsubscribe();
+      unsubscribeParticipants();
+    };
   }, [roomId]);
 
   return (
@@ -52,8 +70,8 @@ const RoomPage = () => {
               <Toaster />
             </div>
             <hr className='my-8 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
-            <Voting />
-            <UsersCard members={room.members} />
+            <Voting roomId={roomId} participants={participants} />
+            <UserCard participants={participants} />
           </div>
         ) : (
           <p>{t('room.loading')}</p>
