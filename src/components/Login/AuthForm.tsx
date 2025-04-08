@@ -1,8 +1,7 @@
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import EmailPasswordField from './EmailPasswordField';
-import { Link } from '@tanstack/react-router';
-import { set, useForm, useFormState } from 'react-hook-form';
+import { useForm, useFormState } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createLoginFormSchema } from '../../../zod.schemas';
@@ -68,26 +67,28 @@ const AuthForm = ({
   return (
     <Form {...form}>
       <form
-        className='flex flex-col space-y-5 mt-8 w-full'
+        className='flex flex-col space-y-5 mt-8 w-full '
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <EmailPasswordField control={form.control} field='email' />
         <EmailPasswordField control={form.control} field='password' />
 
-        <Button className='w-full py-5' type='submit' disabled={isLoading}>
-          {t('forms.login')}
-        </Button>
+        <div className='relative pb-10'>
+          <Button className='w-full py-5' type='submit' disabled={isLoading}>
+            {t('forms.login')}
+          </Button>
 
-        <div className='flex flex-col space-y-1 text-destructive'>
-          {Object.entries(errors).map(([fieldName, error]) => (
-            <ErrorMessage key={fieldName} errorMessage={error.message!} />
-          ))}
-          {submitError.status && (
-            <ErrorMessage errorMessage={submitError.message!} />
-          )}
+          <div className='w-full flex flex-col items-center space-y-1 absolute bottom-0 mt-0.5'>
+            {Object.entries(errors).map(([fieldName, error]) => (
+              <ErrorMessage key={fieldName} errorMessage={error.message!} />
+            ))}
+            {submitError.status && (
+              <ErrorMessage errorMessage={submitError.message!} />
+            )}
+          </div>
         </div>
       </form>
-      <div className='flex justify-center my-3'>
+      <div className='flex justify-center mt-0 my-3'>
         <Button
           onClick={() => toggleIsVisible()}
           variant={'link'}

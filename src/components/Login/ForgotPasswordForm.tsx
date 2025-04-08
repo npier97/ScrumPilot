@@ -8,6 +8,7 @@ import { ForgotPasswordFormType } from '@/types/login';
 import { useEffect } from 'react';
 import EmailPasswordField from './EmailPasswordField';
 import CreateAccountSection from './CreateAccountSection';
+import ErrorMessage from './ErrorMessage';
 // TODO: improve imports declaration
 
 const ForgotPasswordForm = ({
@@ -44,15 +45,16 @@ const ForgotPasswordForm = ({
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <EmailPasswordField control={form.control} field='email' />
-        <Button className='w-full py-5' type='submit'>
-          {t('forms.continue')}
-        </Button>
-        <div className='flex flex-col text-xs space-y-1'>
-          {Object.entries(errors).map(([fieldName, error]) => (
-            <p key={fieldName} className='text-red-500'>
-              {(error as { message: string }).message}
-            </p>
-          ))}
+
+        <div className='relative pb-5'>
+          <Button className='w-full py-5' type='submit'>
+            {t('forms.continue')}
+          </Button>
+          <div className='flex flex-col w-full text-center text-xs space-y-1 absolute bottom-0 mt-0.5 '>
+            {Object.entries(errors).map(([fieldName, error]) => (
+              <ErrorMessage key={fieldName} errorMessage={error.message!} />
+            ))}
+          </div>
         </div>
       </form>
 
