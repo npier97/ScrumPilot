@@ -4,7 +4,7 @@ import EmailPasswordField from './EmailPasswordField';
 import { useForm, useFormState } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createLoginFormSchema } from '../../../zod.schemas';
+import { createLoginFormSchema, LoginFormType } from '../../../zod.schemas';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
@@ -20,7 +20,7 @@ const AuthForm = ({
 }) => {
   const { t } = useTranslation();
   const formSchema = createLoginFormSchema(t);
-  const form = useForm<z.infer<ReturnType<typeof createLoginFormSchema>>>({
+  const form = useForm<LoginFormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
