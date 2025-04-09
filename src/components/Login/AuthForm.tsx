@@ -71,7 +71,7 @@ const AuthForm = ({
         <EmailPasswordField control={form.control} field='email' />
         <EmailPasswordField control={form.control} field='password' />
 
-        <div className='relative pb-10'>
+        <div className='relative pb-14'>
           <Button className='w-full py-5' type='submit' disabled={isLoading}>
             {t('forms.login')}
           </Button>
