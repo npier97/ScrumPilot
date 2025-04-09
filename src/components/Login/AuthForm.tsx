@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import ErrorMessage from './ErrorMessage';
 import CreateAccountSection from './CreateAccountSection';
+import { SubmitErrorType } from '@/types/login';
 
 const AuthForm = ({
   isVisible,
@@ -30,10 +31,7 @@ const AuthForm = ({
   const { errors } = useFormState({ control: form.control });
   const { reset } = form;
   const { connectUser } = useAuth();
-  const [submitError, setSubmitError] = useState<{
-    status: boolean;
-    message?: string | null;
-  }>({
+  const [submitError, setSubmitError] = useState<SubmitErrorType>({
     status: false,
     message: null
   });

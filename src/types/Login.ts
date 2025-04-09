@@ -5,11 +5,16 @@ export type ForgotPasswordFormType = {
   email: string;
 };
 
-export type RenderFieldProps = {
+export interface RenderFieldProps {
   control: Control<LoginFormType> | Control<ForgotPasswordFormType>;
   name: 'email' | 'password';
   type: string;
   placeholder: string;
   label: string;
   autoComplete?: string;
+}
+
+export type SubmitErrorType = {
+  status: boolean;
+  message?: string | null;
 };
