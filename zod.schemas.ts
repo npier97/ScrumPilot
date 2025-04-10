@@ -17,4 +17,4 @@ export const createLoginFormSchema = (t: (key: string) => string) =>
       )
   });
 
-export type LoginForm = z.infer<typeof loginFormSchema>;
+export type LoginFormType = z.infer<ReturnType<typeof createLoginFormSchema>>;

@@ -2,13 +2,13 @@ import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import { useForm, useFormState } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Link } from '@tanstack/react-router';
 import { createLoginFormSchema } from '../../../zod.schemas';
 import { useTranslation } from 'react-i18next';
 import { ForgotPasswordFormType } from '@/types/login';
 import { useEffect } from 'react';
 import EmailPasswordField from './EmailPasswordField';
+import CreateAccountSection from './CreateAccountSection';
+import ErrorMessage from './ErrorMessage';
 // TODO: improve imports declaration
 
 const ForgotPasswordForm = ({
@@ -45,15 +45,16 @@ const ForgotPasswordForm = ({
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <EmailPasswordField control={form.control} field='email' />
-        <Button className='w-full py-5' type='submit'>
-          {t('forms.continue')}
-        </Button>
-        <div className='flex flex-col text-xs space-y-1'>
-          {Object.entries(errors).map(([fieldName, error]) => (
-            <p key={fieldName} className='text-red-500'>
-              {(error as { message: string }).message}
-            </p>
-          ))}
+
+        <div className='relative pb-5'>
+          <Button className='w-full py-5' type='submit'>
+            {t('forms.continue')}
+          </Button>
+          <div className='flex flex-col w-full text-center text-xs space-y-1 absolute bottom-0 mt-0.5 '>
+            {Object.entries(errors).map(([fieldName, error]) => (
+              <ErrorMessage key={fieldName} errorMessage={error.message!} />
+            ))}
+          </div>
         </div>
       </form>
 
@@ -66,16 +67,8 @@ const ForgotPasswordForm = ({
           {t('forms.backToLogin')}
         </Button>
       </div>
-      <hr />
-      <div className='flex items-center justify-center flex-wrap pt-6'>
-        <p>{t('forms.noAccountYet')}</p>
-        &nbsp;
-        <Link to='/sign-up'>
-          <Button variant={'link'} className='text-primary hover:underline'>
-            {t('forms.createAccount')}
-          </Button>
-        </Link>
-      </div>
+
+      <CreateAccountSection />
     </Form>
   );
 };

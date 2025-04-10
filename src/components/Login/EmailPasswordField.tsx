@@ -8,7 +8,9 @@ const EmailPasswordField = ({
   control,
   field
 }: {
-  control: Control<{ email: string; password: string }>;
+  control:
+    | Control<{ email: string; password: string }>
+    | Control<{ email: string }>;
   field: 'email' | 'password';
 }) => {
   const { t } = useTranslation();
