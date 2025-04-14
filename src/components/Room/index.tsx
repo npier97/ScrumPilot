@@ -9,7 +9,8 @@ import { Toaster } from '../ui/sonner';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import UserCard from './UserCard';
-import Voting from './Voting';
+import VotingPanel from './VotingPanel';
+import { useUsersCardsStore } from '@/store';
 
 const RoomPage = () => {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ const RoomPage = () => {
   const [room, setRoom] = useState<RoomType>(null);
   const [participants, setParticipants] = useState<ParticipantsType[]>([]);
   const [isModalVisible, setModalVisibility] = useState(true);
+  const setIsCardRevealed = useUsersCardsStore((state) => state.setIsRevealed);
 
   const handleInviteOnClick = () => {
     const link = `${window.location.origin}/join/${roomId}`;
@@ -33,6 +35,7 @@ const RoomPage = () => {
     const unsubscribe = onSnapshot(roomRef, (roomSnap) => {
       if (roomSnap.exists()) {
         setRoom(roomSnap.data() as RoomProps);
+        setIsCardRevealed(roomSnap.data().isVoteRevealed);
       }
     });
 
@@ -70,7 +73,7 @@ const RoomPage = () => {
               <Toaster />
             </div>
             <hr className='my-8 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
-            <Voting roomId={roomId} />
+            <VotingPanel roomId={roomId} />
             <UserCard participants={participants} />
           </div>
         ) : (

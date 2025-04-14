@@ -3,7 +3,7 @@ export interface RoomProps {
   createdBy: string;
   name: string;
   participants: ParticipantsType;
-  revealVotes: boolean;
+  isVoteRevealed: boolean;
 }
 
 export interface ModalProps {
@@ -31,6 +31,10 @@ export interface InputProps {
   setValue: (value: string) => void;
 }
 
-export interface VotingProps {
-  roomId: string;
+export type VotingPanelType = Pick<ModalProps, 'roomId'>;
+
+export interface CardProps {
+  number: number;
+  selectedNumber: number | null;
+  onClick: (number: number) => void;
 }
