@@ -4,18 +4,21 @@ import { useTranslation } from 'react-i18next';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/firebase-config';
 import { VotingProps } from '@/types/Room';
+import { useParticipantStore } from '@/store';
 
 const Voting = ({ roomId }: VotingProps) => {
   const { t } = useTranslation();
+  const participantId = useParticipantStore((state) => state.participantId);
 
   const handleClick = async (number: number) => {
-    // console.log(currentParticipantId, number);
+    console.log(participantId);
+
     const participantRef = doc(
       db,
       'rooms',
       roomId,
-      'participants'
-      // currentParticipantId
+      'participants',
+      participantId
     );
     await updateDoc(participantRef, {
       vote: number

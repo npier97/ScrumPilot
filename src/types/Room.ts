@@ -33,5 +33,4 @@ export interface InputProps {
 
 export interface VotingProps {
   roomId: string;
-  participants: ParticipantsType[];
 }

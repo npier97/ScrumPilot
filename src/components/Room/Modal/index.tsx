@@ -14,6 +14,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import LanguageDropdown from '@/components/LanguageDropdown';
 import InputField from './InputField';
+import { useParticipantStore } from '@/store';
 
 const Modal = ({
   path,
@@ -25,6 +26,9 @@ const Modal = ({
   const { t } = useTranslation();
   const [roomName, setRoomName] = useState('');
   const [participantName, setParticipantName] = useState('');
+  const setParticipantId = useParticipantStore(
+    (state) => state.setParticipantId
+  );
   const isAdminLink = path === 'rooms';
 
   const handleJoinRoom = async (room: RoomType, newParticipantName: string) => {
@@ -38,15 +42,17 @@ const Modal = ({
         createdBy: newParticipantName
       });
     }
-    await addDoc(collection(db, 'rooms', roomRef.id, 'participants'), {
-      avatar: '',
-      name: newParticipantName,
-      vote: null
-    });
+    const docRef = await addDoc(
+      collection(db, 'rooms', roomRef.id, 'participants'),
+      {
+        avatar: '',
+        name: newParticipantName,
+        vote: null
+      }
+    );
+    setParticipantId(docRef.id);
     toggleVisibility(false);
   };
-
-  // return null; //TODO: REMOVE
 
   return (
     <Dialog open={isOpen}>
