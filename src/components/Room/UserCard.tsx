@@ -1,8 +1,10 @@
+import { useUsersCardsStore } from '@/store';
 import { ParticipantsType } from '@/types/Room';
 import { useTranslation } from 'react-i18next';
 
 const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
   const { t } = useTranslation();
+  const isCardRevealed = useUsersCardsStore((state) => state.isRevealed);
 
   return (
     <div className={'rounded-xl border py-12 px-20 shadow-lg text-center'}>
@@ -17,6 +19,15 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
             <h5 className='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
               {participant.name}
             </h5>
+            <div
+              className={`w-[70px] p-6 text-center rounded-xl border shadow-lg cursor-pointer ${isCardRevealed ? '' : 'py-10 bg-primary text-white'}`}
+            >
+              {isCardRevealed && (
+                <h3 className='mb-1 text-xl font-medium text-gray-900'>
+                  {participant.vote}
+                </h3>
+              )}
+            </div>
           </div>
         ))}
       </div>
