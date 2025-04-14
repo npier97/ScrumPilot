@@ -1,7 +1,7 @@
 import { fibonacciSequence } from '@/ressources/datas/estimationScale';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
-import { doc, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '@/firebase-config';
 import { VotingProps } from '@/types/Room';
 import { useParticipantStore, useUsersCardsStore } from '@/store';
@@ -14,7 +14,7 @@ const Voting = ({ roomId }: VotingProps) => {
   const isCardRevealed = useUsersCardsStore((state) => state.isRevealed);
   const setIsCardRevealed = useUsersCardsStore((state) => state.setIsRevealed);
 
-  const handleClick = async (number: number) => {
+  const handleCardClick = async (number: number) => {
     setSelectedNumber(number);
     const participantRef = doc(
       db,
@@ -28,6 +28,17 @@ const Voting = ({ roomId }: VotingProps) => {
     });
   };
 
+  const handleResetClick = async () => {
+    const participantsRef = collection(db, 'rooms', roomId, 'participants');
+    const snapshot = await getDocs(participantsRef);
+
+    const updatePromises = snapshot.docs.map((doc) =>
+      updateDoc(doc.ref, { vote: null })
+    );
+
+    await Promise.all(updatePromises);
+  };
+
   return (
     <div className='flex flex-col items-center gap-8 mb-4'>
       <div className='flex gap-2 justify-between'>
@@ -35,7 +46,7 @@ const Voting = ({ roomId }: VotingProps) => {
           <div
             key={`${number}`}
             className={`w-[70px] p-6 text-center rounded-xl border shadow-lg cursor-pointer ${selectedNumber === number ? 'bg-primary text-white' : ''}`}
-            onClick={() => handleClick(number)}
+            onClick={() => handleCardClick(number)}
           >
             <h3
               className={`mb-1 text-xl font-medium ${selectedNumber === number ? 'text-white' : 'text-gray-900'} dark:text-white`}
@@ -47,7 +58,9 @@ const Voting = ({ roomId }: VotingProps) => {
         ))}
       </div>
       <div className='flex gap-4'>
-        <Button>{t('room.vote.reset')}</Button>
+        <Button onClick={() => handleResetClick()}>
+          {t('room.vote.reset')}
+        </Button>
         <Button onClick={() => setIsCardRevealed(!isCardRevealed)}>
           {t('room.vote.reveal')}
         </Button>

@@ -1,5 +1,6 @@
 export interface ParticipantStore {
   participantId: string;
+  vote: number | null;
   setParticipantId: (id: string) => void;
 }
 

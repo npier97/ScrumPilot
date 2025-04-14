@@ -10,7 +10,7 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
     <div className={'rounded-xl border py-12 px-20 shadow-lg text-center'}>
       <div className='flex flex-row justify-center gap-8 '>
         {participants.map((participant) => (
-          <div className='flex flex-col items-center' key={`${participant}`}>
+          <div className='flex flex-col items-center' key={`${participant.id}`}>
             <img
               className='w-20 h-20 mb-3 rounded-full shadow-sm'
               src='/hacker.png'
@@ -20,7 +20,7 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
               {participant.name}
             </h5>
             <div
-              className={`w-[70px] p-6 text-center rounded-xl border shadow-lg cursor-pointer ${isCardRevealed ? '' : 'py-10 bg-primary text-white'}`}
+              className={`w-[70px] p-6 ${participant.vote ? 'h-[86px]' : 'py-10'} text-center rounded-xl border shadow-lg cursor-pointer ${isCardRevealed ? '' : 'bg-primary text-white'}`}
             >
               {isCardRevealed && (
                 <h3 className='mb-1 text-xl font-medium text-gray-900'>
