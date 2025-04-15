@@ -11,10 +11,9 @@ export const createLoginFormSchema = (t: (key: string) => string) =>
       .string({ required_error: t('forms.password.required') })
       .min(12, t('forms.password.minLength'))
       .max(100, t('forms.password.maxLength'))
-      .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/, // Doit contenir au moins une lettre minuscule, une lettre majuscule, un chiffre et au moins un caractère spécial
-        t('forms.password.complexity')
-      )
+      .regex(/[A-Z]/, 'Au moins une majuscule')
+      .regex(/\d/, 'Au moins un chiffre')
+      .regex(/[^A-Za-z0-9]/, 'Au moins un caractère spécial')
   });
 
 export type LoginFormType = z.infer<ReturnType<typeof createLoginFormSchema>>;

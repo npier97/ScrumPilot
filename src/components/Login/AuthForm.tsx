@@ -51,6 +51,7 @@ const AuthForm = ({
       console.log(setConnection.message);
     } else {
       setSubmitError({ status: true, message: setConnection?.message });
+      console.log(setConnection?.message);
     }
     setIsLoading(false);
   };
