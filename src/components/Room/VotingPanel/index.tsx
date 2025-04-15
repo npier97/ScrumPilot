@@ -49,7 +49,7 @@ const VotingPanel = ({ roomId }: VotingPanelType) => {
 
   return (
     <div className='flex flex-col items-center gap-8 mb-4'>
-      <div className='flex gap-2 justify-between'>
+      <div className='grid grid-cols-3 md:grid-cols-6 align-middle gap-4'>
         {fibonacciSequence.map((number) => (
           <Card
             number={number}
