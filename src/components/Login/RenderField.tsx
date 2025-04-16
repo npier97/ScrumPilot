@@ -8,24 +8,22 @@ export const RenderField = ({
   placeholder,
   label,
   autoComplete
-}: RenderFieldProps) => {
-  return (
-    <FormField
-      name={name}
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel>{label}</FormLabel>
-          <FormControl>
-            <Input
-              type={type}
-              placeholder={placeholder}
-              autoComplete={autoComplete}
-              {...field}
-              value={field.value ?? ''}
-            />
-          </FormControl>
-        </FormItem>
-      )}
-    />
-  );
-};
+}: RenderFieldProps) => (
+  <FormField
+    name={name}
+    render={({ field }) => (
+      <FormItem>
+        <FormLabel>{label}</FormLabel>
+        <FormControl>
+          <Input
+            type={type}
+            placeholder={placeholder}
+            autoComplete={autoComplete}
+            {...field}
+            value={field.value ?? ''}
+          />
+        </FormControl>
+      </FormItem>
+    )}
+  />
+);
