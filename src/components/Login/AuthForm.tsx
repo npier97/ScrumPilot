@@ -28,13 +28,13 @@ const AuthForm = ({
       password: ''
     }
   });
+  const { isSubmitting } = useFormState({ control: form.control });
   const { reset } = form;
   const { connectUser } = useAuth();
   const [submitError, setSubmitError] = useState<SubmitErrorType>({
     status: false,
     message: null
   });
-  const [isLoading, setIsLoading] = useState(false);
 
   const resetSubmitErrors = () =>
     setSubmitError({ status: false, message: null });
@@ -44,7 +44,6 @@ const AuthForm = ({
   ) => {
     resetSubmitErrors();
 
-    setIsLoading(true);
     const setConnection = await connectUser(values);
     if (setConnection?.success) {
       console.log(setConnection.message);
@@ -52,7 +51,6 @@ const AuthForm = ({
       setSubmitError({ status: true, message: setConnection?.message });
       console.log(setConnection?.message);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -64,14 +62,14 @@ const AuthForm = ({
   return (
     <Form {...form}>
       <form
-        className='flex flex-col space-y-3 mt-8 w-full '
+        className='flex flex-col space-y-3 mt-8 w-full'
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <EmailPasswordField field='email' />
         <EmailPasswordField field='password' />
 
         <div>
-          <Button className='w-full py-5' type='submit' disabled={isLoading}>
+          <Button className='w-full py-5' type='submit' disabled={isSubmitting}>
             {t('forms.login')}
           </Button>
 

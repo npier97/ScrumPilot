@@ -26,7 +26,7 @@ const ForgotPasswordForm = ({
       email: ''
     }
   });
-  const { errors } = useFormState({ control: form.control });
+  const { isSubmitting } = useFormState({ control: form.control });
   const { reset } = form;
   const onSubmit = (values: ForgotPasswordFormType) => {
     // get form values here
@@ -44,16 +44,15 @@ const ForgotPasswordForm = ({
         className='flex flex-col space-y-5 mt-6 w-full'
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <EmailPasswordField control={form.control} field='email' />
+        <EmailPasswordField field='email' />
 
         <div className='relative pb-5'>
           <Button className='w-full py-5' type='submit'>
             {t('forms.continue')}
           </Button>
           <div className='flex flex-col w-full text-center text-xs space-y-1 absolute bottom-0 mt-0.5 '>
-            {Object.entries(errors).map(([fieldName, error]) => (
-              <ErrorMessage key={fieldName} errorMessage={error.message!} />
-            ))}
+            {/* TODO: handle submit errors  */}
+            <ErrorMessage errorMessage={'submitError.message!'} />
           </div>
         </div>
       </form>
@@ -63,6 +62,7 @@ const ForgotPasswordForm = ({
           onClick={() => toggleIsVisible()}
           variant={'link'}
           className='text-sm text-primary hover:underline'
+          disabled={isSubmitting}
         >
           {t('forms.backToLogin')}
         </Button>
