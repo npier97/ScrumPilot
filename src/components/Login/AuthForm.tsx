@@ -28,7 +28,6 @@ const AuthForm = ({
       password: ''
     }
   });
-  const { errors } = useFormState({ control: form.control });
   const { reset } = form;
   const { connectUser } = useAuth();
   const [submitError, setSubmitError] = useState<SubmitErrorType>({
@@ -65,28 +64,25 @@ const AuthForm = ({
   return (
     <Form {...form}>
       <form
-        className='flex flex-col space-y-5 mt-8 w-full '
+        className='flex flex-col space-y-3 mt-8 w-full '
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <EmailPasswordField control={form.control} field='email' />
-        <EmailPasswordField control={form.control} field='password' />
+        <EmailPasswordField field='email' />
+        <EmailPasswordField field='password' />
 
-        <div className='relative pb-14'>
+        <div>
           <Button className='w-full py-5' type='submit' disabled={isLoading}>
             {t('forms.login')}
           </Button>
 
-          <div className='w-full flex flex-col items-center space-y-1 absolute bottom-0 mt-0.5'>
-            {Object.entries(errors).map(([fieldName, error]) => (
-              <ErrorMessage key={fieldName} errorMessage={error.message!} />
-            ))}
+          <div className='w-full flex flex-col items-center space-y-1 min-h-4 mt-1'>
             {submitError.status && (
               <ErrorMessage errorMessage={submitError.message!} />
             )}
           </div>
         </div>
       </form>
-      <div className='flex justify-center mt-0 my-3'>
+      <div className='flex justify-center mt-0 my-5'>
         <Button
           onClick={() => toggleIsVisible()}
           variant={'link'}
