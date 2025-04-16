@@ -43,8 +43,10 @@
     },
     "password": {
       "label": "Password",
-      "minLength": "Password must be at least 12 characters long",
-      "maxLength": "Password must not exceed 100 characters",
+      "minLength": "12 characters",
+      "capital": "A / a",
+      "number": "1 2 3",
+      "special": "@ ! #",
       "invalid": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
       "placeholder": "Enter your password",
       "complexity": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",

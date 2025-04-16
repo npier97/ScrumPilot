@@ -3,7 +3,6 @@ import { FormField, FormItem, FormLabel, FormControl } from '../ui/form';
 import { Input } from '../ui/input';
 
 export const RenderField = ({
-  control,
   name,
   type,
   placeholder,
@@ -11,7 +10,6 @@ export const RenderField = ({
   autoComplete
 }: RenderFieldProps) => (
   <FormField
-    control={control}
     name={name}
     render={({ field }) => (
       <FormItem>
