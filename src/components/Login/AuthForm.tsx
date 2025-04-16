@@ -35,7 +35,6 @@ const AuthForm = ({
     status: false,
     message: null
   });
-  const [isLoading, setIsLoading] = useState(false);
 
   const resetSubmitErrors = () =>
     setSubmitError({ status: false, message: null });
@@ -45,7 +44,6 @@ const AuthForm = ({
   ) => {
     resetSubmitErrors();
 
-    setIsLoading(true);
     const setConnection = await connectUser(values);
     if (setConnection?.success) {
       console.log(setConnection.message);
@@ -53,7 +51,6 @@ const AuthForm = ({
       setSubmitError({ status: true, message: setConnection?.message });
       console.log(setConnection?.message);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
