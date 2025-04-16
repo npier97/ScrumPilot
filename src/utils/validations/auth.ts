@@ -11,7 +11,7 @@ export const emailCriterias: ValidationCriteria[] = [
   {
     label: t('forms.email.invalid'),
     test: (val: string) =>
-      val.trim() !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val)
   }
 ];
 
