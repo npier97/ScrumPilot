@@ -1,6 +1,3 @@
-import { Control } from 'react-hook-form';
-import { LoginFormType } from 'zod.schemas';
-
 export type ForgotPasswordFormType = {
   email: string;
 };
