@@ -10,7 +10,7 @@ const ValidationCriterias = ({
   watchedField: string;
 }) => {
   return (
-    <ul className='text-xs text-gray-500 space-x-2 flex transition-all'>
+    <ul className='text-xs text-gray-500 space-x-4 flex transition-all'>
       {fieldCriterias?.map(({ label, test }, i) => {
         const passed = test(watchedField);
         return (
@@ -26,7 +26,7 @@ const ValidationCriterias = ({
             ) : (
               <XCircle className='w-3 h-3 shrink-0' />
             )}
-            {label}
+            <span>{label}</span>
           </li>
         );
       })}

@@ -1,3 +1,5 @@
+import { t } from 'i18next';
+
 export type ValidationCriteria = {
   label: string;
   test: (val: string) => boolean;
@@ -7,30 +9,27 @@ export type ValidationCriteria = {
 // from 'zod.schemas' file
 export const emailCriterias: ValidationCriteria[] = [
   {
-    label: 'Format email valide',
-    test: (val: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)
-  },
-  {
-    label: '5 caractères minimum',
-    test: (val: string) => val.length >= 5
+    label: t('forms.email.invalid'),
+    test: (val: string) =>
+      val.trim() !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)
   }
 ];
 
 export const passwordCriterias: ValidationCriteria[] = [
   {
-    label: '12 caractères minimum',
+    label: t('forms.password.minLength'),
     test: (val) => val.length >= 12
   },
   {
-    label: '1 lettre majuscule',
+    label: t('forms.password.capital'),
     test: (val) => /[A-Z]/.test(val)
   },
   {
-    label: '1 chiffre',
+    label: t('forms.password.number'),
     test: (val) => /\d/.test(val)
   },
   {
-    label: '1 caractère spécial',
+    label: t('forms.password.special'),
     test: (val) => /[^A-Za-z0-9]/.test(val)
   }
 ];

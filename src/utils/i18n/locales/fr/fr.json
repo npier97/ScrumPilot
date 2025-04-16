@@ -36,15 +36,17 @@
     "email": {
       "label": "Email",
       "invalid": "Veuillez entrer une adresse email valide",
-      "minLength": "L'email doit contenir au moins 5 caractères",
+      "minLength": "12 caractères",
       "maxLength": "L'email ne doit pas dépasser 255 caractères",
       "placeholder": "Entrez votre email (ex: votrenom@gmail.com)",
       "required": "Adresse email : Requis"
     },
     "password": {
       "label": "Mot de passe",
-      "minLength": "Le mot de passe doit contenir au moins 12 caractères",
-      "maxLength": "Le mot de passe ne doit pas dépasser 100 caractères",
+      "minLength": "12 caractères",
+      "capital": "A / a",
+      "number": "1 2 3",
+      "special": "@ ! #",
       "invalid": "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial",
       "placeholder": "Entrez votre mot de passe",
       "complexity": "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial",
