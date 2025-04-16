@@ -69,6 +69,7 @@
       "save": "Save changes"
     },
     "vote": {
+      "estimation": "Estimation card:",
       "reset": "Reset votes",
       "reveal": "Reveal votes",
       "submit": "Submit votes"

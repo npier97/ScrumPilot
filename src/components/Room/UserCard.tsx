@@ -37,7 +37,7 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
               {participant.name}
             </h5>
             <div
-              className={`w-[70px] min-h-[86px] p-6 ${participant.vote ? '' : 'py-10'} text-center rounded-xl border shadow-lg cursor-pointer ${isCardRevealed ? '' : 'bg-primary text-white'}`}
+              className={`w-[70px] min-h-[86px] p-6 ${participant.vote ? '' : 'py-10'} text-center rounded-xl border shadow-lg ${isCardRevealed ? '' : 'bg-primary text-white'}`}
             >
               {isCardRevealed && (
                 <h3 className='mb-1 text-xl font-medium text-gray-900'>
