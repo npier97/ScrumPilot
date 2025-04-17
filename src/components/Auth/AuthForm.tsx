@@ -4,24 +4,31 @@ import EmailPasswordField from './EmailPasswordField';
 import { useForm, useFormState } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createLoginFormSchema, LoginFormType } from '../../../zod.schemas';
+import {
+  createLoginFormSchema,
+  AuthFormSchemaType,
+  createAuthFormSchema
+} from '../../../zod.schemas';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import ErrorMessage from './ErrorMessage';
 import CreateAccountSection from './CreateAccountSection';
-import { SubmitErrorType } from '@/types/login';
+import { SubmitErrorType, AuthFormType } from '@/types/Auth';
 
 const AuthForm = ({
-  isVisible,
-  toggleIsVisible
+  isVisible = true,
+  toggleIsVisible,
+  authType
 }: {
-  isVisible: boolean;
-  toggleIsVisible: () => void;
+  isVisible?: boolean;
+  toggleIsVisible?: () => void;
+  authType: AuthFormType;
 }) => {
+  const isSignupForm = authType === 'sign-up';
   const { t } = useTranslation();
-  const formSchema = createLoginFormSchema(t);
-  const form = useForm<LoginFormType>({
+  const formSchema = createAuthFormSchema(authType, t);
+  const form = useForm<AuthFormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
@@ -35,7 +42,7 @@ const AuthForm = ({
     status: false,
     message: null
   });
-
+  const inputValidationMode = isSignupForm ? 'manual' : 'auto';
   const resetSubmitErrors = () =>
     setSubmitError({ status: false, message: null });
 
@@ -43,7 +50,6 @@ const AuthForm = ({
     values: z.infer<ReturnType<typeof createLoginFormSchema>>
   ) => {
     resetSubmitErrors();
-
     const setConnection = await connectUser(values);
     if (setConnection?.success) {
       console.log(setConnection.message);
@@ -65,12 +71,17 @@ const AuthForm = ({
         className='flex flex-col space-y-3 mt-8 w-full'
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <EmailPasswordField field='email' />
-        <EmailPasswordField field='password' />
-
+        <EmailPasswordField
+          withValidations={inputValidationMode}
+          field='email'
+        />
+        <EmailPasswordField
+          withValidations={inputValidationMode}
+          field='password'
+        />
         <div>
           <Button className='w-full py-5' type='submit' disabled={isSubmitting}>
-            {t('forms.login')}
+            {isSignupForm ? t('forms.signup') : t('forms.login')}
           </Button>
 
           <div className='w-full flex flex-col items-center space-y-1 min-h-4 mt-1'>
@@ -80,15 +91,17 @@ const AuthForm = ({
           </div>
         </div>
       </form>
-      <div className='flex justify-center mt-0 my-5'>
-        <Button
-          onClick={() => toggleIsVisible()}
-          variant={'link'}
-          className=' text-sm text-primary hover:underline'
-        >
-          {t('forms.forgotPwd')}
-        </Button>
-      </div>
+      {toggleIsVisible && (
+        <div className='flex justify-center mt-0 my-5'>
+          <Button
+            onClick={() => toggleIsVisible()}
+            variant={'link'}
+            className=' text-sm text-primary hover:underline'
+          >
+            {t('forms.forgotPwd')}
+          </Button>
+        </div>
+      )}
       <CreateAccountSection />
     </Form>
   );

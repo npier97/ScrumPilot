@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import { createRootRoute, Outlet, useMatches } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
-const HEADERLESS_ROUTES = ['/login', '/signup'];
+const HEADERLESS_ROUTES = ['/login', '/sign-up'];
 
 const RootRoute = () => {
   const matches = useMatches();

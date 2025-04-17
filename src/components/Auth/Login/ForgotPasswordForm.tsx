@@ -1,14 +1,14 @@
-import { Button } from '../ui/button';
-import { Form } from '../ui/form';
+import { Button } from '../../ui/button';
+import { Form } from '../../ui/form';
 import { useForm, useFormState } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createLoginFormSchema } from '../../../zod.schemas';
+import { createLoginFormSchema } from '../../../../zod.schemas';
 import { useTranslation } from 'react-i18next';
-import { ForgotPasswordFormType } from '@/types/login';
+import { ForgotPasswordFormType } from '@/types/Auth';
 import { useEffect } from 'react';
-import EmailPasswordField from './EmailPasswordField';
-import CreateAccountSection from './CreateAccountSection';
-import ErrorMessage from './ErrorMessage';
+import EmailPasswordField from '../EmailPasswordField';
+import CreateAccountSection from '../CreateAccountSection';
+import ErrorMessage from '../ErrorMessage';
 // TODO: improve imports declaration
 
 const ForgotPasswordForm = ({

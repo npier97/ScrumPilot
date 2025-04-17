@@ -14,3 +14,5 @@ export type SubmitErrorType = {
   status: boolean;
   message?: string | null;
 };
+
+export type AuthFormType = 'login' | 'sign-up';

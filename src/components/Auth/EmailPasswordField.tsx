@@ -5,16 +5,24 @@ import { RenderField } from './RenderField';
 import ValidationCriterias from './ValidationCriterias';
 import { useWatch, useFormContext } from 'react-hook-form';
 import { authFieldsCriterias } from '@/utils/validations/auth';
+import ErrorMessage from './ErrorMessage';
 
-const EmailPasswordField = ({ field }: { field: 'email' | 'password' }) => {
+const EmailPasswordField = ({
+  field,
+  withValidations = 'auto'
+}: {
+  field: 'email' | 'password';
+  withValidations?: 'manual' | 'auto';
+}) => {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const {
     control,
-    formState: { isSubmitted }
+    formState: { isSubmitted, errors }
   } = useFormContext();
   const fieldControl = useWatch({ control, name: field }) || '';
   const fieldCriterias = authFieldsCriterias[field];
+
   return (
     <div>
       {field === 'email' ? (
@@ -41,14 +49,22 @@ const EmailPasswordField = ({ field }: { field: 'email' | 'password' }) => {
           </div>
         </div>
       )}
-      <div className='min-h-4 mt-1'>
-        {isSubmitted && (
-          <ValidationCriterias
-            fieldCriterias={fieldCriterias}
-            watchedField={fieldControl}
-          />
-        )}
-      </div>
+      {withValidations === 'manual' ? (
+        <div className='min-h-4 mt-1'>
+          {isSubmitted && (
+            <ValidationCriterias
+              fieldCriterias={fieldCriterias}
+              watchedField={fieldControl}
+            />
+          )}
+        </div>
+      ) : (
+        <div className='mt-1 min-h-4'>
+          {withValidations === 'auto' && errors[field]?.message && (
+            <ErrorMessage errorMessage={errors[field]?.message} />
+          )}
+        </div>
+      )}
     </div>
   );
 };
