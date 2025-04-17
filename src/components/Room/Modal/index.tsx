@@ -16,15 +16,10 @@ import LanguageDropdown from '@/components/LanguageDropdown';
 import InputField from './InputField';
 import { useParticipantStore } from '@/store';
 
-const Modal = ({
-  path,
-  room,
-  roomId,
-  isOpen,
-  toggleVisibility
-}: ModalProps) => {
+const Modal = ({ path, room, roomId }: ModalProps) => {
   const { t } = useTranslation();
   const [roomName, setRoomName] = useState('');
+  const [isModalVisible, setModalVisibility] = useState(true);
   const [participantName, setParticipantName] = useState('');
   const setParticipantId = useParticipantStore(
     (state) => state.setParticipantId
@@ -51,11 +46,11 @@ const Modal = ({
       }
     );
     setParticipantId(docRef.id);
-    toggleVisibility(false);
+    setModalVisibility(false);
   };
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isModalVisible}>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
           <DialogTitle>{t('room.modal.title')}</DialogTitle>
