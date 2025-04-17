@@ -10,8 +10,6 @@ export interface ModalProps {
   path: string;
   room: RoomType;
   roomId: string;
-  isOpen: boolean;
-  toggleVisibility: (bool: boolean) => void;
 }
 
 export type RoomType = RoomProps | null;
@@ -37,4 +35,9 @@ export interface CardProps {
   number: number;
   selectedNumber: number | null;
   onClick: (number: number) => void;
+}
+
+export interface EditProfileProps {
+  isOpen: boolean;
+  toggleVisibility: (bool: boolean) => void;
 }

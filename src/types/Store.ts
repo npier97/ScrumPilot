@@ -8,3 +8,8 @@ export interface UsersCardsStore {
   isRevealed: boolean;
   setIsRevealed: (bool: boolean) => void;
 }
+
+export interface RoomStore {
+  roomId: string;
+  setRoomId: (id: string) => void;
+}
