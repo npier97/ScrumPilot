@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import UserCard from './UserCard';
 import VotingPanel from './VotingPanel';
-import { useUsersCardsStore } from '@/store';
+import { useRoomStore, useUsersCardsStore } from '@/store';
 
 const RoomPage = () => {
   const { t } = useTranslation();
@@ -20,6 +20,7 @@ const RoomPage = () => {
   const [room, setRoom] = useState<RoomType>(null);
   const [participants, setParticipants] = useState<ParticipantsType[]>([]);
   const setIsCardRevealed = useUsersCardsStore((state) => state.setIsRevealed);
+  const setRoomId = useRoomStore((state) => state.setRoomId);
 
   const handleInviteOnClick = () => {
     const link = `${window.location.origin}/join/${roomId}`;
@@ -51,6 +52,8 @@ const RoomPage = () => {
       });
       setParticipants(updatedParticipants);
     });
+
+    setRoomId(roomId);
 
     return () => {
       unsubscribe();

@@ -14,15 +14,12 @@ import {
 import { useTranslation } from 'react-i18next';
 import LanguageDropdown from '@/components/LanguageDropdown';
 import InputField from '../Modal/InputField';
-import { useLocation, useParams } from '@tanstack/react-router';
-import { useParticipantStore } from '@/store';
+import { useParticipantStore, useRoomStore } from '@/store';
 
 const EditProfileModal = ({ isOpen, toggleVisibility }: EditProfileProps) => {
   const { t } = useTranslation();
-  const location = useLocation();
-  const path = location.pathname.includes('rooms') ? 'rooms' : 'join';
-  const { roomId } = useParams({ from: `/${path}/$roomId` });
   const [updatedParticipantName, setUpdatedParticipantName] = useState('');
+  const roomId = useRoomStore((state) => state.roomId);
   const participantId = useParticipantStore((state) => state.participantId);
 
   const handleUpdateProfile = async (updatedParticipantName: string) => {
