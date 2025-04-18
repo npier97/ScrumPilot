@@ -12,6 +12,13 @@ export interface ModalProps {
   roomId: string;
 }
 
+export type ModalFooterProps = Pick<ModalProps, 'room' | 'roomId'> & {
+  isAdmin: boolean;
+  roomName: string;
+  participantName: string;
+  setModalVisibility: (bool: boolean) => void;
+};
+
 export type RoomType = RoomProps | null;
 export type ParticipantsType = {
   id: string;

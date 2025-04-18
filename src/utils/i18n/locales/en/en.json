@@ -68,7 +68,11 @@
       "username": "User",
       "yourName": "Your Name",
       "save": "Save changes",
-      "update": "Enter your updated name"
+      "update": "Enter your updated name",
+      "error": {
+        "username": "Please enter your name.",
+        "roomName": "Please enter a room name."
+      }
     },
     "vote": {
       "estimation": "Estimation card:",

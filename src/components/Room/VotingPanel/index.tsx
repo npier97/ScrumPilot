@@ -52,6 +52,7 @@ const VotingPanel = ({ roomId }: VotingPanelType) => {
       <div className='grid grid-cols-3 md:grid-cols-6 align-middle gap-4'>
         {fibonacciSequence.map((number) => (
           <Card
+            key={number}
             number={number}
             selectedNumber={selectedNumber}
             onClick={handleCardClick}

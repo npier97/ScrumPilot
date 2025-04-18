@@ -68,7 +68,11 @@
       "username": "Utilisateur",
       "yourName": "Votre Nom",
       "save": "Enregistrer les modifications",
-      "update": "Entrez votre nom mis à jour"
+      "update": "Entrez votre nom mis à jour",
+      "error": {
+        "username": "Veuillez entrer votre nom.",
+        "roomName": "Veuillez entrer un nom de salle."
+      }
     },
     "vote": {
       "estimation": "Carte d'estimation:",

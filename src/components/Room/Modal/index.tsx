@@ -1,53 +1,22 @@
-import { db } from '@/firebase-config';
-import { ModalProps, RoomType } from '@/types/Room';
-import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import { ModalProps } from '@/types/Room';
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog';
 import { useTranslation } from 'react-i18next';
-import LanguageDropdown from '@/components/LanguageDropdown';
 import InputField from './InputField';
-import { useParticipantStore } from '@/store';
+import Footer from './Footer';
 
 const Modal = ({ path, room, roomId }: ModalProps) => {
   const { t } = useTranslation();
   const [roomName, setRoomName] = useState('');
   const [isModalVisible, setModalVisibility] = useState(true);
   const [participantName, setParticipantName] = useState('');
-  const setParticipantId = useParticipantStore(
-    (state) => state.setParticipantId
-  );
   const isAdminLink = path === 'rooms';
-
-  const handleJoinRoom = async (room: RoomType, newParticipantName: string) => {
-    if (!room) return;
-
-    const roomRef = doc(db, 'rooms', roomId);
-
-    if (isAdminLink) {
-      await updateDoc(roomRef, {
-        name: roomName,
-        createdBy: newParticipantName
-      });
-    }
-    const docRef = await addDoc(
-      collection(db, 'rooms', roomRef.id, 'participants'),
-      {
-        avatar: '',
-        name: newParticipantName,
-        vote: null
-      }
-    );
-    setParticipantId(docRef.id);
-    setModalVisibility(false);
-  };
 
   return (
     <Dialog open={isModalVisible}>
@@ -74,15 +43,14 @@ const Modal = ({ path, room, roomId }: ModalProps) => {
             isVisible
           />
         </div>
-        <DialogFooter>
-          <Button
-            type='submit'
-            onClick={() => handleJoinRoom(room, participantName)}
-          >
-            {t('room.modal.save')}
-          </Button>
-          <LanguageDropdown />
-        </DialogFooter>
+        <Footer
+          isAdmin={isAdminLink}
+          room={room}
+          roomId={roomId}
+          roomName={roomName}
+          participantName={participantName}
+          setModalVisibility={setModalVisibility}
+        />
       </DialogContent>
     </Dialog>
   );
