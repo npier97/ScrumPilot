@@ -13,8 +13,9 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import ErrorMessage from './ErrorMessage';
-import CreateAccountSection from './CreateAccountSection';
+import FormFooter from './FormFooter';
 import { SubmitErrorType, AuthFormType } from '@/types/Auth';
+import { useNavigate } from '@tanstack/react-router';
 
 const AuthForm = ({
   isVisible = true,
@@ -37,7 +38,9 @@ const AuthForm = ({
   });
   const { isSubmitting } = useFormState({ control: form.control });
   const { reset } = form;
-  const { connectUser } = useAuth();
+  const { connectUser, createUser } = useAuth();
+  const authAction = isSignupForm ? createUser : connectUser;
+  const navigate = useNavigate();
   const [submitError, setSubmitError] = useState<SubmitErrorType>({
     status: false,
     message: null
@@ -46,16 +49,14 @@ const AuthForm = ({
   const resetSubmitErrors = () =>
     setSubmitError({ status: false, message: null });
 
-  const onSubmit = async (
-    values: z.infer<ReturnType<typeof createLoginFormSchema>>
-  ) => {
+  const onSubmit = async (values: AuthFormSchemaType) => {
     resetSubmitErrors();
-    const setConnection = await connectUser(values);
+    const setConnection = await authAction(values);
     if (setConnection?.success) {
       console.log(setConnection.message);
+      navigate({ to: '/' });
     } else {
       setSubmitError({ status: true, message: setConnection?.message });
-      console.log(setConnection?.message);
     }
   };
 
@@ -64,7 +65,6 @@ const AuthForm = ({
   }, [isVisible, reset]);
 
   if (!isVisible) return null;
-
   return (
     <Form {...form}>
       <form
@@ -102,7 +102,7 @@ const AuthForm = ({
           </Button>
         </div>
       )}
-      <CreateAccountSection />
+      <FormFooter authType={authType} />
     </Form>
   );
 };

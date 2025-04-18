@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { ForgotPasswordFormType } from '@/types/Auth';
 import { useEffect } from 'react';
 import EmailPasswordField from '../EmailPasswordField';
-import CreateAccountSection from '../CreateAccountSection';
+import CreateAccountSection from '../FormFooter';
 import ErrorMessage from '../ErrorMessage';
 // TODO: improve imports declaration
 
