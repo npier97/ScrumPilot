@@ -59,6 +59,7 @@
     "welcome": "Bienvenue sur",
     "invite": "Inviter un nouveau membre",
     "loading": "Chargement de la Room...",
+    "copied": "Lien d'invitation copié dans le presse-papiers",
     "modal": {
       "title": "Entrez un nom pour rejoindre la Room",
       "description": "Modifiez votre profil ici. Cliquez sur enregistrer lorsque vous avez terminé.",
@@ -66,9 +67,15 @@
       "roomName": "Nom de la Room",
       "username": "Utilisateur",
       "yourName": "Votre Nom",
-      "save": "Enregistrer les modifications"
+      "save": "Enregistrer les modifications",
+      "update": "Entrez votre nom mis à jour",
+      "error": {
+        "username": "Veuillez entrer votre nom.",
+        "roomName": "Veuillez entrer un nom de salle."
+      }
     },
     "vote": {
+      "estimation": "Carte d'estimation:",
       "reset": "Réinitialiser les votes",
       "reveal": "Révéler les votes",
       "submit": "Soumettre les votes"

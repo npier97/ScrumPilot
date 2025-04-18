@@ -59,6 +59,7 @@
     "welcome": "Welcome to",
     "invite": "Invite new member",
     "loading": "Loading room...",
+    "copied": "Invite link copied to clipboard",
     "modal": {
       "title": "Enter your name to join the room",
       "description": "Make changes to your profile here. Click save when you're done.",
@@ -66,9 +67,15 @@
       "roomName": "Room Name",
       "username": "User",
       "yourName": "Your Name",
-      "save": "Save changes"
+      "save": "Save changes",
+      "update": "Enter your updated name",
+      "error": {
+        "username": "Please enter your name.",
+        "roomName": "Please enter a room name."
+      }
     },
     "vote": {
+      "estimation": "Estimation card:",
       "reset": "Reset votes",
       "reveal": "Reveal votes",
       "submit": "Submit votes"

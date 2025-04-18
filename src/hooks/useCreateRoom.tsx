@@ -11,7 +11,7 @@ export const useCreateRoom = () => {
         name: 'New Room',
         createdBy: '',
         createdAt: serverTimestamp(),
-        members: []
+        isVoteRevealed: false
       });
       navigate({ to: `/rooms/${roomRef.id}` });
     } catch (error) {
