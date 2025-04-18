@@ -26,7 +26,7 @@ const LanguageDropdown = () => {
 
       {isOpen && (
         <div
-          className='absolute right-0 mt-2 w-30 bg-white border border-gray-300 shadow-lg rounded-md'
+          className='absolute md:right-0 mt-2 w-30 bg-white border border-gray-300 shadow-lg rounded-md'
           data-testid='language-dropdown'
         >
           {LANGUAGES.map((language) => (

@@ -58,15 +58,17 @@ const Footer = ({
     <>
       <DialogFooter>
         {error && (
-          <p className='text-xs text-destructive text-center'>{error}</p>
+          <p className='text-xs text-center text-destructive'>{error}</p>
         )}
-        <Button
-          type='submit'
-          onClick={() => handleJoinRoom(room, participantName)}
-        >
-          {t('room.modal.save')}
-        </Button>
-        <LanguageDropdown />
+        <div className='flex'>
+          <Button
+            type='submit'
+            onClick={() => handleJoinRoom(room, participantName)}
+          >
+            {t('room.modal.save')}
+          </Button>
+          <LanguageDropdown />
+        </div>
       </DialogFooter>
     </>
   );
