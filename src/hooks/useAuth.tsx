@@ -1,16 +1,26 @@
 import {
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
 } from 'firebase/auth';
 import { getAuth } from 'firebase/auth';
 import { app } from '@/firebase-config';
-// import { useNavigate } from '@tanstack/react-router';
 import { AuthFormSchemaType } from '../../zod.schemas';
 import { t } from 'i18next';
+import { useState, useEffect } from 'react';
 
 export const useAuth = () => {
-  // const navigate = useNavigate();
   const auth = getAuth(app);
+  const [user, setUser] = useState(auth.currentUser);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
 
   const connectUser = async ({ email, password }: AuthFormSchemaType) => {
     try {
@@ -58,5 +68,15 @@ export const useAuth = () => {
     }
   };
 
-  return { connectUser, createUser };
+  const signOutUser = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      if (error instanceof Error) {
+        return { success: false, message: error.message };
+      }
+    }
+  };
+  const getUser = () => user || null;
+  return { connectUser, createUser, signOutUser, getUser };
 };

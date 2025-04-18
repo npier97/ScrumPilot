@@ -2,13 +2,8 @@ import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import EmailPasswordField from './EmailPasswordField';
 import { useForm, useFormState } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  createLoginFormSchema,
-  AuthFormSchemaType,
-  createAuthFormSchema
-} from '../../../zod.schemas';
+import { AuthFormSchemaType, createAuthFormSchema } from '../../../zod.schemas';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
@@ -38,9 +33,9 @@ const AuthForm = ({
   });
   const { isSubmitting } = useFormState({ control: form.control });
   const { reset } = form;
-  const { connectUser, createUser } = useAuth();
+  const { connectUser, createUser, getUser } = useAuth();
   const authAction = isSignupForm ? createUser : connectUser;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [submitError, setSubmitError] = useState<SubmitErrorType>({
     status: false,
     message: null
@@ -52,10 +47,7 @@ const AuthForm = ({
   const onSubmit = async (values: AuthFormSchemaType) => {
     resetSubmitErrors();
     const setConnection = await authAction(values);
-    if (setConnection?.success) {
-      console.log(setConnection.message);
-      navigate({ to: '/' });
-    } else {
+    if (!setConnection?.success) {
       setSubmitError({ status: true, message: setConnection?.message });
     }
   };
@@ -103,6 +95,8 @@ const AuthForm = ({
         </div>
       )}
       <FormFooter authType={authType} />
+      {/* <Button onClick={() => console.log(getUser())}>GetU</Button>
+      <Button onClick={() => signOutUser()}>out</Button> */}
     </Form>
   );
 };
