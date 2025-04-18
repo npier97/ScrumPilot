@@ -33,9 +33,9 @@ const AuthForm = ({
   });
   const { isSubmitting } = useFormState({ control: form.control });
   const { reset } = form;
-  const { connectUser, createUser, getUser } = useAuth();
+  const { connectUser, createUser, isAuthenticated } = useAuth();
   const authAction = isSignupForm ? createUser : connectUser;
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [submitError, setSubmitError] = useState<SubmitErrorType>({
     status: false,
     message: null
@@ -53,8 +53,13 @@ const AuthForm = ({
   };
 
   useEffect(() => {
-    reset();
-  }, [isVisible, reset]);
+    if (isAuthenticated) {
+      navigate({ to: '/dashboard' });
+    }
+    if (!isVisible) {
+      reset();
+    }
+  }, [isAuthenticated, navigate, isVisible, reset]);
 
   if (!isVisible) return null;
   return (
@@ -95,8 +100,6 @@ const AuthForm = ({
         </div>
       )}
       <FormFooter authType={authType} />
-      {/* <Button onClick={() => console.log(getUser())}>GetU</Button>
-      <Button onClick={() => signOutUser()}>out</Button> */}
     </Form>
   );
 };

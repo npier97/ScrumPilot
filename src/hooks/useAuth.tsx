@@ -13,10 +13,12 @@ import { useState, useEffect } from 'react';
 export const useAuth = () => {
   const auth = getAuth(app);
   const [user, setUser] = useState(auth.currentUser);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!user);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setIsAuthenticated(!!currentUser);
     });
 
     return () => unsubscribe();
@@ -24,12 +26,8 @@ export const useAuth = () => {
 
   const connectUser = async ({ email, password }: AuthFormSchemaType) => {
     try {
-      // TODO: all connexion logic
       const login = await signInWithEmailAndPassword(auth, email, password);
-
-      // FIXME: temporary return
       if (login?.user) {
-        console.log(login.user);
         return { success: true, message: 'user connected' };
       }
     } catch (error) {
@@ -77,6 +75,12 @@ export const useAuth = () => {
       }
     }
   };
-  const getUser = () => user || null;
-  return { connectUser, createUser, signOutUser, getUser };
+
+  return {
+    connectUser,
+    createUser,
+    signOutUser,
+    user,
+    isAuthenticated
+  };
 };

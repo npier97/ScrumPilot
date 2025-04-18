@@ -24,8 +24,8 @@ const MenuItem = ({ link, label }: { link: string; label: string }) => (
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { t } = useTranslation();
-  const { getUser, signOutUser } = useAuth();
-  const isConnected = getUser();
+  const { signOutUser, isAuthenticated } = useAuth();
+  const isConnected = isAuthenticated;
 
   useEffect(() => {
     const handleScroll = () => {

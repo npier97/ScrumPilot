@@ -1,8 +1,15 @@
 import Header from '@/components/Header';
-import { createRootRoute, Outlet, useMatches } from '@tanstack/react-router';
+import {
+  Outlet,
+  useMatches,
+  createRootRouteWithContext
+} from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+interface MyRouterContext {
+  isAuthenticated: boolean;
+}
 
-const HEADERLESS_ROUTES = ['/login', '/sign-up'];
+const HEADERLESS_ROUTES = ['/login', '/sign-up', '/dashboard'];
 
 const RootRoute = () => {
   const matches = useMatches();
@@ -19,6 +26,6 @@ const RootRoute = () => {
   );
 };
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: RootRoute
 });

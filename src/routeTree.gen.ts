@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root';
 import { Route as SignUpImport } from './routes/sign-up';
 import { Route as LoginImport } from './routes/login';
 import { Route as FirebasePlaygroundImport } from './routes/firebase-playground';
+import { Route as DashboardImport } from './routes/dashboard';
 import { Route as IndexImport } from './routes/index';
 import { Route as RoomsRoomIdImport } from './routes/rooms/$roomId';
 import { Route as JoinRoomIdImport } from './routes/join/$roomId';
@@ -35,6 +36,12 @@ const LoginRoute = LoginImport.update({
 const FirebasePlaygroundRoute = FirebasePlaygroundImport.update({
   id: '/firebase-playground',
   path: '/firebase-playground',
+  getParentRoute: () => rootRoute
+} as any);
+
+const DashboardRoute = DashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRoute
 } as any);
 
@@ -65,6 +72,13 @@ declare module '@tanstack/react-router' {
       path: '/';
       fullPath: '/';
       preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/dashboard': {
+      id: '/dashboard';
+      path: '/dashboard';
+      fullPath: '/dashboard';
+      preLoaderRoute: typeof DashboardImport;
       parentRoute: typeof rootRoute;
     };
     '/firebase-playground': {
@@ -109,6 +123,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute;
+  '/dashboard': typeof DashboardRoute;
   '/firebase-playground': typeof FirebasePlaygroundRoute;
   '/login': typeof LoginRoute;
   '/sign-up': typeof SignUpRoute;
@@ -118,6 +133,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute;
+  '/dashboard': typeof DashboardRoute;
   '/firebase-playground': typeof FirebasePlaygroundRoute;
   '/login': typeof LoginRoute;
   '/sign-up': typeof SignUpRoute;
@@ -128,6 +144,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   '/': typeof IndexRoute;
+  '/dashboard': typeof DashboardRoute;
   '/firebase-playground': typeof FirebasePlaygroundRoute;
   '/login': typeof LoginRoute;
   '/sign-up': typeof SignUpRoute;
@@ -139,6 +156,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
+    | '/dashboard'
     | '/firebase-playground'
     | '/login'
     | '/sign-up'
@@ -147,6 +165,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
+    | '/dashboard'
     | '/firebase-playground'
     | '/login'
     | '/sign-up'
@@ -155,6 +174,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/dashboard'
     | '/firebase-playground'
     | '/login'
     | '/sign-up'
@@ -165,6 +185,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
+  DashboardRoute: typeof DashboardRoute;
   FirebasePlaygroundRoute: typeof FirebasePlaygroundRoute;
   LoginRoute: typeof LoginRoute;
   SignUpRoute: typeof SignUpRoute;
@@ -174,6 +195,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
   FirebasePlaygroundRoute: FirebasePlaygroundRoute,
   LoginRoute: LoginRoute,
   SignUpRoute: SignUpRoute,
@@ -192,6 +214,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/dashboard",
         "/firebase-playground",
         "/login",
         "/sign-up",
@@ -201,6 +224,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/dashboard": {
+      "filePath": "dashboard.tsx"
     },
     "/firebase-playground": {
       "filePath": "firebase-playground.tsx"
