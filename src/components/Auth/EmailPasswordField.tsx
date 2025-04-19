@@ -6,13 +6,14 @@ import ValidationCriterias from './ValidationCriterias';
 import { useWatch, useFormContext } from 'react-hook-form';
 import { authFieldsCriterias } from '@/utils/validations/auth';
 import ErrorMessage from './ErrorMessage';
+import { FieldType, FieldValidationsMode } from '@/types/Auth';
 
 const EmailPasswordField = ({
   field,
   withValidations = 'auto'
 }: {
-  field: 'email' | 'password';
-  withValidations?: 'manual' | 'auto';
+  field: FieldType;
+  withValidations?: FieldValidationsMode;
 }) => {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);

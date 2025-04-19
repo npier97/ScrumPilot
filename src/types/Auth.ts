@@ -16,3 +16,15 @@ export type SubmitErrorType = {
 };
 
 export type AuthFormType = 'login' | 'sign-up';
+
+export type FieldType = RenderFieldProps['name'];
+export type FieldValidationsMode = 'manual' | 'auto';
+
+export interface AuthFormProps {
+  isVisible?: boolean;
+  toggleIsVisible?: () => void;
+  authType: AuthFormType;
+}
+export interface FormFooterProps {
+  authType: AuthFormType;
+}

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { ForgotPasswordFormType } from '@/types/Auth';
 import { useEffect } from 'react';
 import EmailPasswordField from '../EmailPasswordField';
-import CreateAccountSection from '../FormFooter';
+import FormFooter from '../FormFooter';
 import ErrorMessage from '../ErrorMessage';
 // TODO: improve imports declaration
 
@@ -68,7 +68,7 @@ const ForgotPasswordForm = ({
         </Button>
       </div>
 
-      <CreateAccountSection />
+      <FormFooter authType='login' />
     </Form>
   );
 };

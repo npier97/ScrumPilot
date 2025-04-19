@@ -75,16 +75,12 @@ export const useAuth = () => {
       } else throw new Error('missing credentials');
     } catch (error) {
       if (error instanceof Error) {
-        let parsedMessage: string | null = null;
+        const parsedMessage = error.message.includes(
+          'auth/email-already-in-use'
+        )
+          ? t('forms.errors.alreadyInUse')
+          : t('forms.errors.error');
 
-        switch (true) {
-          case error.message.includes('auth/email-already-in-use'):
-            parsedMessage = t('forms.errors.alreadyInUse');
-            break;
-          default:
-            parsedMessage = t('forms.errors.error');
-            break;
-        }
         return { success: false, message: parsedMessage };
       }
     }

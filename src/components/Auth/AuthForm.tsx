@@ -9,18 +9,15 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import ErrorMessage from './ErrorMessage';
 import FormFooter from './FormFooter';
-import { SubmitErrorType, AuthFormType } from '@/types/Auth';
+import { SubmitErrorType, AuthFormProps } from '@/types/Auth';
 import { useNavigate } from '@tanstack/react-router';
+import ForgotPasswordButton from './ForgotPasswordButton';
 
 const AuthForm = ({
   isVisible = true,
   toggleIsVisible,
   authType
-}: {
-  isVisible?: boolean;
-  toggleIsVisible?: () => void;
-  authType: AuthFormType;
-}) => {
+}: AuthFormProps) => {
   const isSignupForm = authType === 'sign-up';
   const { t } = useTranslation();
   const formSchema = createAuthFormSchema(authType, t);
@@ -88,17 +85,7 @@ const AuthForm = ({
           </div>
         </div>
       </form>
-      {toggleIsVisible && (
-        <div className='flex justify-center mt-0 my-5'>
-          <Button
-            onClick={() => toggleIsVisible()}
-            variant={'link'}
-            className=' text-sm text-primary hover:underline'
-          >
-            {t('forms.forgotPwd')}
-          </Button>
-        </div>
-      )}
+      {toggleIsVisible && <ForgotPasswordButton action={toggleIsVisible} />}
       <FormFooter authType={authType} />
     </Form>
   );

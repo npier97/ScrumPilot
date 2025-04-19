@@ -1,5 +1,5 @@
 import { AuthFormType } from '@/types/Auth';
-import { z } from 'zod';
+import { z, ZodSchema } from 'zod';
 
 export const createLoginFormSchema = (t: (key: string) => string) =>
   z.object({
@@ -29,12 +29,14 @@ export const createAuthFormSchema = (
   formType: AuthFormType,
   t: (key: string) => string
 ) => {
-  switch (formType) {
-    case 'sign-up':
-      return createSignUpFormSchema(t);
-    case 'login':
-      return createLoginFormSchema(t);
-    default:
-      return createSignUpFormSchema(t);
-  }
+  const schemaMap: Record<
+    AuthFormType,
+    (t: (key: string) => string) => ZodSchema
+  > = {
+    'sign-up': createSignUpFormSchema,
+    login: createLoginFormSchema
+  };
+
+  const getSchema = schemaMap[formType] || createSignUpFormSchema;
+  return getSchema(t);
 };

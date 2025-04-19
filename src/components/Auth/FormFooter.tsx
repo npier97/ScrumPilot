@@ -1,11 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { Button } from '../ui/button';
 import { useTranslation } from 'react-i18next';
-import { AuthFormType } from '@/types/Auth';
-
-interface FormFooterProps {
-  authType: AuthFormType;
-}
+import { FormFooterProps } from '@/types/Auth';
 
 const FormFooter = ({ authType }: FormFooterProps) => {
   const { t } = useTranslation();
