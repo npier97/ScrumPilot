@@ -8,8 +8,6 @@ import { Link } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import LanguageDropdown from '../LanguageDropdown';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '@/hooks/useAuth';
-import { DoorOpenIcon } from 'lucide-react';
 
 const MenuItem = ({ link, label }: { link: string; label: string }) => (
   <NavigationMenuItem>
@@ -24,8 +22,6 @@ const MenuItem = ({ link, label }: { link: string; label: string }) => (
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { t } = useTranslation();
-  const { signOutUser, isAuthenticated } = useAuth();
-  const isConnected = isAuthenticated;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,14 +40,8 @@ const Header = () => {
         <MenuItem link='/' label='Scrum Pilot' />
       </NavigationMenuList>
       <NavigationMenuList>
-        {!isConnected ? (
-          <>
-            <MenuItem link='/login' label={t('logIn')} />
-            <MenuItem link='/sign-up' label={t('signUp')} />
-          </>
-        ) : (
-          <DoorOpenIcon size={22} onClick={() => signOutUser()} />
-        )}
+        <MenuItem link='/login' label={t('logIn')} />
+        <MenuItem link='/sign-up' label={t('signUp')} />
         <LanguageDropdown />
       </NavigationMenuList>
     </NavigationMenu>
