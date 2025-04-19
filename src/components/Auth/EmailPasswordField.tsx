@@ -20,7 +20,9 @@ const EmailPasswordField = ({
     control,
     formState: { isSubmitted, errors }
   } = useFormContext();
-  const fieldControl = useWatch({ control, name: field }) || '';
+
+  // suscribe to target input changes
+  const fieldControlledValue: string = useWatch({ control, name: field });
   const fieldCriterias = authFieldsCriterias[field];
 
   return (
@@ -51,10 +53,10 @@ const EmailPasswordField = ({
       )}
       {withValidations === 'manual' ? (
         <div className='min-h-4 mt-1'>
-          {isSubmitted && (
+          {isSubmitted && errors[field] && (
             <ValidationCriterias
               fieldCriterias={fieldCriterias}
-              watchedField={fieldControl}
+              watchedFieldValue={fieldControlledValue}
             />
           )}
         </div>
