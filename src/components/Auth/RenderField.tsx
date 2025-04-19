@@ -1,4 +1,4 @@
-import { RenderFieldProps } from '@/types/login';
+import { RenderFieldProps } from '@/types/Auth';
 import { FormField, FormItem, FormLabel, FormControl } from '../ui/form';
 import { Input } from '../ui/input';
 

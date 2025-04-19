@@ -29,9 +29,12 @@
   "forms": {
     "loginTitle": "Login to your account",
     "forgotPwdTitle": "Recover your account",
+    "signupTitle": "Create your account",
     "login": "Log in",
+    "signup": "Sign up",
     "forgotPwd": "Forgot your password?",
     "noAccountYet": "Don't have an account yet?",
+    "alreadyHaveAccount": "Already have an account?",
     "createAccount": "Create an account",
     "email": {
       "label": "Email",
