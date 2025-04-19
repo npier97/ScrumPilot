@@ -9,6 +9,8 @@ import { app } from '@/firebase-config';
 import { AuthFormSchemaType } from '../../zod.schemas';
 import { t } from 'i18next';
 import { useState, useEffect } from 'react';
+import { db } from '@/firebase-config';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 export const useAuth = () => {
   const auth = getAuth(app);
@@ -16,7 +18,21 @@ export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!user);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        // keep sync user auth instance with user db critical datas
+        const { uid, email } = currentUser;
+        const userDoc = doc(db, 'users', uid);
+        await setDoc(
+          userDoc,
+          {
+            email,
+            uid,
+            lastUpdateTime: serverTimestamp()
+          },
+          { merge: true }
+        );
+      }
       setUser(currentUser);
       setIsAuthenticated(!!currentUser);
     });
@@ -46,8 +62,16 @@ export const useAuth = () => {
           password
         );
         if (create.user) {
+          const { uid, email } = create.user;
+          const newUserDoc = doc(db, 'users', uid);
+          await setDoc(newUserDoc, {
+            email,
+            uid,
+            createdAt: serverTimestamp(),
+            rooms: []
+          });
           return { success: true, message: 'new user created successfully' };
-        }
+        } else throw Error(`${create.operationType} failed`);
       } else throw new Error('missing credentials');
     } catch (error) {
       if (error instanceof Error) {
