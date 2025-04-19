@@ -29,7 +29,9 @@
   "forms": {
     "loginTitle": "Connectez-vous à votre compte",
     "forgotPwdTitle": "Récupérez votre compte",
+    "signupTitle": "Créez votre compte",
     "login": "Se connecter",
+    "signup": "S'inscrire",
     "forgotPwd": "Mot de passe oublié ?",
     "noAccountYet": "Vous n'avez pas encore de compte ?",
     "alreadyHaveAccount": "Vous avez déjà un compte ?",
@@ -37,7 +39,7 @@
     "email": {
       "label": "Email",
       "invalid": "Veuillez entrer une adresse email valide",
-      "minLength": "12 caractères",
+      "minLength": "L'email doit contenir au moins 5 caractères",
       "maxLength": "L'email ne doit pas dépasser 255 caractères",
       "placeholder": "Entrez votre email (ex: votrenom@gmail.com)",
       "required": "Adresse email : Requis"
