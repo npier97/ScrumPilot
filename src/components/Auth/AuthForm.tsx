@@ -2,26 +2,26 @@ import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import EmailPasswordField from './EmailPasswordField';
 import { useForm, useFormState } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createLoginFormSchema, LoginFormType } from '../../../zod.schemas';
+import { AuthFormSchemaType, createAuthFormSchema } from '../../../zod.schemas';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import ErrorMessage from './ErrorMessage';
-import CreateAccountSection from './CreateAccountSection';
-import { SubmitErrorType } from '@/types/login';
+import FormFooter from './FormFooter';
+import { SubmitErrorType, AuthFormProps } from '@/types/Auth';
+import { useNavigate } from '@tanstack/react-router';
+import ForgotPasswordButton from './ForgotPasswordButton';
 
 const AuthForm = ({
-  isVisible,
-  toggleIsVisible
-}: {
-  isVisible: boolean;
-  toggleIsVisible: () => void;
-}) => {
+  isVisible = true,
+  toggleIsVisible,
+  authType
+}: AuthFormProps) => {
+  const isSignupForm = authType === 'sign-up';
   const { t } = useTranslation();
-  const formSchema = createLoginFormSchema(t);
-  const form = useForm<LoginFormType>({
+  const formSchema = createAuthFormSchema(authType, t);
+  const form = useForm<AuthFormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
@@ -30,47 +30,52 @@ const AuthForm = ({
   });
   const { isSubmitting } = useFormState({ control: form.control });
   const { reset } = form;
-  const { connectUser } = useAuth();
+  const { connectUser, createUser, isAuthenticated } = useAuth();
+  const authAction = isSignupForm ? createUser : connectUser;
+  const navigate = useNavigate();
   const [submitError, setSubmitError] = useState<SubmitErrorType>({
     status: false,
     message: null
   });
-
+  const inputValidationMode = isSignupForm ? 'manual' : 'auto';
   const resetSubmitErrors = () =>
     setSubmitError({ status: false, message: null });
 
-  const onSubmit = async (
-    values: z.infer<ReturnType<typeof createLoginFormSchema>>
-  ) => {
+  const onSubmit = async (values: AuthFormSchemaType) => {
     resetSubmitErrors();
-
-    const setConnection = await connectUser(values);
-    if (setConnection?.success) {
-      console.log(setConnection.message);
-    } else {
+    const setConnection = await authAction(values);
+    if (!setConnection?.success) {
       setSubmitError({ status: true, message: setConnection?.message });
-      console.log(setConnection?.message);
     }
   };
 
   useEffect(() => {
-    reset();
-  }, [isVisible, reset]);
+    if (isAuthenticated) {
+      navigate({ to: '/dashboard' });
+    }
+    if (!isVisible) {
+      reset();
+    }
+  }, [isAuthenticated, navigate, isVisible, reset]);
 
   if (!isVisible) return null;
-
   return (
     <Form {...form}>
       <form
         className='flex flex-col space-y-3 mt-8 w-full'
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <EmailPasswordField field='email' />
-        <EmailPasswordField field='password' />
-
+        <EmailPasswordField
+          withValidations={inputValidationMode}
+          field='email'
+        />
+        <EmailPasswordField
+          withValidations={inputValidationMode}
+          field='password'
+        />
         <div>
           <Button className='w-full py-5' type='submit' disabled={isSubmitting}>
-            {t('forms.login')}
+            {isSignupForm ? t('forms.signup') : t('forms.login')}
           </Button>
 
           <div className='w-full flex flex-col items-center space-y-1 min-h-4 mt-1'>
@@ -80,16 +85,8 @@ const AuthForm = ({
           </div>
         </div>
       </form>
-      <div className='flex justify-center mt-0 my-5'>
-        <Button
-          onClick={() => toggleIsVisible()}
-          variant={'link'}
-          className=' text-sm text-primary hover:underline'
-        >
-          {t('forms.forgotPwd')}
-        </Button>
-      </div>
-      <CreateAccountSection />
+      {toggleIsVisible && <ForgotPasswordButton onClick={toggleIsVisible} />}
+      <FormFooter authType={authType} />
     </Form>
   );
 };

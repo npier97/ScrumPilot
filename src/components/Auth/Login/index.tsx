@@ -1,4 +1,4 @@
-import AuthForm from './AuthForm';
+import AuthForm from '../AuthForm';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +9,6 @@ const LogIn = () => {
     setShowForgotPasswordForm(!showForgotPasswordForm);
   };
   const { t } = useTranslation();
-
   return (
     <div className='w-screen h-screen flex justify-center items-center text-sm container mx-auto'>
       <div className='shadow-lg rounded-xl w-full sm:w-[450px] p-6 flex flex-col items-center'>
@@ -21,6 +20,7 @@ const LogIn = () => {
           </h1>
         </div>
         <AuthForm
+          authType='login'
           isVisible={!showForgotPasswordForm}
           toggleIsVisible={toggleForgotPasswordPage}
         />
