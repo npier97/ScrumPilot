@@ -85,7 +85,7 @@ const AuthForm = ({
           </div>
         </div>
       </form>
-      {toggleIsVisible && <ForgotPasswordButton action={toggleIsVisible} />}
+      {toggleIsVisible && <ForgotPasswordButton onClick={toggleIsVisible} />}
       <FormFooter authType={authType} />
     </Form>
   );
