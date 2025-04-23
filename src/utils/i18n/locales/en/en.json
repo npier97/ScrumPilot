@@ -90,6 +90,10 @@
   "onBoarding": {
     "title": "Welcome to ScrumPilot ! 👋",
     "description": "Let's get you started with a quick tour",
+    "stepBack": "Back",
+    "skipTour": "Skip tour",
+    "nextStep": "Next Step",
+    "close": "Close",
     "step1": {
       "title": "Step 1: Create your first room",
       "description": "Discover how to streamline your Scrum meetings with our intuitive platform."

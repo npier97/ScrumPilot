@@ -13,3 +13,9 @@ export interface OnBoardingStepPropTypes {
   closeProcess: () => void;
   resetProcess: () => void;
 }
+
+export interface OnBoardingFooterProps {
+  index: number;
+  decrementStepIndex: () => void;
+  closeDialog: () => void;
+}

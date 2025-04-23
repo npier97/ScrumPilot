@@ -5,20 +5,19 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogOverlay,
-  DialogClose,
-  DialogFooter
+  DialogOverlay
 } from '@/components/ui/dialog';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
-import { X, StepBack } from 'lucide-react';
 import OnBoardingStep from './OnBoardingStep';
 import { NumericActionProps } from '@/types/Dashboard';
 import { onBoardingMessages } from '@/ressources/datas/onBoardingMessages';
+import OnBoardingFooter from './onBoardingFooter';
 
 const OnBoarding = () => {
   const [isOpen, setIsOpen] = useState(false);
+  // TODO: get info from firestore db
   const [hasSeenOnboarding, setHasSeenOnboarding] = useState(false);
   const { t } = useTranslation();
   const [index, setIndex] = useState(0);
@@ -55,10 +54,10 @@ const OnBoarding = () => {
 
       <DialogContent className='duration-700 ease-out w-full lg:max-w-[60%]! '>
         <DialogHeader className=''>
-          <DialogTitle className='text-center'>
-            {t('onBoarding.title')}
+          <DialogTitle asChild className='text-center text-3xl font-bold'>
+            <h1>{t('onBoarding.title')}</h1>
           </DialogTitle>
-          <DialogDescription className='text-center'>
+          <DialogDescription className='text-center font-bold'>
             {t('onBoarding.description')}
           </DialogDescription>
         </DialogHeader>
@@ -71,30 +70,11 @@ const OnBoarding = () => {
           resetProcess={() => setIndex(0)}
         />
 
-        <DialogFooter className='relative'>
-          {index > 0 && (
-            <Button
-              onClick={() => switchStepValue('decrement')}
-              className='text-xs text-primary absolute bottom-0 left-0'
-              variant='ghost'
-            >
-              <StepBack />
-              {t('onBoarding.stepBack')}
-            </Button>
-          )}
-          <DialogClose
-            onClick={() => setIsOpen(false)}
-            asChild
-            className='mx-auto text-xs'
-          >
-            {index < onBoardingMessages.length - 1 && (
-              <Button variant='ghost'>
-                {t('onBoarding.close')}
-                <X />
-              </Button>
-            )}
-          </DialogClose>
-        </DialogFooter>
+        <OnBoardingFooter
+          decrementStepIndex={() => switchStepValue('decrement')}
+          closeDialog={() => setIsOpen(false)}
+          index={index}
+        />
       </DialogContent>
     </Dialog>
   );

@@ -88,8 +88,14 @@
     }
   },
   "onBoarding": {
+    "title": "Bienvenue sur ScrumPilot ! 👋",
+    "description": "Commençons par un rapide tour d'horizon",
+    "stepBack": "Retour",
+    "skipTour": "Passer l'onboarding",
+    "nextStep": "Étape Suivante",
+    "close": "Fermer",
     "step1": {
-      "title": "Bienvenue sur ScrumPilot",
+      "title": "Étape 1 : Créez votre première salle",
       "description": "Découvrez comment rationaliser vos réunions Scrum avec notre plateforme intuitive."
     },
     "step2": {

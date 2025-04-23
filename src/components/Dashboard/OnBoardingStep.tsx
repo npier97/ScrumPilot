@@ -20,7 +20,7 @@ const OnBoardingStep = ({
   if (!messages) return;
 
   return (
-    <div className='w-full flex h-full'>
+    <div className='w-full flex h-full py-3'>
       <div className='basis-full w-full flex flex-col justify-center items-start space-y-4'>
         <div className='flex flex-col space-y-2'>
           <h3 className='font-bold text-xl'>{t(messages.stepTitle)}</h3>
