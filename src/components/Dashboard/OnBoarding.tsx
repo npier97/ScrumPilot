@@ -10,10 +10,10 @@ import {
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
-import OnBoardingStep from './OnBoardingStep';
 import { NumericActionProps } from '@/types/Dashboard';
 import { onBoardingMessages } from '@/ressources/datas/onBoardingMessages';
-import OnBoardingFooter from './onBoardingFooter';
+import OnBoardingStep from './OnBoardingStep';
+import OnBoardingFooter from './OnBoardingFooter';
 
 const OnBoarding = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,6 +60,17 @@ const OnBoarding = () => {
           <DialogDescription className='text-center font-bold'>
             {t('onBoarding.description')}
           </DialogDescription>
+
+          <div className='flex items-center justify-center space-x-2 mt-5'>
+            {Array.from({ length: onBoardingMessages.length }).map((_, idx) => (
+              <Button
+                size={'sm'}
+                variant={'default'}
+                onClick={() => setIndex(idx)}
+                className={`p-0 size-2 rounded-full ${idx === index ? 'bg-primary' : 'bg-gray-300'}`}
+              />
+            ))}
+          </div>
         </DialogHeader>
 
         <OnBoardingStep
