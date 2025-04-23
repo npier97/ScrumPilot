@@ -86,5 +86,29 @@
     "users": {
       "estimate": "Average estimate"
     }
+  },
+  "onBoarding": {
+    "title": "Welcome to ScrumPilot ! 👋",
+    "description": "Let's get you started with a quick tour",
+    "step1": {
+      "title": "Step 1: Create your first room",
+      "description": "Discover how to streamline your Scrum meetings with our intuitive platform."
+    },
+    "step2": {
+      "title": "Room Creation",
+      "description": "Create a new room to start your Scrum meeting in just a few clicks."
+    },
+    "step3": {
+      "title": "Member Invitation",
+      "description": "Easily invite your team members to join the room."
+    },
+    "step4": {
+      "title": "Meeting Management",
+      "description": "Track time, manage speaking turns, and ensure everyone participates."
+    },
+    "step5": {
+      "title": "Progress Tracking",
+      "description": "Visualize and track your team's progress in real-time."
+    }
   }
 }

@@ -86,5 +86,27 @@
     "users": {
       "estimate": "Estimation moyenne"
     }
+  },
+  "onBoarding": {
+    "step1": {
+      "title": "Bienvenue sur ScrumPilot",
+      "description": "Découvrez comment rationaliser vos réunions Scrum avec notre plateforme intuitive."
+    },
+    "step2": {
+      "title": "Création de salle",
+      "description": "Créez une nouvelle salle pour commencer votre réunion Scrum en quelques clics."
+    },
+    "step3": {
+      "title": "Invitation des membres",
+      "description": "Invitez facilement les membres de votre équipe à rejoindre la salle."
+    },
+    "step4": {
+      "title": "Gestion des réunions",
+      "description": "Suivez le temps, gérez les tours de parole et assurez-vous que tout le monde participe."
+    },
+    "step5": {
+      "title": "Suivi des progrès",
+      "description": "Visualisez et suivez les progrès de votre équipe en temps réel."
+    }
   }
 }

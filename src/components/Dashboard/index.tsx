@@ -4,6 +4,7 @@ import { Link } from '@tanstack/react-router';
 import { DoorOpenIcon } from 'lucide-react';
 import { useEffect } from 'react';
 import { useNavigate } from '@tanstack/react-router';
+import OnBoarding from './OnBoarding';
 
 const Dashboard = () => {
   const { signOutUser, isAuthenticated } = useAuth();
@@ -18,6 +19,7 @@ const Dashboard = () => {
   // TODO: implem dashboard UI
   return (
     <>
+      <OnBoarding />
       <h1>Welcome on your dashboard</h1>
       <Button onClick={() => signOutUser()} variant='link'>
         {' '}
