@@ -9,6 +9,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '@/firebase-config';
 import { useAuth } from './useAuth';
+import { toast } from 'sonner';
 
 export const useCreateRoom = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ export const useCreateRoom = () => {
       navigate({ to: `/rooms/${roomRef.id}` });
     } catch (error) {
       console.error('Error adding document: ', error);
+      toast.error('The room could not be created');
     }
   };
 

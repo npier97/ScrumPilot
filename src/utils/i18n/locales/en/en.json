@@ -118,6 +118,11 @@
     "step6": {
       "title": "Step 6: Get Started!",
       "description": "You're ready! Click 'Start Using ScrumPilot' or revisit this onboarding anytime to sharpen your skills."
+    },
+    "dashboard": {
+      "welcome": "Welcome on your dashboard!",
+      "noRoomsError": "Error fetching user rooms",
+      "noRoomsCreated": "No rooms created, start a new room!"
     }
   }
 }

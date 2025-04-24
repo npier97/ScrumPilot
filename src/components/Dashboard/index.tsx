@@ -20,6 +20,7 @@ import { db } from '@/firebase-config';
 const Dashboard = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [error, setError] = useState<string | null>('');
   const [activeRooms, setActiveRooms] = useState<DocumentData[]>([]);
 
   const { createNewRoom } = useCreateRoom();
@@ -44,6 +45,7 @@ const Dashboard = () => {
         setActiveRooms(createdRooms);
       } catch (err) {
         console.error('Error fetching user rooms:', err);
+        setError(t('dashboard.noRoomsError'));
       }
     };
 
@@ -57,7 +59,7 @@ const Dashboard = () => {
       <div className='p-4 w-full flex flex-col'>
         <section className='mt-4'>
           <div className='flex justify-between'>
-            <h1>Welcome on your dashboard</h1>
+            <h1>{t('dashboard.welcome')}</h1>
             <Button onClick={() => disconnectUser()} variant='link'>
               {' '}
               signOut
@@ -76,9 +78,13 @@ const Dashboard = () => {
         <section className='mt-8'>
           <h2>Your Active Rooms</h2>
           <div className='flex gap-4'>
-            {activeRooms.map((room) => (
-              <ActiveRoom roomData={room} />
-            ))}
+            {activeRooms.length !== 0 ? (
+              activeRooms.map((room) => <ActiveRoom roomData={room} />)
+            ) : (
+              <p className={`pt-2 ${error && 'text-red-600'}`}>
+                {error || t('dashboard.noRoomsCreated')}
+              </p>
+            )}
           </div>
         </section>
       </div>
