@@ -20,7 +20,7 @@ const RoomPage = () => {
   const [room, setRoom] = useState<RoomType>(null);
   const [participants, setParticipants] = useState<ParticipantsType[]>([]);
   const setIsCardRevealed = useUsersCardsStore((state) => state.setIsRevealed);
-  const setRoomId = useRoomStore((state) => state.setRoomId);
+  const setRoomUid = useRoomStore((state) => state.setRoomUid);
 
   const handleInviteOnClick = () => {
     const link = `${window.location.origin}/join/${roomId}`;
@@ -32,19 +32,19 @@ const RoomPage = () => {
     if (!roomId) return;
 
     const roomRef = doc(db, 'rooms', roomId);
-    const unsubscribe = onSnapshot(roomRef, (roomSnap) => {
+    const participantsRef = collection(db, 'rooms', roomId, 'participants');
+
+    const unsubscribeRoom = onSnapshot(roomRef, (roomSnap) => {
       if (roomSnap.exists()) {
         setRoom(roomSnap.data() as RoomProps);
         setIsCardRevealed(roomSnap.data().isVoteRevealed);
       }
     });
-
-    const participantsRef = collection(db, 'rooms', roomId, 'participants');
     const unsubscribeParticipants = onSnapshot(participantsRef, (snapshot) => {
       const updatedParticipants = snapshot.docs.map((doc) => {
         const data = doc.data();
         return {
-          id: doc.id,
+          uid: doc.id,
           name: data.name,
           avatar: data.avatar,
           vote: data.vote
@@ -53,10 +53,10 @@ const RoomPage = () => {
       setParticipants(updatedParticipants);
     });
 
-    setRoomId(roomId);
+    setRoomUid(roomId);
 
     return () => {
-      unsubscribe();
+      unsubscribeRoom();
       unsubscribeParticipants();
     };
   }, [roomId]);
@@ -75,14 +75,14 @@ const RoomPage = () => {
               <Toaster />
             </div>
             <hr className='my-8 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
-            <VotingPanel roomId={roomId} />
+            <VotingPanel roomUid={roomId} />
             <UserCard participants={participants} />
           </div>
         ) : (
           <p>{t('room.loading')}</p>
         )}
       </div>
-      <Modal path={path} room={room} roomId={roomId} />
+      <Modal path={path} room={room} roomUid={roomId} />
     </>
   );
 };

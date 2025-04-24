@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import InputField from './InputField';
 import Footer from './Footer';
 
-const Modal = ({ path, room, roomId }: ModalProps) => {
+const Modal = ({ path, room, roomUid }: ModalProps) => {
   const { t } = useTranslation();
   const [roomName, setRoomName] = useState('');
   const [isModalVisible, setModalVisibility] = useState(true);
@@ -46,7 +46,7 @@ const Modal = ({ path, room, roomId }: ModalProps) => {
         <Footer
           isAdmin={isAdminLink}
           room={room}
-          roomId={roomId}
+          roomUid={roomUid}
           roomName={roomName}
           participantName={participantName}
           setModalVisibility={setModalVisibility}

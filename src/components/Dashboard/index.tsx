@@ -1,17 +1,22 @@
 import { Button } from '@/components/ui/button';
-import { Sidebar } from '@/components/ui/sidebar';
 import { useAuth } from '@/hooks/useAuth';
 import { DoorOpenIcon, Plus } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import OnBoarding from './OnBoarding';
 import { useTranslation } from 'react-i18next';
 import { useCreateRoom } from '@/hooks/useCreateRoom';
 import ActiveRoom from './ActiveRoom';
+import DashSidebar from './Sidebar';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/firebase-config';
+import { RoomProps } from '@/types/Room';
 
 const Dashboard = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [activeRooms, setActiveRooms] = useState<RoomProps[]>([]);
+
   const { createNewRoom } = useCreateRoom();
   const { disconnectUser, isAuthenticated } = useAuth();
 
@@ -22,13 +27,40 @@ const Dashboard = () => {
       navigate({ to: '/' });
     }
 
-    // const roomRef = doc(db, 'users', user.uid, 'rooms');
+    const fetchUserRooms = async () => {
+      try {
+        const userRef = doc(db, 'users', 'eIcUdPdmqxWKfYFLYM1C1ccWux22');
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          const roomRefs = userData.rooms || [];
+
+          const roomDataList = await Promise.all(
+            roomRefs.map((roomRef) => getDoc(roomRef))
+          );
+
+          // const allRooms = roomDataList.map((roomSnap) => ({
+          //   id: roomSnap.id,
+          //   ...roomSnap.data()
+          // }));
+
+          console.log(roomDataList);
+
+          setActiveRooms([]);
+        }
+      } catch (err) {
+        console.error('Error fetching user rooms:', err);
+      }
+    };
+
+    fetchUserRooms();
   }, [isAuthenticated, navigate]);
 
   return (
     <>
       <OnBoarding />
-      <Sidebar />
+      <DashSidebar />
       <div className='p-4 w-full flex flex-col'>
         <section className='mt-4'>
           <div className='flex justify-between'>
@@ -50,7 +82,9 @@ const Dashboard = () => {
         </section>
         <section className='mt-8'>
           <h2>Your Active Rooms</h2>
-          <ActiveRoom />
+          {activeRooms.map((room) => (
+            <ActiveRoom roomData={room} />
+          ))}
         </section>
       </div>
     </>

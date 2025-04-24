@@ -9,10 +9,10 @@ export interface RoomProps {
 export interface ModalProps {
   path: string;
   room: RoomType;
-  roomId: string;
+  roomUid: string;
 }
 
-export type ModalFooterProps = Pick<ModalProps, 'room' | 'roomId'> & {
+export type ModalFooterProps = Pick<ModalProps, 'room' | 'roomUid'> & {
   isAdmin: boolean;
   roomName: string;
   participantName: string;
@@ -21,7 +21,7 @@ export type ModalFooterProps = Pick<ModalProps, 'room' | 'roomId'> & {
 
 export type RoomType = RoomProps | null;
 export type ParticipantsType = {
-  id: string;
+  uid: string;
   name: string;
   avatar: string;
   vote: number;
@@ -36,7 +36,7 @@ export interface InputProps {
   setValue: (value: string) => void;
 }
 
-export type VotingPanelType = Pick<ModalProps, 'roomId'>;
+export type VotingPanelType = Pick<ModalProps, 'roomUid'>;
 
 export interface CardProps {
   number: number;
@@ -47,4 +47,8 @@ export interface CardProps {
 export interface EditProfileProps {
   isOpen: boolean;
   toggleVisibility: (bool: boolean) => void;
+}
+
+export interface ActiveRoomProps {
+  roomData: RoomProps;
 }

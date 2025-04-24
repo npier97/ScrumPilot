@@ -1,11 +1,16 @@
 import { create } from 'zustand';
-import { ParticipantStore, RoomStore, UsersCardsStore } from './types/Store';
+import {
+  GuestStore,
+  ParticipantStore,
+  RoomStore,
+  UsersCardsStore
+} from './types/Store';
 import { UserStore } from './types/User';
 
 export const useParticipantStore = create<ParticipantStore>((set) => ({
-  participantId: '',
+  participantUid: '',
   vote: null,
-  setParticipantId: (id: string) => set({ participantId: id })
+  setParticipantUid: (uid: string) => set({ participantUid: uid })
 }));
 
 export const useUsersCardsStore = create<UsersCardsStore>((set) => ({
@@ -14,8 +19,13 @@ export const useUsersCardsStore = create<UsersCardsStore>((set) => ({
 }));
 
 export const useRoomStore = create<RoomStore>((set) => ({
-  roomId: '',
-  setRoomId: (id: string) => set({ roomId: id })
+  roomUid: '',
+  setRoomUid: (uid: string) => set({ roomUid: uid })
+}));
+
+export const useGuestStore = create<GuestStore>((set) => ({
+  guestUid: '',
+  setGuestUid: (uid: string) => set({ guestUid: uid })
 }));
 
 export const useUserStore = create<UserStore>((set) => ({

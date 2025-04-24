@@ -5,7 +5,7 @@ import EditProfileCard from './EditProfileCard';
 
 const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
   const { t } = useTranslation();
-  const participantId = useParticipantStore((state) => state.participantId);
+  const participantUid = useParticipantStore((state) => state.participantUid);
   const isCardRevealed = useUsersCardsStore((state) => state.isRevealed);
   const totalVotes = participants.reduce(
     (accumulator, currentValue) => accumulator + currentValue.vote,
@@ -29,11 +29,11 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
       <hr className='my-6 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
       <div className='flex flex-wrap justify-center gap-8'>
         {participants.map((participant) => {
-          const isCurrentUser = participantId === participant.id;
+          const isCurrentUser = participantUid === participant.uid;
           return (
             <div
               className='flex flex-col items-center'
-              key={`${participant.id}`}
+              key={`${participant.uid}`}
             >
               {isCurrentUser ? (
                 <EditProfileCard />

@@ -19,8 +19,8 @@ import { useParticipantStore, useRoomStore } from '@/store';
 const EditProfileModal = ({ isOpen, toggleVisibility }: EditProfileProps) => {
   const { t } = useTranslation();
   const [updatedParticipantName, setUpdatedParticipantName] = useState('');
-  const roomId = useRoomStore((state) => state.roomId);
-  const participantId = useParticipantStore((state) => state.participantId);
+  const roomId = useRoomStore((state) => state.roomUid);
+  const participantId = useParticipantStore((state) => state.participantUid);
 
   const handleUpdateProfile = async (updatedParticipantName: string) => {
     await updateDoc(doc(db, 'rooms', roomId, 'participants', participantId), {

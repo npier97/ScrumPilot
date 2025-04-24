@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 const Footer = ({
   isAdmin,
   room,
-  roomId,
+  roomUid,
   roomName,
   participantName,
   setModalVisibility
@@ -19,7 +19,7 @@ const Footer = ({
   const { t } = useTranslation();
   const [error, setError] = useState('');
   const setParticipantId = useParticipantStore(
-    (state) => state.setParticipantId
+    (state) => state.setParticipantUid
   );
 
   const handleJoinRoom = async (room: RoomType, newParticipantName: string) => {
@@ -34,7 +34,7 @@ const Footer = ({
     }
     setError('');
 
-    const roomRef = doc(db, 'rooms', roomId);
+    const roomRef = doc(db, 'rooms', roomUid);
 
     if (isAdmin) {
       await updateDoc(roomRef, {
