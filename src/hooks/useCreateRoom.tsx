@@ -29,7 +29,7 @@ export const useCreateRoom = () => {
         if (userSnapshot.exists()) {
           const existingRooms = userSnapshot.data().rooms || [];
 
-          const updatedRooms = [...existingRooms, `/rooms/${roomRef.id}`];
+          const updatedRooms = [...existingRooms, roomRef.id];
 
           await updateDoc(userDoc, {
             rooms: updatedRooms

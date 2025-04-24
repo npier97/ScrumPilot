@@ -8,14 +8,19 @@ import { useTranslation } from 'react-i18next';
 import { useCreateRoom } from '@/hooks/useCreateRoom';
 import ActiveRoom from './ActiveRoom';
 import DashSidebar from './Sidebar';
-import { doc, getDoc } from 'firebase/firestore';
+import {
+  collection,
+  DocumentData,
+  getDocs,
+  query,
+  where
+} from 'firebase/firestore';
 import { db } from '@/firebase-config';
-import { RoomProps } from '@/types/Room';
 
 const Dashboard = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [activeRooms, setActiveRooms] = useState<RoomProps[]>([]);
+  const [activeRooms, setActiveRooms] = useState<DocumentData[]>([]);
 
   const { createNewRoom } = useCreateRoom();
   const { disconnectUser, isAuthenticated } = useAuth();
@@ -29,26 +34,14 @@ const Dashboard = () => {
 
     const fetchUserRooms = async () => {
       try {
-        const userRef = doc(db, 'users', 'eIcUdPdmqxWKfYFLYM1C1ccWux22');
-        const userSnap = await getDoc(userRef);
+        const queryUserRooms = query(
+          collection(db, 'rooms'),
+          where('createdBy', '==', user?.uid)
+        );
+        const querySnapshot = await getDocs(queryUserRooms);
+        const createdRooms = querySnapshot.docs.map((doc) => doc.data());
 
-        if (userSnap.exists()) {
-          const userData = userSnap.data();
-          const roomRefs = userData.rooms || [];
-
-          const roomDataList = await Promise.all(
-            roomRefs.map((roomRef) => getDoc(roomRef))
-          );
-
-          // const allRooms = roomDataList.map((roomSnap) => ({
-          //   id: roomSnap.id,
-          //   ...roomSnap.data()
-          // }));
-
-          console.log(roomDataList);
-
-          setActiveRooms([]);
-        }
+        setActiveRooms(createdRooms);
       } catch (err) {
         console.error('Error fetching user rooms:', err);
       }
@@ -82,9 +75,11 @@ const Dashboard = () => {
         </section>
         <section className='mt-8'>
           <h2>Your Active Rooms</h2>
-          {activeRooms.map((room) => (
-            <ActiveRoom roomData={room} />
-          ))}
+          <div className='flex gap-4'>
+            {activeRooms.map((room) => (
+              <ActiveRoom roomData={room} />
+            ))}
+          </div>
         </section>
       </div>
     </>

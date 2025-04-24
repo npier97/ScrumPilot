@@ -38,8 +38,8 @@ const Footer = ({
 
     if (isAdmin) {
       await updateDoc(roomRef, {
-        name: roomName,
-        createdBy: newParticipantName
+        uid: roomUid,
+        name: roomName
       });
     }
     const docRef = await addDoc(

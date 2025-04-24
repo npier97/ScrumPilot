@@ -1,4 +1,5 @@
 export interface RoomProps {
+  uid: string;
   createdAt: Date;
   createdBy: string;
   name: string;
@@ -47,8 +48,4 @@ export interface CardProps {
 export interface EditProfileProps {
   isOpen: boolean;
   toggleVisibility: (bool: boolean) => void;
-}
-
-export interface ActiveRoomProps {
-  roomData: RoomProps;
 }
