@@ -11,10 +11,10 @@ const ActiveRoom = ({ roomData }: { roomData: DocumentData }) => {
   const handleJoinRoom = () => navigate({ to: `/join/${roomData.uid}` });
 
   return (
-    <div className='p-6 text-center rounded-xl border shadow-lg'>
-      <div>{roomData.name}</div>
+    <div className='max-w-[250px] mt-4 p-6 rounded-xl border shadow-lg'>
+      <h3 className='mb-4'>{roomData.name}</h3>
       <Button
-        className='bg-blue-600 cursor-pointer hover:bg-blue-500 md:max-w-[300px]'
+        className='w-full px-20 bg-blue-600 cursor-pointer hover:bg-blue-500'
         onClick={handleJoinRoom}
       >
         {t('subNavMessage2')}

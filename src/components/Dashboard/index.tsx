@@ -77,9 +77,11 @@ const Dashboard = () => {
         </section>
         <section className='mt-8'>
           <h2>Your Active Rooms</h2>
-          <div className='flex gap-4'>
+          <div className='grid gap-2 grid-cols-1 sm:flex sm:flex-wrap'>
             {activeRooms.length !== 0 ? (
-              activeRooms.map((room) => <ActiveRoom roomData={room} />)
+              activeRooms.map((room, index) => (
+                <ActiveRoom key={`${room.name}-${index}`} roomData={room} />
+              ))
             ) : (
               <p className={`pt-2 ${error && 'text-red-600'}`}>
                 {error || t('dashboard.noRoomsCreated')}
