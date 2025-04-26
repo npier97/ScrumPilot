@@ -1,6 +1,7 @@
 import { OnBoardingMessage } from '@/types/Dashboard';
 import hackerImage from '../../../public/hacker.png';
 
+// TODO: take and set animate pictures from dashboard navigation
 const showCases = [
   hackerImage,
   hackerImage,
@@ -34,6 +35,11 @@ const onBoardingMessages: OnBoardingMessage[] = [
     stepTitle: 'onBoarding.step5.title',
     stepDescription: 'onBoarding.step5.description',
     stepShowcase: showCases[4]
+  },
+  {
+    stepTitle: 'onBoarding.step5.title',
+    stepDescription: 'onBoarding.step5.description',
+    stepShowcase: showCases[5]
   }
 ];
 
