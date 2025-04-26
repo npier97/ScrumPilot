@@ -17,6 +17,7 @@ import OnBoardingFooter from './OnBoardingFooter';
 import { useUserStore } from '@/store';
 import { useStore } from 'zustand';
 import { updateUserInDataBase } from '@/services/userServices';
+import UiStepIndicators from './UiStepIndicators';
 
 const OnBoarding = () => {
   const { t } = useTranslation();
@@ -56,26 +57,23 @@ const OnBoarding = () => {
         <Button onClick={() => setIsOpen(true)}>{t('seeTutorial')}</Button>
       </DialogTrigger>
 
-      <DialogContent className='duration-700 ease-out w-full lg:max-w-[60%]! '>
+      <DialogContent className='duration-700 ease-out w-full max-md:max-h-[80vh] max-w-[80%]! md:max-w-[60%]! '>
         <DialogHeader className=''>
-          <DialogTitle asChild className='text-center text-3xl font-bold'>
+          <DialogTitle
+            asChild
+            className='text-center text-xl md:text-3xl font-bold'
+          >
             <h1>{t('onBoarding.title')}</h1>
           </DialogTitle>
-          <DialogDescription className='text-center font-bold'>
+          <DialogDescription className='text-center font-bold md:text-base'>
             {t('onBoarding.description')}
           </DialogDescription>
 
-          <div className='flex items-center justify-center space-x-2 mt-5'>
-            {Array.from({ length: onBoardingMessages.length }).map((_, idx) => (
-              <Button
-                key={`onBoarding-carousel-button-${idx}`}
-                size={'sm'}
-                variant={'default'}
-                onClick={() => setIndex(idx)}
-                className={`p-0 size-2 rounded-full ${idx === index ? 'bg-primary' : 'bg-gray-300'}`}
-              />
-            ))}
-          </div>
+          <UiStepIndicators
+            stepItems={onBoardingMessages}
+            shiftIndex={setIndex}
+            currentIndex={index}
+          />
         </DialogHeader>
 
         <OnBoardingStep

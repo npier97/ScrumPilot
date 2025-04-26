@@ -94,6 +94,7 @@
     "skipTour": "Passer l'onboarding",
     "nextStep": "Étape Suivante",
     "close": "Fermer",
+    "finish": "C'est parti !",
     "step1": {
       "title": "Étape 1 : Créez votre salle",
       "description": "Cliquez sur le bouton 'Créer une salle', configurez les paramètres comme le nom, la méthode de vote et le minuteur, puis finalisez en cliquant sur 'Créer'."

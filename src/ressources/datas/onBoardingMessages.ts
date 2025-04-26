@@ -7,6 +7,7 @@ const showCases = [
   hackerImage,
   hackerImage,
   hackerImage,
+  hackerImage,
   hackerImage
 ];
 

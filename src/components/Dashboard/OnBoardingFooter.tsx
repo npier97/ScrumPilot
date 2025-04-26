@@ -13,20 +13,20 @@ const OnBoardingFooter = ({
   const { t } = useTranslation();
 
   return (
-    <DialogFooter className='relative'>
+    <DialogFooter className='relative max-md:flex-row max-md:justify-center min-h-[36px] sm:justify-center'>
       {index > 0 && (
         <Button
           onClick={decrementStepIndex}
-          className='text-xs text-primary absolute bottom-0 left-0'
+          className={`text-primary md:absolute bottom-0 left-0 max-md:text-xs md:pl-0! ${index >= onBoardingMessages.length - 1 && 'max-md:mr-auto'}`}
           variant='ghost'
         >
-          <StepBack />
+          <StepBack className='size-4' />
           {t('onBoarding.stepBack')}
         </Button>
       )}
-      <DialogClose onClick={closeDialog} asChild className='mx-auto text-xs'>
+      <DialogClose onClick={closeDialog} asChild className='md:mx-auto text-xs'>
         {index < onBoardingMessages.length - 1 && (
-          <Button variant='ghost'>
+          <Button variant='ghost' className='text-gray-500 font-semibold'>
             {t('onBoarding.skipTour')}
             <X />
           </Button>
