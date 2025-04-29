@@ -25,12 +25,16 @@ const OnBoarding = () => {
   const userInfos = useStore(useUserStore, (state) => state.userInfos);
   const [index, setIndex] = useState(0);
 
+  const completeOnboarding = async () => {
+    if (userInfos?.isNewUser) {
+      await updateUserInDataBase(userInfos.uid, { isNewUser: false });
+    }
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     if (userInfos?.isNewUser) {
       setTimeout(() => setIsOpen(true), 1000);
-      (async () => {
-        await updateUserInDataBase(userInfos.uid, { isNewUser: false });
-      })();
     }
   }, [userInfos]);
 
@@ -67,7 +71,7 @@ const OnBoarding = () => {
           }
           messages={onBoardingMessages[index]}
           isLastStep={index === onBoardingMessages.length - 1}
-          closeProcess={() => setIsOpen(false)}
+          closeProcess={() => completeOnboarding()}
           resetProcess={() => setIndex(0)}
         />
 
@@ -75,7 +79,7 @@ const OnBoarding = () => {
           decrementStepIndex={() =>
             shiftStepValue('decrement', index, setIndex)
           }
-          closeDialog={() => setIsOpen(false)}
+          closeDialog={() => completeOnboarding()}
           index={index}
         />
       </DialogContent>

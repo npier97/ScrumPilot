@@ -7,7 +7,7 @@ import { useNavigate } from '@tanstack/react-router';
 import OnBoarding from './OnBoarding';
 
 const Dashboard = () => {
-  const { signOutUser, isAuthenticated } = useAuth();
+  const { disconnectUser, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Dashboard = () => {
     <>
       <OnBoarding />
       <h1>Welcome on your dashboard</h1>
-      <Button onClick={() => signOutUser()} variant='link'>
+      <Button onClick={() => disconnectUser()} variant='link'>
         {' '}
         signOut
         <DoorOpenIcon size={22} />

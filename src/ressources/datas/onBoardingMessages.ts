@@ -37,8 +37,8 @@ const onBoardingMessages: OnBoardingMessage[] = [
     stepShowcase: showCases[4]
   },
   {
-    stepTitle: 'onBoarding.step5.title',
-    stepDescription: 'onBoarding.step5.description',
+    stepTitle: 'onBoarding.step6.title',
+    stepDescription: 'onBoarding.step6.description',
     stepShowcase: showCases[5]
   }
 ];
