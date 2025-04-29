@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
-import { NumericActionProps } from '@/types/Dashboard';
+import { shiftStepValue } from '@/utils/helpers';
 import { onBoardingMessages } from '@/ressources/datas/onBoardingMessages';
 import OnBoardingStep from './OnBoardingStep';
 import OnBoardingFooter from './OnBoardingFooter';
@@ -33,21 +33,6 @@ const OnBoarding = () => {
       })();
     }
   }, [userInfos]);
-
-  const switchStepValue = (action: NumericActionProps) => {
-    switch (action) {
-      case 'increment':
-        if (index >= 0) {
-          setIndex((val) => (val += 1));
-        }
-        break;
-      case 'decrement':
-        if (index > 0) {
-          setIndex((val) => (val -= 1));
-        }
-        break;
-    }
-  };
 
   return (
     <Dialog open={isOpen}>
@@ -77,7 +62,9 @@ const OnBoarding = () => {
         </DialogHeader>
 
         <OnBoardingStep
-          incrementCurrentStepIndex={() => switchStepValue('increment')}
+          incrementCurrentStepIndex={() =>
+            shiftStepValue('increment', index, setIndex)
+          }
           messages={onBoardingMessages[index]}
           isLastStep={index === onBoardingMessages.length - 1}
           closeProcess={() => setIsOpen(false)}
@@ -85,7 +72,9 @@ const OnBoarding = () => {
         />
 
         <OnBoardingFooter
-          decrementStepIndex={() => switchStepValue('decrement')}
+          decrementStepIndex={() =>
+            shiftStepValue('decrement', index, setIndex)
+          }
           closeDialog={() => setIsOpen(false)}
           index={index}
         />

@@ -13,5 +13,5 @@ export type UserInfos = {
 export type UserStore = {
   userInfos: UserInfos;
   setUserInfos: (datas: UserInfos) => void;
-  checkoutUser: () => void;
+  signOutUser: () => void;
 };

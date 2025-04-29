@@ -21,5 +21,5 @@ export const useRoomStore = create<RoomStore>((set) => ({
 export const useUserStore = create<UserStore>((set) => ({
   userInfos: null,
   setUserInfos: (datas) => set({ userInfos: datas }),
-  checkoutUser: () => set({ userInfos: null })
+  signOutUser: () => set({ userInfos: null })
 }));

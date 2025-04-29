@@ -1,14 +1,13 @@
 import { OnBoardingMessage } from '@/types/Dashboard';
-import hackerImage from '../../../public/hacker.png';
 
 // TODO: take and set animate pictures from dashboard navigation
 const showCases = [
-  hackerImage,
-  hackerImage,
-  hackerImage,
-  hackerImage,
-  hackerImage,
-  hackerImage
+  '/hacker.png',
+  '/hacker.png',
+  '/hacker.png',
+  '/hacker.png',
+  '/hacker.png',
+  '/hacker.png'
 ];
 
 const onBoardingMessages: OnBoardingMessage[] = [

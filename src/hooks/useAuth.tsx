@@ -18,7 +18,7 @@ export const useAuth = () => {
   const auth = getAuth(app);
   const [user, setUser] = useState(auth.currentUser);
   const [isAuthenticated, setIsAuthenticated] = useState(!!user);
-  const checkoutUser = useStore(useUserStore, (state) => state.checkoutUser);
+  const signOutUser = useStore(useUserStore, (state) => state.signOutUser);
   const setUserInfos = useStore(useUserStore, (state) => state.setUserInfos);
 
   useEffect(() => {
@@ -51,12 +51,12 @@ export const useAuth = () => {
           setUserInfos(userData);
         } else {
           console.error('No user document found');
-          checkoutUser();
+          signOutUser();
         }
       });
       return () => unsub();
     } else {
-      checkoutUser();
+      signOutUser();
     }
     return () => {
       unsubscribe();
@@ -110,10 +110,10 @@ export const useAuth = () => {
     }
   };
 
-  const signOutUser = async () => {
+  const disconnectUser = async () => {
     try {
       await signOut(auth);
-      checkoutUser();
+      signOutUser();
     } catch (error) {
       if (error instanceof Error) {
         return { success: false, message: error.message };
@@ -123,7 +123,7 @@ export const useAuth = () => {
   return {
     connectUser,
     createUser,
-    signOutUser,
+    disconnectUser,
     user,
     isAuthenticated
   };
