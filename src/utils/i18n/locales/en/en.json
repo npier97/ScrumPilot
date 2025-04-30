@@ -86,5 +86,38 @@
     "users": {
       "estimate": "Average estimate"
     }
+  },
+  "onBoarding": {
+    "title": "Welcome to ScrumPilot ! 👋",
+    "description": "Let's get you started with a quick tour",
+    "stepBack": "Back",
+    "skipTour": "Skip tour",
+    "nextStep": "Next Step",
+    "finish": "Get started !",
+    "close": "Close",
+    "step1": {
+      "title": "Step 1: Create Your Room",
+      "description": "Click the 'Create Room' button, configure settings like name, voting method, and timer, then finalize by hitting 'Create'."
+    },
+    "step2": {
+      "title": "Step 2: Invite Your Team",
+      "description": "Copy the room link or send invitations directly via email or chat to quickly bring your team onboard."
+    },
+    "step3": {
+      "title": "Step 3: Add and Manage Tasks",
+      "description": "Manually add tasks or import them easily. Edit task details and descriptions to keep everything clear and organized."
+    },
+    "step4": {
+      "title": "Step 4: Estimate and Vote",
+      "description": "Team members select story points using methods like Fibonacci. Reveal, discuss, and finalize votes effortlessly."
+    },
+    "step5": {
+      "title": "Step 5: Learn and Grow",
+      "description": "Explore the Learning Hub to dive deeper into Agile practices and Scrum techniques with curated articles and resources."
+    },
+    "step6": {
+      "title": "Step 6: Get Started!",
+      "description": "You're ready! Click 'Start Using ScrumPilot' or revisit this onboarding anytime to sharpen your skills."
+    }
   }
 }

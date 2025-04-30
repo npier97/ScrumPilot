@@ -86,5 +86,38 @@
     "users": {
       "estimate": "Estimation moyenne"
     }
+  },
+  "onBoarding": {
+    "title": "Bienvenue sur ScrumPilot ! 👋",
+    "description": "Commençons par un rapide tour d'horizon",
+    "stepBack": "Retour",
+    "skipTour": "Passer l'onboarding",
+    "nextStep": "Étape Suivante",
+    "close": "Fermer",
+    "finish": "C'est parti !",
+    "step1": {
+      "title": "Étape 1 : Créez votre salle",
+      "description": "Cliquez sur le bouton 'Créer une salle', configurez les paramètres comme le nom, la méthode de vote et le minuteur, puis finalisez en cliquant sur 'Créer'."
+    },
+    "step2": {
+      "title": "Étape 2 : Invitez votre équipe",
+      "description": "Copiez le lien de la salle ou envoyez des invitations directement par email ou chat pour inviter rapidement votre équipe."
+    },
+    "step3": {
+      "title": "Étape 3 : Ajoutez et gérez les tâches",
+      "description": "Ajoutez des tâches manuellement ou importez-les facilement. Modifiez les détails et descriptions pour garder tout clair et organisé."
+    },
+    "step4": {
+      "title": "Étape 4 : Estimez et votez",
+      "description": "Les membres de l'équipe sélectionnent les points d'histoire avec des méthodes comme Fibonacci. Révélez, discutez et finalisez les votes facilement."
+    },
+    "step5": {
+      "title": "Étape 5 : Apprenez et progressez",
+      "description": "Explorez le Learning Hub pour approfondir vos connaissances sur les pratiques Agile et Scrum grâce à des articles et ressources sélectionnés."
+    },
+    "step6": {
+      "title": "Étape 6 : Lancez-vous !",
+      "description": "Vous êtes prêt ! Cliquez sur 'Commencer à utiliser ScrumPilot' ou revenez à cet onboarding à tout moment pour perfectionner vos compétences."
+    }
   }
 }

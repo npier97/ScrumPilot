@@ -10,17 +10,22 @@ import { AuthFormSchemaType } from '../../zod.schemas';
 import { t } from 'i18next';
 import { useState, useEffect } from 'react';
 import { db } from '@/firebase-config';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, setDoc, serverTimestamp, onSnapshot } from 'firebase/firestore';
+import { useUserStore } from '@/store';
+import { useStore } from 'zustand';
 
 export const useAuth = () => {
   const auth = getAuth(app);
   const [user, setUser] = useState(auth.currentUser);
   const [isAuthenticated, setIsAuthenticated] = useState(!!user);
+  const signOutUser = useStore(useUserStore, (state) => state.signOutUser);
+  const setUserInfos = useStore(useUserStore, (state) => state.setUserInfos);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         // keep sync user auth instance with user db critical datas
+        // note: fired only on login and logout
         const { uid, email } = currentUser;
         const userDoc = doc(db, 'users', uid);
         await setDoc(
@@ -37,8 +42,26 @@ export const useAuth = () => {
       setIsAuthenticated(!!currentUser);
     });
 
-    return () => unsubscribe();
-  }, [auth]);
+    // observes user in DB so datas stay up to date
+    if (user) {
+      const docRef = doc(db, 'users', user.uid);
+      const unsub = onSnapshot(docRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          setUserInfos(userData);
+        } else {
+          console.error('No user document found');
+          signOutUser();
+        }
+      });
+      return () => unsub();
+    } else {
+      signOutUser();
+    }
+    return () => {
+      unsubscribe();
+    };
+  }, [auth, user]);
 
   const connectUser = async ({ email, password }: AuthFormSchemaType) => {
     try {
@@ -68,7 +91,8 @@ export const useAuth = () => {
             email,
             uid,
             createdAt: serverTimestamp(),
-            rooms: []
+            rooms: [],
+            isNewUser: true
           });
           return { success: true, message: 'new user created successfully' };
         } else throw Error(`${create.operationType} failed`);
@@ -86,20 +110,20 @@ export const useAuth = () => {
     }
   };
 
-  const signOutUser = async () => {
+  const disconnectUser = async () => {
     try {
       await signOut(auth);
+      signOutUser();
     } catch (error) {
       if (error instanceof Error) {
         return { success: false, message: error.message };
       }
     }
   };
-
   return {
     connectUser,
     createUser,
-    signOutUser,
+    disconnectUser,
     user,
     isAuthenticated
   };

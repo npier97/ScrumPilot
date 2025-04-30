@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { ParticipantStore, RoomStore, UsersCardsStore } from './types/Store';
+import { UserStore } from './types/User';
 
 export const useParticipantStore = create<ParticipantStore>((set) => ({
   participantId: '',
@@ -15,4 +16,10 @@ export const useUsersCardsStore = create<UsersCardsStore>((set) => ({
 export const useRoomStore = create<RoomStore>((set) => ({
   roomId: '',
   setRoomId: (id: string) => set({ roomId: id })
+}));
+
+export const useUserStore = create<UserStore>((set) => ({
+  userInfos: null,
+  setUserInfos: (datas) => set({ userInfos: datas }),
+  signOutUser: () => set({ userInfos: null })
 }));
