@@ -1,12 +1,28 @@
+import { db } from '@/firebase-config';
+import { useAuth } from '@/hooks/useAuth';
 import { RoomSettingsProps } from '@/types/Dashboard';
+import { deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { Settings } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const RoomSettings = ({ roomId, activeRoom, onToggle }: RoomSettingsProps) => {
   const { t } = useTranslation();
+  const { user } = useAuth();
 
-  const handleDeleteRoom = () => {
-    console.log(`Room ${roomId} deleted`);
+  const handleDeleteRoom = async () => {
+    if (user?.uid) {
+      const userDocRef = doc(db, 'users', user.uid);
+      const userSnapshot = await getDoc(userDocRef);
+
+      if (userSnapshot.exists()) {
+        const existingRooms = userSnapshot.data().rooms || [];
+        const updatedRooms = existingRooms.filter(
+          (id: string) => id !== roomId
+        );
+        await updateDoc(userDocRef, { rooms: updatedRooms });
+      }
+    }
+    await deleteDoc(doc(db, 'rooms', roomId));
   };
 
   return (
