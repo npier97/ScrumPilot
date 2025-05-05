@@ -118,11 +118,11 @@
     "step6": {
       "title": "Étape 6 : Lancez-vous !",
       "description": "Vous êtes prêt ! Cliquez sur 'Commencer à utiliser ScrumPilot' ou revenez à cet onboarding à tout moment pour perfectionner vos compétences."
-    },
-    "dashboard": {
-      "welcome": "Bienvenue sur votre tableau de bord!",
-      "noRoomsCreated": "Aucune salle créée, démarrez une nouvelle salle !",
-      "noRoomsError": "Erreur lors de la récupération des salles utilisateur"
     }
+  },
+  "dashboard": {
+    "welcome": "Bienvenue sur votre tableau de bord!",
+    "noRoomsCreated": "Aucune salle créée, démarrez une nouvelle salle !",
+    "noRoomsError": "Erreur lors de la récupération des salles utilisateur"
   }
 }
