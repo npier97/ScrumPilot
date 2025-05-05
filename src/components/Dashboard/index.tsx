@@ -6,7 +6,7 @@ import { useNavigate } from '@tanstack/react-router';
 import OnBoarding from './OnBoarding';
 import { useTranslation } from 'react-i18next';
 import { useCreateRoom } from '@/hooks/useCreateRoom';
-import ActiveRoom from './ActiveRoom';
+import ActiveRooms from './ActiveRooms';
 import DashSidebar from './Sidebar';
 import {
   collection,
@@ -16,6 +16,7 @@ import {
   where
 } from 'firebase/firestore';
 import { db } from '@/firebase-config';
+import InvitationLink from './InvitationLink';
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -54,12 +55,12 @@ const Dashboard = () => {
 
   return (
     <>
-      <OnBoarding />
       <DashSidebar />
       <div className='p-4 w-full flex flex-col'>
         <section className='mt-4'>
           <div className='flex justify-between'>
-            <h1>{t('dashboard.welcome')}</h1>
+            <h1 className='font-bold'>{t('dashboard.welcome')}</h1>
+            <OnBoarding />
             <Button onClick={() => disconnectUser()} variant='link'>
               {' '}
               signOut
@@ -75,20 +76,8 @@ const Dashboard = () => {
             <Plus aria-hidden='true' />
           </Button>
         </section>
-        <section className='mt-8'>
-          <h2>Your Active Rooms</h2>
-          <div className='grid gap-2 grid-cols-1 sm:flex sm:flex-wrap'>
-            {activeRooms.length !== 0 ? (
-              activeRooms.map((room, index) => (
-                <ActiveRoom key={`${room.name}-${index}`} roomData={room} />
-              ))
-            ) : (
-              <p className={`pt-2 ${error && 'text-red-600'}`}>
-                {error || t('dashboard.noRoomsCreated')}
-              </p>
-            )}
-          </div>
-        </section>
+        <ActiveRooms activeRooms={activeRooms} error={error} />
+        <InvitationLink activeRooms={activeRooms} />
       </div>
     </>
   );

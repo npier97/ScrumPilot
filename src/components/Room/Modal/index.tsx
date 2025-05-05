@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import InputField from './InputField';
 import Footer from './Footer';
 import { useAuth } from '@/hooks/useAuth';
+import { useParticipantStore } from '@/store';
 
 const Modal = ({
   path,
@@ -24,7 +25,8 @@ const Modal = ({
   const [roomName, setRoomName] = useState('');
   const [isModalVisible, setModalVisibility] = useState(true);
   const [participantName, setParticipantName] = useState('');
-  const showModal = !user?.uid && participantName.trim() !== '';
+  const participantId = useParticipantStore((state) => state.setParticipantUid);
+  const showModal = !user?.uid && !participantId;
   const isAdminLink = path === 'rooms';
 
   useEffect(() => {
