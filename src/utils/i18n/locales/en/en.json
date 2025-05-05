@@ -123,6 +123,12 @@
   "dashboard": {
     "welcome": "Welcome on your dashboard!",
     "noRoomsError": "Error fetching user rooms",
-    "noRoomsCreated": "No rooms created, start a new room!"
+    "noRoomsCreated": "No rooms created, start a new room!",
+    "activeRooms": "Your Active Rooms",
+    "invitationLink": {
+      "title": "Invite to Scrum Room",
+      "description": "Share this link with your team members to join the voting session",
+      "buttonText": "Copy Link"
+    }
   }
 }

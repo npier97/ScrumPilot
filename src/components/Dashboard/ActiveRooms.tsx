@@ -12,7 +12,7 @@ const ActiveRooms = ({ activeRooms, error }: ActiveRoomsProps) => {
 
   return (
     <section className='mt-8'>
-      <h2 className='font-bold'>Your Active Rooms</h2>
+      <h2 className='font-bold'>{t('dashboard.activeRooms')}</h2>
       <div className='grid gap-2 grid-cols-1 sm:flex sm:flex-wrap'>
         {activeRooms.length !== 0 ? (
           activeRooms.map((room, index) => (

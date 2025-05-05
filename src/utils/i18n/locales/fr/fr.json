@@ -123,6 +123,12 @@
   "dashboard": {
     "welcome": "Bienvenue sur votre tableau de bord!",
     "noRoomsCreated": "Aucune salle créée, démarrez une nouvelle salle !",
-    "noRoomsError": "Erreur lors de la récupération des salles utilisateur"
+    "noRoomsError": "Erreur lors de la récupération des salles utilisateur",
+    "activeRooms": "Your Active Rooms",
+    "invitationLink": {
+      "title": "Inviter à la salle Scrum",
+      "description": "Partagez ce lien avec les membres de votre équipe pour rejoindre la session",
+      "buttonText": "Copier le lien"
+    }
   }
 }

@@ -6,23 +6,23 @@ import { toast } from 'sonner';
 
 const InvitationLink = ({ activeRooms }: InvitationLinkType) => {
   const { t } = useTranslation();
+  const link = `${window.location.origin}/join/${activeRooms[0]?.uid}`;
 
   const handleInviteOnClick = () => {
-    const link = `${window.location.origin}/join/${activeRooms[0].uid}`;
     navigator.clipboard.writeText(link);
     toast.success(t('room.copied'));
   };
 
   return (
     <section className='mt-8 p-6 rounded-xl border shadow-lg'>
-      <h2 className='mb-4 font-bold'>Invite to Scrum Room</h2>
+      <h2 className='mb-4 font-bold'>{t('dashboard.invitationLink.title')}</h2>
       <p className='mb-2 font-semibold text-gray-500'>
-        Share this link with your team members to join the voting session
+        {t('dashboard.invitationLink.description')}
       </p>
       <div className='flex flex-col gap-2 md:flex-row md:justify-between'>
         <input
           type='text'
-          value={`${window.location.origin}/join/${activeRooms[0].uid}`}
+          value={link}
           className='w-full border p-2 rounded-lg bg-gray-100 text-sm'
           aria-label='Invitation link'
           readOnly
@@ -34,7 +34,7 @@ const InvitationLink = ({ activeRooms }: InvitationLinkType) => {
           aria-label='Copy invitation link'
         >
           <Copy />
-          Copy Link
+          {t('dashboard.invitationLink.buttonText')}
         </Button>
       </div>
     </section>
