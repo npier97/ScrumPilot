@@ -1,5 +1,5 @@
 import { ModalProps } from '@/types/Room';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -10,13 +10,36 @@ import {
 import { useTranslation } from 'react-i18next';
 import InputField from './InputField';
 import Footer from './Footer';
+import { useAuth } from '@/hooks/useAuth';
 
-const Modal = ({ path, room, roomUid }: ModalProps) => {
+const Modal = ({
+  path,
+  room,
+  participants,
+  roomUid,
+  adminUserUid
+}: ModalProps) => {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [roomName, setRoomName] = useState('');
   const [isModalVisible, setModalVisibility] = useState(true);
   const [participantName, setParticipantName] = useState('');
+  const showModal = !user?.uid && participantName.trim() !== '';
   const isAdminLink = path === 'rooms';
+
+  useEffect(() => {
+    if (!user?.uid) return;
+
+    const hasCurrentUserJoined = participants.some(
+      (obj) => obj.uid === user?.uid
+    );
+
+    if (hasCurrentUserJoined) {
+      setModalVisibility(false);
+    }
+  }, [roomUid, participants, user?.uid]);
+
+  if (showModal) return null;
 
   return (
     <Dialog open={isModalVisible}>
@@ -47,6 +70,7 @@ const Modal = ({ path, room, roomUid }: ModalProps) => {
           isAdmin={isAdminLink}
           room={room}
           roomUid={roomUid}
+          adminUserUid={adminUserUid}
           roomName={roomName}
           participantName={participantName}
           setModalVisibility={setModalVisibility}

@@ -10,10 +10,15 @@ export interface RoomProps {
 export interface ModalProps {
   path: string;
   room: RoomType;
+  participants: ParticipantsType[];
   roomUid: string;
+  adminUserUid: string;
 }
 
-export type ModalFooterProps = Pick<ModalProps, 'room' | 'roomUid'> & {
+export type ModalFooterProps = Pick<
+  ModalProps,
+  'room' | 'roomUid' | 'adminUserUid'
+> & {
   isAdmin: boolean;
   roomName: string;
   participantName: string;

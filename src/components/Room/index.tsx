@@ -18,6 +18,7 @@ const RoomPage = () => {
   const path = location.pathname.includes('rooms') ? 'rooms' : 'join';
   const { roomId } = useParams({ from: `/${path}/$roomId` });
   const [room, setRoom] = useState<RoomType>(null);
+  const [adminUserUid, setAdminUserUid] = useState<string>('');
   const [participants, setParticipants] = useState<ParticipantsType[]>([]);
   const setIsCardRevealed = useUsersCardsStore((state) => state.setIsRevealed);
   const setRoomUid = useRoomStore((state) => state.setRoomUid);
@@ -38,8 +39,10 @@ const RoomPage = () => {
       if (roomSnap.exists()) {
         setRoom(roomSnap.data() as RoomProps);
         setIsCardRevealed(roomSnap.data().isVoteRevealed);
+        setAdminUserUid(roomSnap.data().createdBy);
       }
     });
+
     const unsubscribeParticipants = onSnapshot(participantsRef, (snapshot) => {
       const updatedParticipants = snapshot.docs.map((doc) => {
         const data = doc.data();
@@ -82,7 +85,13 @@ const RoomPage = () => {
           <p>{t('room.loading')}</p>
         )}
       </div>
-      <Modal path={path} room={room} roomUid={roomId} />
+      <Modal
+        path={path}
+        room={room}
+        participants={participants}
+        roomUid={roomId}
+        adminUserUid={adminUserUid}
+      />
     </>
   );
 };

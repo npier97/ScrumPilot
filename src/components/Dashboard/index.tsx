@@ -24,7 +24,7 @@ const Dashboard = () => {
   const [activeRooms, setActiveRooms] = useState<DocumentData[]>([]);
 
   const { createNewRoom } = useCreateRoom();
-  const { disconnectUser, isAuthenticated } = useAuth();
+  const { disconnectUser, isAuthenticated, user } = useAuth();
 
   const handleClick = () => createNewRoom();
 
@@ -50,7 +50,7 @@ const Dashboard = () => {
     };
 
     fetchUserRooms();
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, user]);
 
   return (
     <>
