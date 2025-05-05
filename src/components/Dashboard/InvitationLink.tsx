@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { InvitationLinkType } from '@/types/Room';
+import { InvitationLinkType } from '@/types/Dashboard';
 import { Copy } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';

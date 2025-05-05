@@ -2,10 +2,10 @@
   "logIn": "Connexion",
   "signUp": "S'inscrire",
   "subNavMessage1": "Entrez numero de session",
-  "subNavMessage2": "Rejoindre une salle",
+  "subNavMessage2": "Rejoindre une room",
   "heroTitle": "Rationalisez Vos Réunions Scrum",
-  "heroSubTitle": "Connectez-vous avec votre équipe. Créez ou rejoignez une salle pour rendre vos réunions quotidiennes plus efficaces.",
-  "heroCTAMessage": "Démarrez une salle",
+  "heroSubTitle": "Connectez-vous avec votre équipe. Créez ou rejoignez une room pour rendre vos réunions quotidiennes plus efficaces.",
+  "heroCTAMessage": "Démarrez une room",
   "heroImageAltMessage": "Personnes en réunion",
   "featureMessage1": "Réunions efficaces en temps",
   "featureMessage2": "Vos réunions plus productives avec des minuteries et des invitations intégrées.",
@@ -74,7 +74,7 @@
       "update": "Entrez votre nom mis à jour",
       "error": {
         "username": "Veuillez entrer votre nom.",
-        "roomName": "Veuillez entrer un nom de salle."
+        "roomName": "Veuillez entrer un nom de room."
       }
     },
     "vote": {
@@ -96,12 +96,12 @@
     "close": "Fermer",
     "finish": "C'est parti !",
     "step1": {
-      "title": "Étape 1 : Créez votre salle",
-      "description": "Cliquez sur le bouton 'Créer une salle', configurez les paramètres comme le nom, la méthode de vote et le minuteur, puis finalisez en cliquant sur 'Créer'."
+      "title": "Étape 1 : Créez votre room",
+      "description": "Cliquez sur le bouton 'Créer une room', configurez les paramètres comme le nom, la méthode de vote et le minuteur, puis finalisez en cliquant sur 'Créer'."
     },
     "step2": {
       "title": "Étape 2 : Invitez votre équipe",
-      "description": "Copiez le lien de la salle ou envoyez des invitations directement par email ou chat pour inviter rapidement votre équipe."
+      "description": "Copiez le lien de la room ou envoyez des invitations directement par email ou chat pour inviter rapidement votre équipe."
     },
     "step3": {
       "title": "Étape 3 : Ajoutez et gérez les tâches",
@@ -122,11 +122,14 @@
   },
   "dashboard": {
     "welcome": "Bienvenue sur votre tableau de bord!",
-    "noRoomsCreated": "Aucune salle créée, démarrez une nouvelle salle !",
-    "noRoomsError": "Erreur lors de la récupération des salles utilisateur",
-    "activeRooms": "Your Active Rooms",
+    "noRoomsCreated": "Aucune room créée, démarrez une nouvelle room !",
+    "noRoomsError": "Erreur lors de la récupération des rooms utilisateur",
+    "activeRooms": {
+      "title": "Vos Rooms Active",
+      "delete": "Supprimer"
+    },
     "invitationLink": {
-      "title": "Inviter à la salle Scrum",
+      "title": "Inviter à la room Scrum",
       "description": "Partagez ce lien avec les membres de votre équipe pour rejoindre la session",
       "buttonText": "Copier le lien"
     }

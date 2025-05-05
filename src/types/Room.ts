@@ -1,5 +1,3 @@
-import { DocumentData } from 'firebase/firestore';
-
 export interface RoomProps {
   uid: string;
   createdAt: Date;
@@ -56,10 +54,3 @@ export interface EditProfileProps {
   isOpen: boolean;
   toggleVisibility: (bool: boolean) => void;
 }
-
-export interface ActiveRoomsProps {
-  activeRooms: DocumentData[];
-  error: string | null;
-}
-
-export type InvitationLinkType = Pick<ActiveRoomsProps, 'activeRooms'>;
