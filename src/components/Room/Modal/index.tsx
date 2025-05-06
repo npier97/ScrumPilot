@@ -25,23 +25,20 @@ const Modal = ({
   const [roomName, setRoomName] = useState('');
   const [isModalVisible, setModalVisibility] = useState(true);
   const [participantName, setParticipantName] = useState('');
-  const participantId = useParticipantStore((state) => state.setParticipantUid);
-  const showModal = !user?.uid && !participantId;
+  const participantId = useParticipantStore((state) => state.participantUid);
   const isAdminLink = path === 'rooms';
 
   useEffect(() => {
-    if (!user?.uid) return;
+    if (!participants && (!user?.uid || !participantId)) return;
 
     const hasCurrentUserJoined = participants.some(
-      (obj) => obj.uid === user?.uid
+      (obj) => obj.uid === (user?.uid || participantId)
     );
 
-    if (hasCurrentUserJoined) {
-      setModalVisibility(false);
-    }
-  }, [roomUid, participants, user?.uid]);
+    if (hasCurrentUserJoined) setModalVisibility(false);
+  }, [participants, user?.uid, participantId]);
 
-  if (showModal) return null;
+  if (!isModalVisible) return null;
 
   return (
     <Dialog open={isModalVisible}>

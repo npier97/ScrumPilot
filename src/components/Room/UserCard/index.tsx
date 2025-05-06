@@ -1,4 +1,4 @@
-import { useUsersCardsStore } from '@/store';
+import { useParticipantStore, useUsersCardsStore } from '@/store';
 import { ParticipantsType } from '@/types/Room';
 import { useTranslation } from 'react-i18next';
 import EditProfileCard from './EditProfileCard';
@@ -8,6 +8,7 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const isCardRevealed = useUsersCardsStore((state) => state.isRevealed);
+  const participantId = useParticipantStore((state) => state.participantUid);
   const totalVotes = participants.reduce(
     (accumulator, currentValue) => accumulator + currentValue.vote,
     0
@@ -30,7 +31,8 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
       <hr className='my-6 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
       <div className='flex flex-wrap justify-center gap-8'>
         {participants.map((participant) => {
-          const isCurrentUser = user?.uid === participant.uid;
+          const isCurrentUser =
+            (user?.uid || participantId) === participant.uid;
           return (
             <div
               className='flex flex-col items-center'

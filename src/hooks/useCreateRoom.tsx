@@ -17,9 +17,10 @@ export const useCreateRoom = () => {
 
   const createNewRoom = async () => {
     try {
+      const guestUid = crypto.randomUUID();
       const roomRef = await addDoc(collection(db, 'rooms'), {
         name: 'New Room',
-        createdBy: user?.uid || '',
+        createdBy: user?.uid || guestUid,
         createdAt: serverTimestamp(),
         isVoteRevealed: false
       });

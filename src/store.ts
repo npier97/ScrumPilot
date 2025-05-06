@@ -6,12 +6,20 @@ import {
   UsersCardsStore
 } from './types/Store';
 import { UserStore } from './types/User';
+import { persist } from 'zustand/middleware';
 
-export const useParticipantStore = create<ParticipantStore>((set) => ({
-  participantUid: '',
-  vote: null,
-  setParticipantUid: (uid: string) => set({ participantUid: uid })
-}));
+export const useParticipantStore = create<ParticipantStore>()(
+  persist(
+    (set) => ({
+      participantUid: '',
+      vote: null,
+      setParticipantUid: (uid: string) => set({ participantUid: uid })
+    }),
+    {
+      name: 'sp-participant'
+    }
+  )
+);
 
 export const useUsersCardsStore = create<UsersCardsStore>((set) => ({
   isRevealed: false,
