@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 
 const InvitationLink = ({ activeRooms }: InvitationLinkType) => {
   const { t } = useTranslation();
+  const hasActiveRooms = activeRooms?.length;
   const link = `${window.location.origin}/join/${activeRooms[0]?.uid}`;
 
   const handleInviteOnClick = () => {
@@ -22,15 +23,16 @@ const InvitationLink = ({ activeRooms }: InvitationLinkType) => {
       <div className='flex flex-col gap-2 md:flex-row md:justify-between'>
         <input
           type='text'
-          value={link}
+          value={hasActiveRooms ? link : ''}
           className='w-full border p-2 rounded-lg bg-gray-100 text-sm'
           aria-label='Invitation link'
+          disabled={!hasActiveRooms}
           readOnly
         />
         <Button
           className='w-full px-20 bg-blue-600 cursor-pointer hover:bg-blue-500  md:max-w-[150px]'
           onClick={handleInviteOnClick}
-          disabled={!activeRooms?.length}
+          disabled={!hasActiveRooms}
           aria-label='Copy invitation link'
         >
           <Copy />

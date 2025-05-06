@@ -51,7 +51,7 @@ const Dashboard = () => {
     };
 
     fetchUserRooms();
-  }, [isAuthenticated, navigate, user]);
+  }, [isAuthenticated, navigate, user, activeRooms]);
 
   return (
     <>
