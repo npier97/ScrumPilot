@@ -1,6 +1,6 @@
 import { FilePenLine } from 'lucide-react';
 import { useState } from 'react';
-import EditProfileModal from './EditProfleModal';
+import EditProfileModal from './EditProfileModal';
 
 const EditProfileCard = () => {
   const [isModalVisible, setModalVisibility] = useState(false);

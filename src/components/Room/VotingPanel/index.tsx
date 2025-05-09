@@ -14,21 +14,21 @@ import { useParticipantStore, useUsersCardsStore } from '@/store';
 import { useState } from 'react';
 import Card from './Card';
 
-const VotingPanel = ({ roomId }: VotingPanelType) => {
+const VotingPanel = ({ roomUid }: VotingPanelType) => {
   const { t } = useTranslation();
   const [selectedNumber, setSelectedNumber] = useState<number | null>(null);
-  const participantId = useParticipantStore((state) => state.participantId);
+  const participantId = useParticipantStore((state) => state.participantUid);
   const setIsCardRevealed = useUsersCardsStore((state) => state.setIsRevealed);
 
   const handleCardClick = async (number: number) => {
     setSelectedNumber(number);
-    await updateDoc(doc(db, 'rooms', roomId, 'participants', participantId), {
+    await updateDoc(doc(db, 'rooms', roomUid, 'participants', participantId), {
       vote: number
     });
   };
 
   const handleResetClick = async () => {
-    const participantsRef = collection(db, 'rooms', roomId, 'participants');
+    const participantsRef = collection(db, 'rooms', roomUid, 'participants');
     const snapshot = await getDocs(participantsRef);
 
     await Promise.all(
@@ -37,7 +37,7 @@ const VotingPanel = ({ roomId }: VotingPanelType) => {
   };
 
   const handleRevealClick = async () => {
-    const roomRef = doc(db, 'rooms', roomId);
+    const roomRef = doc(db, 'rooms', roomUid);
     const roomSnap = await getDoc(roomRef);
 
     if (!roomSnap.exists()) return;

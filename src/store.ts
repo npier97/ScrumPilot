@@ -1,12 +1,25 @@
 import { create } from 'zustand';
-import { ParticipantStore, RoomStore, UsersCardsStore } from './types/Store';
+import {
+  GuestStore,
+  ParticipantStore,
+  RoomStore,
+  UsersCardsStore
+} from './types/Store';
 import { UserStore } from './types/User';
+import { persist } from 'zustand/middleware';
 
-export const useParticipantStore = create<ParticipantStore>((set) => ({
-  participantId: '',
-  vote: null,
-  setParticipantId: (id: string) => set({ participantId: id })
-}));
+export const useParticipantStore = create<ParticipantStore>()(
+  persist(
+    (set) => ({
+      participantUid: '',
+      vote: null,
+      setParticipantUid: (uid: string) => set({ participantUid: uid })
+    }),
+    {
+      name: 'sp-participant'
+    }
+  )
+);
 
 export const useUsersCardsStore = create<UsersCardsStore>((set) => ({
   isRevealed: false,
@@ -14,8 +27,13 @@ export const useUsersCardsStore = create<UsersCardsStore>((set) => ({
 }));
 
 export const useRoomStore = create<RoomStore>((set) => ({
-  roomId: '',
-  setRoomId: (id: string) => set({ roomId: id })
+  roomUid: '',
+  setRoomUid: (uid: string) => set({ roomUid: uid })
+}));
+
+export const useGuestStore = create<GuestStore>((set) => ({
+  guestUid: '',
+  setGuestUid: (uid: string) => set({ guestUid: uid })
 }));
 
 export const useUserStore = create<UserStore>((set) => ({

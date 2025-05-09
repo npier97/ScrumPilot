@@ -3,15 +3,16 @@ import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import LanguageDropdown from '@/components/LanguageDropdown';
 import { useState } from 'react';
-import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import { collection, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { useParticipantStore } from '@/store';
 import { db } from '@/firebase-config';
 import { useTranslation } from 'react-i18next';
 
 const Footer = ({
   isAdmin,
+  adminUserUid,
   room,
-  roomId,
+  roomUid,
   roomName,
   participantName,
   setModalVisibility
@@ -19,7 +20,7 @@ const Footer = ({
   const { t } = useTranslation();
   const [error, setError] = useState('');
   const setParticipantId = useParticipantStore(
-    (state) => state.setParticipantId
+    (state) => state.setParticipantUid
   );
 
   const handleJoinRoom = async (room: RoomType, newParticipantName: string) => {
@@ -34,23 +35,39 @@ const Footer = ({
     }
     setError('');
 
-    const roomRef = doc(db, 'rooms', roomId);
-
     if (isAdmin) {
+      const roomRef = doc(db, 'rooms', roomUid);
+      const adminRef = doc(
+        db,
+        'rooms',
+        roomRef.id,
+        'participants',
+        adminUserUid
+      );
       await updateDoc(roomRef, {
-        name: roomName,
-        createdBy: newParticipantName
+        uid: roomUid,
+        name: roomName
       });
-    }
-    const docRef = await addDoc(
-      collection(db, 'rooms', roomRef.id, 'participants'),
-      {
+      await setDoc(adminRef, {
+        uid: adminUserUid,
         avatar: '',
         name: newParticipantName,
         vote: null
-      }
-    );
-    setParticipantId(docRef.id);
+      });
+      setParticipantId(adminUserUid);
+    }
+    if (!isAdmin) {
+      const participantDocRef = doc(
+        collection(db, 'rooms', roomUid, 'participants')
+      );
+      await setDoc(participantDocRef, {
+        uid: participantDocRef.id,
+        avatar: '',
+        name: newParticipantName,
+        vote: null
+      });
+      setParticipantId(participantDocRef.id);
+    }
     setModalVisibility(false);
   };
 
