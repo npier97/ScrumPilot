@@ -21,7 +21,7 @@
 
 ## Tech Stack
 
-- **Frontend:** React, TypeScript, TailwindCSS, Shadecn, TanStack Router
+- **Frontend:** React, TypeScript, TailwindCSS, Shadecn, TanStack Router, Zustand
 - **Backend:** Firebase, Nodejs, WebSocket
 - **Build Tool:** Vite
 - **Testing:** Vitest
