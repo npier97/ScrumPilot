@@ -1,5 +1,7 @@
 # Scrum Pilot (Still In Progress)
 
+<img width="1494" alt="scrum-pilot" src="https://github.com/user-attachments/assets/95a0794c-7bbb-40eb-9c82-4e130875b30a" />
+
 ## Overview
 
 **Scrum Pilot** is a collaborative tool designed to enhance the efficiency of scrum teams. This application allows team members (developers, product owners, and others) to estimate the complexity and effort required for tasks in a sprint. With a simple, interactive interface, Scrum Pilot empowers teams to make informed decisions and complete their sprints successfully.
