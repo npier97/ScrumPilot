@@ -95,6 +95,9 @@ importers:
       '@testing-library/user-event':
         specifier: ^14.6.1
         version: 14.6.1(@testing-library/dom@10.4.0)
+      '@types/chrome':
+        specifier: ^0.0.321
+        version: 0.0.321
       '@types/node':
         specifier: ^22.13.12
         version: 22.13.14
@@ -1952,10 +1955,34 @@ packages:
         integrity: sha512-dkO5fhS7+/oos4ciWxyEyjWe48zmG6wbCheo/G2ZnHx4fs3EU6YC6UM8rk56gAjNJ9P3MTH2jo5jb92/K6wbng==
       }
 
+  '@types/chrome@0.0.321':
+    resolution:
+      {
+        integrity: sha512-SJhZSr5Xcj0rHXSKm/UTp4iIFtlxMADpa45UVCgWPemz/MdJA7ej0gvqUb+wqAX5COpA1FgPKPEoEw2L8SDVGQ==
+      }
+
   '@types/estree@1.0.7':
     resolution:
       {
         integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==
+      }
+
+  '@types/filesystem@0.0.36':
+    resolution:
+      {
+        integrity: sha512-vPDXOZuannb9FZdxgHnqSwAG/jvdGM8Wq+6N4D/d80z+D4HWH+bItqsZaVRQykAn6WEVeEkLm2oQigyHtgb0RA==
+      }
+
+  '@types/filewriter@0.0.33':
+    resolution:
+      {
+        integrity: sha512-xFU8ZXTw4gd358lb2jw25nxY9QAgqn2+bKKjKOYfNCzN4DKCFetK7sPtrlpg66Ywe3vWY9FNxprZawAh9wfJ3g==
+      }
+
+  '@types/har-format@1.2.16':
+    resolution:
+      {
+        integrity: sha512-fluxdy7ryD3MV6h8pTfTYpy/xQzCFC7m89nOH9y94cNqJ1mDIDPut7MnRHI3F6qRmh/cT2fUjG1MLdCNb4hE9A==
       }
 
   '@types/json-schema@7.0.15':
@@ -5795,7 +5822,20 @@ snapshots:
     dependencies:
       '@babel/types': 7.27.0
 
+  '@types/chrome@0.0.321':
+    dependencies:
+      '@types/filesystem': 0.0.36
+      '@types/har-format': 1.2.16
+
   '@types/estree@1.0.7': {}
+
+  '@types/filesystem@0.0.36':
+    dependencies:
+      '@types/filewriter': 0.0.33
+
+  '@types/filewriter@0.0.33': {}
+
+  '@types/har-format@1.2.16': {}
 
   '@types/json-schema@7.0.15': {}
 
