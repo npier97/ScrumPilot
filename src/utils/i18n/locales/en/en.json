@@ -119,5 +119,19 @@
       "title": "Step 6: Get Started!",
       "description": "You're ready! Click 'Start Using ScrumPilot' or revisit this onboarding anytime to sharpen your skills."
     }
+  },
+  "dashboard": {
+    "welcome": "Welcome on your dashboard!",
+    "noRoomsError": "Error fetching user rooms",
+    "noRoomsCreated": "No rooms created, start a new room!",
+    "activeRooms": {
+      "title": "Your Active Rooms",
+      "delete": "Delete"
+    },
+    "invitationLink": {
+      "title": "Invite to Scrum Room",
+      "description": "Share this link with your team members to join the voting session",
+      "buttonText": "Copy Link"
+    }
   }
 }

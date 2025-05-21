@@ -1,5 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import Dashboard from '@/components/Dashboard';
+import { SidebarProvider } from '@/components/ui/sidebar';
 
 export const Route = createFileRoute('/dashboard')({
   beforeLoad: ({ context }) => {
@@ -9,5 +10,13 @@ export const Route = createFileRoute('/dashboard')({
       });
     }
   },
-  component: Dashboard
+  component: DashboardComponent
 });
+
+function DashboardComponent() {
+  return (
+    <SidebarProvider>
+      <Dashboard />
+    </SidebarProvider>
+  );
+}

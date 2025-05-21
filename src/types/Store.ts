@@ -1,7 +1,7 @@
 export interface ParticipantStore {
-  participantId: string;
+  participantUid: string;
   vote: number | null;
-  setParticipantId: (id: string) => void;
+  setParticipantUid: (uid: string) => void;
 }
 
 export interface UsersCardsStore {
@@ -10,6 +10,11 @@ export interface UsersCardsStore {
 }
 
 export interface RoomStore {
-  roomId: string;
-  setRoomId: (id: string) => void;
+  roomUid: string;
+  setRoomUid: (uid: string) => void;
+}
+
+export interface GuestStore {
+  guestUid: string;
+  setGuestUid: (uid: string) => void;
 }

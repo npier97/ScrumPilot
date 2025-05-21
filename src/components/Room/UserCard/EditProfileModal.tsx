@@ -15,17 +15,23 @@ import { useTranslation } from 'react-i18next';
 import LanguageDropdown from '@/components/LanguageDropdown';
 import InputField from '../Modal/InputField';
 import { useParticipantStore, useRoomStore } from '@/store';
+import { useAuth } from '@/hooks/useAuth';
 
 const EditProfileModal = ({ isOpen, toggleVisibility }: EditProfileProps) => {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [updatedParticipantName, setUpdatedParticipantName] = useState('');
-  const roomId = useRoomStore((state) => state.roomId);
-  const participantId = useParticipantStore((state) => state.participantId);
+  const roomId = useRoomStore((state) => state.roomUid);
+  const participantId = useParticipantStore((state) => state.participantUid);
+  const currentParticipantId = user?.uid ?? participantId;
 
   const handleUpdateProfile = async (updatedParticipantName: string) => {
-    await updateDoc(doc(db, 'rooms', roomId, 'participants', participantId), {
-      name: updatedParticipantName
-    });
+    await updateDoc(
+      doc(db, 'rooms', roomId, 'participants', currentParticipantId),
+      {
+        name: updatedParticipantName
+      }
+    );
     toggleVisibility(false);
   };
 
