@@ -10,7 +10,7 @@ describe('Language selection', () => {
   beforeEach(() => {
     render(<RouterProvider router={router} defaultComponent={Header} />);
   });
-  it('should render the language menu item', async () => {
+  it('should render the language menu item', () => {
     const languageMenu = screen.getByTestId('language-menu-item');
     expect(languageMenu).toBeInTheDocument();
   });
