@@ -18,6 +18,7 @@ const Hero = () => {
           className='bg-blue-600 hover:bg-blue-500 md:max-w-[300px]'
           aria-label={t('heroCTAMessage')}
           onClick={handleClick}
+          data-testid='create-room-button'
         >
           {t('heroCTAMessage')}
           <Plus aria-hidden='true' />
