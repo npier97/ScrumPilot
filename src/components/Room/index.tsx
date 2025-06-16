@@ -11,6 +11,9 @@ import { useTranslation } from 'react-i18next';
 import UserCard from './UserCard';
 import VotingPanel from './VotingPanel';
 import { useRoomStore, useUsersCardsStore } from '@/store';
+import RoomSidebar from './Sidebar';
+import { useSidebar } from '../ui/sidebar';
+import { PanelRight } from 'lucide-react';
 
 const RoomPage = () => {
   const { t } = useTranslation();
@@ -22,6 +25,7 @@ const RoomPage = () => {
   const [participants, setParticipants] = useState<ParticipantsType[]>([]);
   const setIsCardRevealed = useUsersCardsStore((state) => state.setIsRevealed);
   const setRoomUid = useRoomStore((state) => state.setRoomUid);
+  const { toggleSidebar } = useSidebar();
 
   const handleInviteOnClick = () => {
     const link = `${window.location.origin}/join/${roomId}`;
@@ -66,13 +70,14 @@ const RoomPage = () => {
 
   return (
     <>
-      <div className='pt-20 flex justify-center'>
+      <div className='pt-20 flex justify-center m-auto'>
         {room ? (
           <div className='flex flex-col gap-4'>
             <div className='flex flex-col items-center gap-2'>
               <h1>
                 {t('room.welcome')} {room.name}!
               </h1>
+
               <Button onClick={handleInviteOnClick}>{t('room.invite')}</Button>
               {/* TODO: toaster translation */}
               <Toaster />
@@ -92,6 +97,19 @@ const RoomPage = () => {
         roomUid={roomId}
         adminUserUid={adminUserUid}
       />
+      <Button
+        variant='ghost'
+        onClick={() => toggleSidebar()}
+        className='flex flex-col items-center justify-center h-screen p-0'
+      >
+        <PanelRight />
+        <span className='flex flex-col items-center leading-none text-xs'>
+          {'TASKS'.split('').map((char, i) => (
+            <span key={i}>{char}</span>
+          ))}
+        </span>
+      </Button>
+      <RoomSidebar />
     </>
   );
 };
