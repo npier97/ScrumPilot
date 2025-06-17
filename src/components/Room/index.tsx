@@ -70,7 +70,7 @@ const RoomPage = () => {
 
   return (
     <>
-      <div className='pt-20 flex justify-center m-auto'>
+      <div className='pt-20 pb-4 flex justify-center m-auto'>
         {room ? (
           <div className='flex flex-col gap-4'>
             <div className='flex flex-col items-center gap-2'>
@@ -82,7 +82,7 @@ const RoomPage = () => {
               {/* TODO: toaster translation */}
               <Toaster />
             </div>
-            <hr className='my-8 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
+            <hr className='my-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
             <VotingPanel roomUid={roomId} />
             <UserCard participants={participants} />
           </div>

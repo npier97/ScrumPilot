@@ -14,7 +14,7 @@ import { PenLine } from 'lucide-react';
 
 const RoomSidebar = () => (
   <>
-    <Sidebar side='right' className='absolute'>
+    <Sidebar side='right' className='z-50'>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Task Management</SidebarGroupLabel>
