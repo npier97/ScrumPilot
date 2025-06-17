@@ -40,3 +40,23 @@ export const createAuthFormSchema = (
   const getSchema = schemaMap[formType] || createSignUpFormSchema;
   return getSchema(t);
 };
+
+export const createTaskFormSchema = (t: (key: string) => string) =>
+  z.object({
+    name: z.string().min(1, {
+      message: t('room.sidebar.task.error.name.minChar')
+    }),
+    description: z
+      .string()
+      .min(10, {
+        message: t('room.sidebar.task.error.description.minChar')
+      })
+      .max(160, {
+        message: t('room.sidebar.task.error.description.maxChar')
+      }),
+    points: z.number()
+  });
+
+export type TaskFormSchemaType = z.infer<
+  ReturnType<typeof createTaskFormSchema>
+>;

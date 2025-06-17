@@ -85,6 +85,20 @@
     },
     "users": {
       "estimate": "Average estimate"
+    },
+    "sidebar": {
+      "task": {
+        "success": "Task updated successfully",
+        "error": {
+          "name": {
+            "minChar": "Name must be at least 1 character"
+          },
+          "description": {
+            "minChar": "Description must be at least 10 characters",
+            "maxChar": "Description must not be longer than 30 characters"
+          }
+        }
+      }
     }
   },
   "onBoarding": {

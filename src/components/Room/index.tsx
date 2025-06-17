@@ -14,6 +14,7 @@ import { useRoomStore, useUsersCardsStore } from '@/store';
 import RoomSidebar from './Sidebar';
 import { useSidebar } from '../ui/sidebar';
 import { PanelRight } from 'lucide-react';
+import TaskSidebar from './Sidebar/Task/TaskSidebar';
 
 const RoomPage = () => {
   const { t } = useTranslation();
@@ -110,6 +111,7 @@ const RoomPage = () => {
         </span>
       </Button>
       <RoomSidebar />
+      <TaskSidebar />
     </>
   );
 };
