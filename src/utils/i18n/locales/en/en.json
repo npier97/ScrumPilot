@@ -88,6 +88,8 @@
     },
     "sidebar": {
       "task": {
+        "back": "Back",
+        "submit": "Submit",
         "success": "Task updated successfully",
         "error": {
           "name": {

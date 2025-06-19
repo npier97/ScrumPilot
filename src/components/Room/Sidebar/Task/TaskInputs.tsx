@@ -4,9 +4,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
+import { useCurrentSidebar } from '@/store';
 
-const TaskForm = () => {
+const TaskInputs = () => {
   const { t } = useTranslation();
+  const { openRoomSidebar } = useCurrentSidebar();
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -56,9 +58,12 @@ const TaskForm = () => {
         />
       </div>
 
-      <Button onClick={handleSubmit}>{t('Submit')}</Button>
+      <Button onClick={() => openRoomSidebar()}>
+        {t('room.sidebar.task.back')}
+      </Button>
+      <Button onClick={handleSubmit}>{t('room.sidebar.task.submit')}</Button>
     </div>
   );
 };
 
-export default TaskForm;
+export default TaskInputs;

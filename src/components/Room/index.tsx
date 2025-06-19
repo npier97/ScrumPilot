@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import UserCard from './UserCard';
 import VotingPanel from './VotingPanel';
-import { useRoomStore, useUsersCardsStore } from '@/store';
+import { useCurrentSidebar, useRoomStore, useUsersCardsStore } from '@/store';
 import RoomSidebar from './Sidebar';
 import { useSidebar } from '../ui/sidebar';
 import { PanelRight } from 'lucide-react';
@@ -27,6 +27,7 @@ const RoomPage = () => {
   const setIsCardRevealed = useUsersCardsStore((state) => state.setIsRevealed);
   const setRoomUid = useRoomStore((state) => state.setRoomUid);
   const { toggleSidebar } = useSidebar();
+  const { activeSidebar, toggleCurrentSidebar } = useCurrentSidebar();
 
   const handleInviteOnClick = () => {
     const link = `${window.location.origin}/join/${roomId}`;
@@ -100,7 +101,10 @@ const RoomPage = () => {
       />
       <Button
         variant='ghost'
-        onClick={() => toggleSidebar()}
+        onClick={() => {
+          toggleSidebar();
+          toggleCurrentSidebar();
+        }}
         className='flex flex-col items-center justify-center h-screen p-0'
       >
         <PanelRight />
@@ -110,8 +114,8 @@ const RoomPage = () => {
           ))}
         </span>
       </Button>
-      <RoomSidebar />
-      <TaskSidebar />
+      {activeSidebar === 'room' && <RoomSidebar />}
+      {activeSidebar === 'task' && <TaskSidebar />}
     </>
   );
 };

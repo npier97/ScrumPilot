@@ -4,19 +4,17 @@ import {
   SidebarGroup,
   SidebarGroupLabel
 } from '@/components/ui/sidebar';
-import TaskForm from './TaskForm';
+import TaskInputs from './TaskInputs';
 
 const TaskSidebar = () => (
-  <>
-    <Sidebar side='right' className='z-60'>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Task</SidebarGroupLabel>
-          <TaskForm />
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
-  </>
+  <Sidebar side='right' className='z-60'>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Task</SidebarGroupLabel>
+        <TaskInputs />
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
 );
 
 export default TaskSidebar;
