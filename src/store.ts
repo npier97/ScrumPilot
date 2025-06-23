@@ -45,7 +45,7 @@ export const useUserStore = create<UserStore>((set) => ({
 
 export const useCurrentSidebar = create<SidebarStore>((set, get) => ({
   activeSidebar: null,
-  toggleCurrentSidebar: () => {
+  toggleActiveSidebar: () => {
     const current = get().activeSidebar;
     set({ activeSidebar: current === null ? 'room' : null });
   },

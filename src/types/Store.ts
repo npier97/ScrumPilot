@@ -21,7 +21,7 @@ export interface GuestStore {
 
 export interface SidebarStore {
   activeSidebar: 'room' | 'task' | null;
-  toggleCurrentSidebar: () => void;
+  toggleActiveSidebar: () => void;
   openRoomSidebar: () => void;
   openTaskSidebar: () => void;
   closeSidebar: () => void;

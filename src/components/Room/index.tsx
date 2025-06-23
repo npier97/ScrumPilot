@@ -27,7 +27,7 @@ const RoomPage = () => {
   const setIsCardRevealed = useUsersCardsStore((state) => state.setIsRevealed);
   const setRoomUid = useRoomStore((state) => state.setRoomUid);
   const { toggleSidebar } = useSidebar();
-  const { activeSidebar, toggleCurrentSidebar } = useCurrentSidebar();
+  const { activeSidebar, toggleActiveSidebar } = useCurrentSidebar();
 
   const handleInviteOnClick = () => {
     const link = `${window.location.origin}/join/${roomId}`;
@@ -72,7 +72,7 @@ const RoomPage = () => {
 
   return (
     <>
-      <div className='pt-20 pb-4 flex justify-center m-auto'>
+      <div className='pt-20 pl-4 pb-4 flex justify-center m-auto'>
         {room ? (
           <div className='flex flex-col gap-4'>
             <div className='flex flex-col items-center gap-2'>
@@ -102,8 +102,8 @@ const RoomPage = () => {
       <Button
         variant='ghost'
         onClick={() => {
+          toggleActiveSidebar();
           toggleSidebar();
-          toggleCurrentSidebar();
         }}
         className='flex flex-col items-center justify-center h-screen p-0'
       >
@@ -114,8 +114,7 @@ const RoomPage = () => {
           ))}
         </span>
       </Button>
-      {activeSidebar === 'room' && <RoomSidebar />}
-      {activeSidebar === 'task' && <TaskSidebar />}
+      {activeSidebar === 'task' ? <TaskSidebar /> : <RoomSidebar />}
     </>
   );
 };

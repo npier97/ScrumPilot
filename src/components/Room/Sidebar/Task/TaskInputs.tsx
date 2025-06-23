@@ -58,9 +58,7 @@ const TaskInputs = () => {
         />
       </div>
 
-      <Button onClick={() => openRoomSidebar()}>
-        {t('room.sidebar.task.back')}
-      </Button>
+      <Button onClick={openRoomSidebar}>{t('room.sidebar.task.back')}</Button>
       <Button onClick={handleSubmit}>{t('room.sidebar.task.submit')}</Button>
     </div>
   );
