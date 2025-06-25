@@ -54,3 +54,12 @@ export interface EditProfileProps {
   isOpen: boolean;
   toggleVisibility: (bool: boolean) => void;
 }
+
+export interface TaskProps {
+  id: string;
+  title: string;
+  description: string;
+  storyPoints: string;
+}
+
+export type RoomOverviewType = Pick<ModalProps, 'room' | 'participants'>;

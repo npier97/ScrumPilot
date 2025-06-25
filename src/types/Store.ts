@@ -26,3 +26,8 @@ export interface SidebarStore {
   openTaskSidebar: () => void;
   closeSidebar: () => void;
 }
+
+export interface TaskStore {
+  taskUid: string;
+  setTaskUid: (uid: string) => void;
+}

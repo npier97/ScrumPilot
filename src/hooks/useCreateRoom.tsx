@@ -24,6 +24,7 @@ export const useCreateRoom = () => {
         createdAt: serverTimestamp(),
         isVoteRevealed: false
       });
+      const tasksRef = collection(db, 'rooms', roomRef.id, 'tasks');
 
       if (user?.uid) {
         const userDoc = doc(db, 'users', user.uid);
@@ -38,6 +39,12 @@ export const useCreateRoom = () => {
           });
         }
       }
+
+      await addDoc(tasksRef, {
+        title: '',
+        description: '',
+        storyPoint: 0
+      });
 
       navigate({ to: `/rooms/${roomRef.id}` });
     } catch (error) {

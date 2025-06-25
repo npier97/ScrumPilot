@@ -1,65 +1,87 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
-import { useCurrentSidebar } from '@/store';
+import { useCurrentSidebar, useRoomStore, useTaskStore } from '@/store';
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { db } from '@/firebase-config';
+import { TaskProps } from '@/types/Room';
+import TaskField from './TaskFields';
 
 const TaskInputs = () => {
   const { t } = useTranslation();
-  const { openRoomSidebar } = useCurrentSidebar();
-
+  const roomId = useRoomStore((state) => state.roomUid);
+  const taskUid = useTaskStore((state) => state.taskUid);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [points, setPoints] = useState('');
+  const { openRoomSidebar, closeSidebar } = useCurrentSidebar();
 
-  const handleSubmit = () => {
-    const taskData = { name, description, points };
+  const handleSubmit = async () => {
+    await updateDoc(doc(db, 'rooms', roomId, 'tasks', taskUid), {
+      title: name,
+      description: description,
+      storyPoints: points
+    });
     toast.success(t('room.sidebar.task.success'));
-    console.log('Task update:', taskData);
+    closeSidebar();
   };
+
+  useEffect(() => {
+    if (!roomId) return;
+
+    const taskRef = doc(db, 'rooms', roomId, 'tasks', taskUid);
+    const unsubscribeTask = onSnapshot(taskRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const task = { id: docSnap.id, ...docSnap.data() } as TaskProps;
+
+        setName(task.title);
+        setDescription(task.description);
+        setPoints(task.storyPoints);
+      }
+    });
+
+    return () => {
+      unsubscribeTask();
+    };
+  }, [roomId, taskUid]);
 
   return (
     <div className='p-4 flex flex-col gap-4'>
-      <div>
-        <label className='font-medium mb-1'>{t('Name')}</label>
+      <TaskField label={t('')}>
         <Input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder=''
           maxLength={200}
+          placeholder=''
         />
-      </div>
-
-      <div>
-        <label className='font-medium mb-1'>{t('Description')}</label>
+      </TaskField>
+      <TaskField label={t('')}>
         <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          maxLength={1000}
           placeholder=''
           className='resize-none'
-          maxLength={1000}
         />
-      </div>
-
-      <div>
-        <label className='font-medium mb-1'>{t('Story Points')}</label>
+      </TaskField>
+      <TaskField label={t('')}>
         <Input
           type='number'
           value={points}
           maxLength={3}
           onChange={(e) => {
-            if (e.target.value.length > e.target.maxLength) {
-              e.target.value = e.target.value.slice(0, e.target.maxLength);
-            }
-            setPoints(e.target.value);
+            const val = e.target.value.slice(0, e.target.maxLength);
+            setPoints(val);
           }}
         />
-      </div>
-
+      </TaskField>
       <Button onClick={openRoomSidebar}>{t('room.sidebar.task.back')}</Button>
-      <Button onClick={handleSubmit}>{t('room.sidebar.task.submit')}</Button>
+      <Button type='submit' onClick={handleSubmit}>
+        {t('room.sidebar.task.submit')}
+      </Button>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import {
   ParticipantStore,
   RoomStore,
   SidebarStore,
+  TaskStore,
   UsersCardsStore
 } from './types/Store';
 import { UserStore } from './types/User';
@@ -52,4 +53,9 @@ export const useCurrentSidebar = create<SidebarStore>((set, get) => ({
   openRoomSidebar: () => set({ activeSidebar: 'room' }),
   openTaskSidebar: () => set({ activeSidebar: 'task' }),
   closeSidebar: () => set({ activeSidebar: null })
+}));
+
+export const useTaskStore = create<TaskStore>((set) => ({
+  taskUid: '',
+  setTaskUid: (uid: string) => set({ taskUid: uid })
 }));
