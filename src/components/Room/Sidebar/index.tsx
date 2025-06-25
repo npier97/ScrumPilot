@@ -15,8 +15,10 @@ import { Button } from '@/components/ui/button';
 import { TaskProps } from '@/types/Room';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/firebase-config';
+import { useTranslation } from 'react-i18next';
 
 const RoomSidebar = ({ tasks }: { tasks: TaskProps[] }) => {
+  const { t } = useTranslation();
   const { setTaskUid } = useTaskStore();
   const { openTaskSidebar } = useCurrentSidebar();
   const roomId = useRoomStore((state) => state.roomUid);
@@ -46,7 +48,7 @@ const RoomSidebar = ({ tasks }: { tasks: TaskProps[] }) => {
       <Sidebar side='right' className='z-50'>
         <SidebarContent>
           <SidebarGroup>
-            <SidebarGroupLabel>Task Management</SidebarGroupLabel>
+            <SidebarGroupLabel>{t('room.sidebar.title')}</SidebarGroupLabel>
             <SidebarGroupContent className='mt-10'>
               <SidebarMenu>
                 {tasks.map((task) => (
@@ -60,7 +62,7 @@ const RoomSidebar = ({ tasks }: { tasks: TaskProps[] }) => {
                 ))}
               </SidebarMenu>
             </SidebarGroupContent>
-            <Button onClick={handleAddTask}>Add Task</Button>
+            <Button onClick={handleAddTask}>{t('room.sidebar.addTask')}</Button>
           </SidebarGroup>
         </SidebarContent>
       </Sidebar>

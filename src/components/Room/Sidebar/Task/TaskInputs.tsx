@@ -50,7 +50,7 @@ const TaskInputs = () => {
 
   return (
     <div className='p-4 flex flex-col gap-4'>
-      <TaskField label={t('')}>
+      <TaskField label={t('room.sidebar.task.name')}>
         <Input
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -58,7 +58,7 @@ const TaskInputs = () => {
           placeholder=''
         />
       </TaskField>
-      <TaskField label={t('')}>
+      <TaskField label={t('room.sidebar.task.description')}>
         <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -67,7 +67,7 @@ const TaskInputs = () => {
           className='resize-none'
         />
       </TaskField>
-      <TaskField label={t('')}>
+      <TaskField label={t('room.sidebar.task.storyPoints')}>
         <Input
           type='number'
           value={points}
