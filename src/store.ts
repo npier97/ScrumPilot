@@ -3,6 +3,8 @@ import {
   GuestStore,
   ParticipantStore,
   RoomStore,
+  SidebarStore,
+  TaskStore,
   UsersCardsStore
 } from './types/Store';
 import { UserStore } from './types/User';
@@ -40,4 +42,20 @@ export const useUserStore = create<UserStore>((set) => ({
   userInfos: null,
   setUserInfos: (datas) => set({ userInfos: datas }),
   signOutUser: () => set({ userInfos: null })
+}));
+
+export const useCurrentSidebar = create<SidebarStore>((set, get) => ({
+  activeSidebar: null,
+  toggleActiveSidebar: () => {
+    const current = get().activeSidebar;
+    set({ activeSidebar: current === null ? 'room' : null });
+  },
+  openRoomSidebar: () => set({ activeSidebar: 'room' }),
+  openTaskSidebar: () => set({ activeSidebar: 'task' }),
+  closeSidebar: () => set({ activeSidebar: null })
+}));
+
+export const useTaskStore = create<TaskStore>((set) => ({
+  taskUid: '',
+  setTaskUid: (uid: string) => set({ taskUid: uid })
 }));

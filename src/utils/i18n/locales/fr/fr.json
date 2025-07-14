@@ -85,6 +85,26 @@
     },
     "users": {
       "estimate": "Estimation moyenne"
+    },
+    "sidebar": {
+      "task": {
+        "title": "Tâche",
+        "name": "Nom",
+        "description": "Description",
+        "storyPoints": "Story Points",
+        "back": "Retour",
+        "submit": "Soumettre",
+        "success": "Tâche mise à jour avec succès",
+        "error": {
+          "name": {
+            "minChar": "Le nom doit comporter au moins 1 caractère"
+          },
+          "description": {
+            "minChar": "La description doit comporter au moins 10 caractères",
+            "maxChar": "La description ne doit pas dépasser 30 caractères"
+          }
+        }
+      }
     }
   },
   "onBoarding": {

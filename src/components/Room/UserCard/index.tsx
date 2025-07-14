@@ -22,7 +22,7 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
 
   return (
     <div
-      className={'rounded-xl border sm:mx-4 py-12 px-20 shadow-lg text-center'}
+      className={'rounded-xl border sm:mx-4 py-10 px-20 shadow-lg text-center'}
     >
       {t('room.users.estimate')}
       <div className='min-h-[40px]font-bold text-4xl'>

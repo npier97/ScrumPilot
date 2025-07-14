@@ -18,3 +18,16 @@ export interface GuestStore {
   guestUid: string;
   setGuestUid: (uid: string) => void;
 }
+
+export interface SidebarStore {
+  activeSidebar: 'room' | 'task' | null;
+  toggleActiveSidebar: () => void;
+  openRoomSidebar: () => void;
+  openTaskSidebar: () => void;
+  closeSidebar: () => void;
+}
+
+export interface TaskStore {
+  taskUid: string;
+  setTaskUid: (uid: string) => void;
+}
