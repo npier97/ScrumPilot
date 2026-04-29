@@ -2,8 +2,10 @@ import { Button } from '@/components/ui/button';
 import { useSidebar } from '@/components/ui/sidebar';
 import { useCurrentSidebar } from '@/store';
 import { PanelRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const SidebarToggle = () => {
+  const { t } = useTranslation();
   const { toggleSidebar } = useSidebar();
   const { toggleActiveSidebar } = useCurrentSidebar();
 
@@ -18,9 +20,12 @@ const SidebarToggle = () => {
     >
       <PanelRight />
       <span className='flex flex-col items-center leading-none text-xs'>
-        {'TASKS'.split('').map((char, i) => (
-          <span key={i}>{char}</span>
-        ))}
+        {t('room.sidebar.toggle')
+          .toUpperCase()
+          .split('')
+          .map((char, i) => (
+            <span key={i}>{char}</span>
+          ))}
       </span>
     </Button>
   );

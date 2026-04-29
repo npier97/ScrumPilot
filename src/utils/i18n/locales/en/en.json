@@ -97,7 +97,11 @@
         "storyPoints": "Story Points",
         "back": "Back",
         "submit": "Submit",
+        "delete": "Delete task",
         "success": "Task updated successfully",
+        "updateError": "Task could not be updated",
+        "deleteSuccess": "Task deleted successfully",
+        "deleteError": "Task could not be deleted",
         "error": {
           "name": {
             "minChar": "Name must be at least 1 character"
