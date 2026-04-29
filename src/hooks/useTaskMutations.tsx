@@ -5,6 +5,7 @@ import {
   useTaskStore,
   useUsersCardsStore
 } from '@/store';
+import { UpdateTaskParams } from '@/types/Room';
 import {
   collection,
   doc,
@@ -15,12 +16,6 @@ import {
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-
-type UpdateTaskParams = {
-  title: string;
-  description: string;
-  storyPoints: string;
-};
 
 export const useTaskMutations = () => {
   const { t } = useTranslation();
@@ -37,15 +32,27 @@ export const useTaskMutations = () => {
     description,
     storyPoints
   }: UpdateTaskParams) => {
-    if (!roomId || !taskUid) return;
+    const sanitizedTitle = title.trim();
+    const sanitizedDescription = description.trim();
+    const sanitizedStoryPoints = storyPoints.trim();
+
+    if (
+      !roomId ||
+      !taskUid ||
+      !sanitizedTitle ||
+      !sanitizedDescription ||
+      !sanitizedStoryPoints
+    ) {
+      return;
+    }
 
     setIsSubmitting(true);
 
     try {
       await updateDoc(doc(db, 'rooms', roomId, 'tasks', taskUid), {
-        title,
-        description,
-        storyPoints
+        title: sanitizedTitle,
+        description: sanitizedDescription,
+        storyPoints: sanitizedStoryPoints
       });
       toast.success(t('room.sidebar.task.success'));
       closeSidebar();

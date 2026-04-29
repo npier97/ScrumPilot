@@ -21,6 +21,11 @@ const TaskInputs = () => {
   const { openRoomSidebar } = useCurrentSidebar();
   const { updateTask, deleteTask, isSubmitting, isDeleting } =
     useTaskMutations();
+  const isSubmitDisabled =
+    isSubmitting ||
+    !name.trim() ||
+    !description.trim() ||
+    !points.toString().trim();
 
   useEffect(() => {
     if (!roomId || !taskUid) return;
@@ -80,12 +85,12 @@ const TaskInputs = () => {
         type='submit'
         onClick={() =>
           updateTask({
-            title: name,
-            description,
-            storyPoints: points
+            title: name.trim(),
+            description: description.trim(),
+            storyPoints: points.trim()
           })
         }
-        disabled={isSubmitting}
+        disabled={isSubmitDisabled}
       >
         {t('room.sidebar.task.submit')}
       </Button>
