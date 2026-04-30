@@ -1,36 +1,34 @@
 import { useEffect, useState } from 'react';
-import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { useCurrentSidebar, useRoomStore, useTaskStore } from '@/store';
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/firebase-config';
 import { TaskProps } from '@/types/Room';
 import TaskField from './TaskFields';
+import { useTaskMutations } from '@/hooks/useTaskMutations';
 
 const TaskInputs = () => {
   const { t } = useTranslation();
   const roomId = useRoomStore((state) => state.roomUid);
   const taskUid = useTaskStore((state) => state.taskUid);
+  const setTaskUid = useTaskStore((state) => state.setTaskUid);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [points, setPoints] = useState('');
-  const { openRoomSidebar, closeSidebar } = useCurrentSidebar();
-
-  const handleSubmit = async () => {
-    await updateDoc(doc(db, 'rooms', roomId, 'tasks', taskUid), {
-      title: name,
-      description: description,
-      storyPoints: points
-    });
-    toast.success(t('room.sidebar.task.success'));
-    closeSidebar();
-  };
+  const { openRoomSidebar } = useCurrentSidebar();
+  const { updateTask, deleteTask, isSubmitting, isDeleting } =
+    useTaskMutations();
+  const isSubmitDisabled =
+    isSubmitting ||
+    !name.trim() ||
+    !description.trim() ||
+    !points.toString().trim();
 
   useEffect(() => {
-    if (!roomId) return;
+    if (!roomId || !taskUid) return;
 
     const taskRef = doc(db, 'rooms', roomId, 'tasks', taskUid);
     const unsubscribeTask = onSnapshot(taskRef, (docSnap) => {
@@ -40,13 +38,17 @@ const TaskInputs = () => {
         setName(task.title);
         setDescription(task.description);
         setPoints(task.storyPoints);
+        return;
       }
+
+      setTaskUid('');
+      openRoomSidebar();
     });
 
     return () => {
       unsubscribeTask();
     };
-  }, [roomId, taskUid]);
+  }, [openRoomSidebar, roomId, setTaskUid, taskUid]);
 
   return (
     <div className='p-4 flex flex-col gap-4'>
@@ -79,8 +81,21 @@ const TaskInputs = () => {
         />
       </TaskField>
       <Button onClick={openRoomSidebar}>{t('room.sidebar.task.back')}</Button>
-      <Button type='submit' onClick={handleSubmit}>
+      <Button
+        type='submit'
+        onClick={() =>
+          updateTask({
+            title: name.trim(),
+            description: description.trim(),
+            storyPoints: points.trim()
+          })
+        }
+        disabled={isSubmitDisabled}
+      >
         {t('room.sidebar.task.submit')}
+      </Button>
+      <Button variant='destructive' onClick={deleteTask} disabled={isDeleting}>
+        {t('room.sidebar.task.delete')}
       </Button>
     </div>
   );

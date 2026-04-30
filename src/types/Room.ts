@@ -63,3 +63,9 @@ export interface TaskProps {
 }
 
 export type RoomOverviewType = Pick<ModalProps, 'room' | 'participants'>;
+
+export type UpdateTaskParams = {
+  title: string;
+  description: string;
+  storyPoints: string;
+};

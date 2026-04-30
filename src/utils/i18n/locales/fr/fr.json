@@ -87,6 +87,9 @@
       "estimate": "Estimation moyenne"
     },
     "sidebar": {
+      "toggle": "Tâches",
+      "title": "Gestion des tâches",
+      "addTask": "Ajouter une tâche",
       "task": {
         "title": "Tâche",
         "name": "Nom",
@@ -94,7 +97,11 @@
         "storyPoints": "Story Points",
         "back": "Retour",
         "submit": "Soumettre",
+        "delete": "Supprimer la tâche",
         "success": "Tâche mise à jour avec succès",
+        "updateError": "La tâche n'a pas pu être mise à jour",
+        "deleteSuccess": "Tâche supprimée avec succès",
+        "deleteError": "La tâche n'a pas pu être supprimée",
         "error": {
           "name": {
             "minChar": "Le nom doit comporter au moins 1 caractère"
