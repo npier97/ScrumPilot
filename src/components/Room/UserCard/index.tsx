@@ -62,7 +62,7 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
       </div>
       <hr className='my-6 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
       {t('room.users.estimate')}
-      <div className='min-h-[40px]font-bold text-4xl'>
+      <div className='min-h-[40px] font-bold text-4xl'>
         {(isCardRevealed && average) || ''}
       </div>
     </div>
