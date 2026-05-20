@@ -22,13 +22,10 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
 
   return (
     <div
-      className={'rounded-xl border sm:mx-4 py-10 px-20 shadow-lg text-center'}
+      className={
+        'rounded-xl border sm:mx-4 py-10 px-20 shadow-lg text-center min-h-105'
+      }
     >
-      {t('room.users.estimate')}
-      <div className='min-h-[40px]font-bold text-4xl'>
-        {(isCardRevealed && average) || ''}
-      </div>
-      <hr className='my-6 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
       <div className='flex flex-wrap justify-center gap-8'>
         {participants.map((participant) => {
           const isCurrentUser =
@@ -62,6 +59,11 @@ const UserCard = ({ participants }: { participants: ParticipantsType[] }) => {
             </div>
           );
         })}
+      </div>
+      <hr className='my-6 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />
+      {t('room.users.estimate')}
+      <div className='min-h-[40px]font-bold text-4xl'>
+        {(isCardRevealed && average) || ''}
       </div>
     </div>
   );
