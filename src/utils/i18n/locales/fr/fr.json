@@ -148,6 +148,7 @@
     }
   },
   "dashboard": {
+    "title": "Tableau de bord",
     "welcome": "Bienvenue sur votre tableau de bord!",
     "noRoomsCreated": "Aucune room créée, démarrez une nouvelle room !",
     "noRoomsError": "Erreur lors de la récupération des rooms utilisateur",
