@@ -1,4 +1,5 @@
 import AuthForm from '../AuthForm';
+import BackToHomeButton from '../BackToHomeButton';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -28,6 +29,7 @@ const LogIn = () => {
           isVisible={showForgotPasswordForm}
           toggleIsVisible={toggleForgotPasswordPage}
         />
+        <BackToHomeButton />
       </div>
     </div>
   );
