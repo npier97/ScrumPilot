@@ -20,6 +20,12 @@ jobs:
       - name: Install Codex
         run: npm install -g @openai/codex
 
+      - name: Check secret
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "Key length: ${#OPENAI_API_KEY}"
+
       - name: Run Triage
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
