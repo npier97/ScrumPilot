@@ -1,4 +1,5 @@
 import AuthForm from '../AuthForm';
+import BackToHomeButton from '../BackToHomeButton';
 import { useTranslation } from 'react-i18next';
 
 const Signup = () => {
@@ -13,6 +14,7 @@ const Signup = () => {
           </h1>
         </div>
         <AuthForm authType='sign-up' />
+        <BackToHomeButton />
       </div>
     </div>
   );
